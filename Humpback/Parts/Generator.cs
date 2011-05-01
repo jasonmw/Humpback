@@ -12,10 +12,12 @@ using Humpback.ConfigurationOptions;
 namespace Humpback.Parts {
     public class Generator : IPart {
         private readonly Configuration _configuration;
-        public Generator(Configuration configuration) {
+        private readonly IFileWriter _file_writer;
+        public Generator(Configuration configuration, IFileWriter file_writer) {
             if(!configuration.Generate) {
                 throw new InvalidOperationException("Configuration not correctly set for Generator");
             }
+            _file_writer = file_writer;
             _configuration = configuration;
             SetGenerationAction();
         }
@@ -25,8 +27,8 @@ namespace Humpback.Parts {
             action = action.Replace(" ", "_");
             action = Regex.Replace(action, @"[^\w\-_]", ""); 
             string file_name = string.Format("{0}_{1}.js",DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss"),action);
-            var path = System.IO.Path.Combine(_configuration.MigrationFolder,file_name);
-            System.IO.File.WriteAllText(path, serialized, Encoding.UTF8);
+            var path = Path.Combine(_configuration.MigrationFolder,file_name);
+            _file_writer.WriteFile(path, serialized);
         }
 
         public void AddTable() {
@@ -35,8 +37,13 @@ namespace Humpback.Parts {
             foreach(var column in column_dictionary) {
                 columns.Add(new {name=column.Key,@type=column.Value});
             }
+
+            if (!columns.Any()) {
+                columns.Add(new { name = "column_name_here", @type = "string" });
+            }
+
             var name = _configuration.GenerateString;
-            dynamic up = new {create_table=new{name,columns}};
+            dynamic up = new {create_table=new{name,timestamps=true,columns}};
             dynamic down = new {drop_table=name};
             dynamic output_object = new {up, down};
             CreateFile("AddTable_" + name, output_object);
@@ -53,7 +60,7 @@ namespace Humpback.Parts {
             dynamic output_object = new { up };
             CreateFile("DropTable_" + table_name, output_object);
             Console.WriteLine("Generating Migration " + "DropTable_" + table_name);
-            Console.WriteLine(new JavaScriptSerializer().Serialize(output_object));
+            Console.WriteLine(Helpers.Json(output_object));
 
         }
 

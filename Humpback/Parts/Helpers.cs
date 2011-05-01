@@ -14,7 +14,7 @@ namespace Humpback.Parts {
             "execute","create_table","drop_table","add_column","remove_column","add_index","remove_index"
         };
         private static string[] keywords_tab_level_3 = new[] {
-            "name","columns","table","column","table_name"
+            "name","columns","table","column","table_name","timestamps"
         };
 
         // Here be formatting dragons

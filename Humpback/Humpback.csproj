@@ -48,7 +48,9 @@
     <Compile Include="ConfigurationOptions\Help.cs" />
     <Compile Include="ConfigurationOptions\HelpSection.cs" />
     <Compile Include="ConfigurationOptions\Options.cs" />
+    <Compile Include="Parts\FileWriter.cs" />
     <Compile Include="Generate.cs" />
+    <Compile Include="IFileWriter.cs" />
     <Compile Include="IPart.cs" />
     <Compile Include="Parts\Generator.cs" />
     <Compile Include="Parts\Helpers.cs" />
