@@ -1,4 +1,5 @@
-﻿using Humpback.ConfigurationOptions;
+﻿using System.Linq;
+using Humpback.ConfigurationOptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -67,7 +68,7 @@ namespace Humpback.Tests
         public void ConfigurationConstructorTestNullConstructorParam() {
             string[] options = null; // TODO: Initialize to an appropriate value
             Configuration target = new Configuration(options);
-            Assert.IsTrue(target.Run);
+            Assert.IsTrue(target.WriteHelp);
             Assert.AreEqual(0,target.MigrateToVersion);
         }
 
@@ -78,7 +79,7 @@ namespace Humpback.Tests
         [TestMethod()]
         public void ConfigurationConstructorTestDefaultConstructor() {
             Configuration target = new Configuration();
-            Assert.IsTrue(target.Run);
+            Assert.IsTrue(target.WriteHelp);
             Assert.AreEqual(0, target.MigrateToVersion);
         }
 
@@ -201,13 +202,51 @@ namespace Humpback.Tests
         }
 
         [TestMethod()]
+        public void BasicGenerateErrorTest() {
+            try {
+                Configuration target = new Configuration(new[] {"-G"});
+                Assert.IsTrue(false, "Configuration should have failed");
+            } catch (Exception ex) {
+                Assert.IsNotNull(ex);
+            }
+
+        }
+        [TestMethod()]
         public void BasicGenerateTest() {
-            Configuration target = new Configuration(new[] { "-G" });
+            Configuration target = new Configuration(new[] { "-G","AddMyMigration" });
             Assert.IsTrue(target.Generate);
             Assert.IsFalse(target.WriteHelp);
             Assert.IsFalse(target.Run);
             Assert.IsFalse(target.List);
         }
+
+        [TestMethod()]
+        public void GenerateTest() {
+            Configuration target = new Configuration(new[] { "-G", "table", "first_name:string", "last_name:string" });
+            Assert.IsTrue(target.Generate);
+            Assert.IsFalse(target.WriteHelp);
+            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.List);
+            Console.WriteLine(String.Join("|",target.Extra.ToArray()));
+            Assert.IsNotNull(target.Extra);
+            Assert.IsTrue(target.Extra.Count() > 0);
+        }
+
+        [TestMethod()]
+        public void GenerateTest_CreateTable() {
+            Configuration target = new Configuration(new[] { "--G", "users", "first_name:string", "last_name" });
+            Assert.IsTrue(target.Generate);
+            Assert.AreEqual("users", target.GenerateString); 
+        }
+
+        [TestMethod()]
+        public void GenerateTest_ModifyTable() {
+            Configuration target = new Configuration(new[] { "--G", "AddAgeToUsers", "first_name:string", "last_name" });
+            Assert.IsTrue(target.Generate);
+            Assert.AreEqual("AddAgeToUsers", target.GenerateString);
+        }
+
+
         [TestMethod()]
         public void BasicListTest() {
             Configuration target = new Configuration(new[] { "-List" });

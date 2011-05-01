@@ -3,39 +3,45 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Humpback.ConfigurationOptions;
+using Humpback.Parts;
 
 namespace Humpback {
     class Program {
-        private static ConfigurationOptions.Configuration configuration;
+        private static Configuration _configuration;
+        private static IPart part;
         static void Main(string[] args) {
+            try {
 
-            configuration = new ConfigurationOptions.Configuration(args);
+                _configuration = new Configuration(args);
 
-            if(configuration.WriteHelp) {
-                PrintHelp();
-            } else if(configuration.Generate) {
-                Generate();
-            } else if (configuration.List) {
-                List();
-            } else if (configuration.Run) {
-                Run();
-            } else if (configuration.Sql) {
-                Sql();
+                if (_configuration.WriteHelp) {
+                    part = new Help(_configuration);
+                } else if (_configuration.Generate) {
+                    part = new Generator(_configuration);
+                } else if (_configuration.List) {
+                    part = new ListMigrations(_configuration);
+                } else if (_configuration.Run) {
+                    Run();
+                } else if (_configuration.Sql) {
+                    Sql();
+                }
+
+                part.Execute();
+
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
             }
-
             DebugWaitAtEnd();
 
         }
 
         [Conditional("DEBUG")]
         private static void DebugWaitAtEnd() {
-            Console.ReadLine();
+           // Console.ReadLine();
         }
 
         private static void PrintHelp() {
-            
-        }
-        private static void Generate() {
             
         }
         private static void List() {

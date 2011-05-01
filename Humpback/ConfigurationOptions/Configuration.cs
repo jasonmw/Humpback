@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Humpback.ConfigurationOptions;
 using System.Configuration;
@@ -11,22 +12,27 @@ namespace Humpback.ConfigurationOptions {
         private void Parse(IEnumerable<string> options) {
             var oset = new OptionSet()
                 .Add("?:|help:|h:|HELP:|H:|Help:", SetSpecificHelpPage)
-                .Add("G:|gen:|g:|GEN:|Gen:|Generate:|generate:|GENERATE:", s => { SetMainToFalse(); Generate = true; })
-                .Add("L:|list:|l:|LIST:|List", s => { SetMainToFalse(); List = true; })
-                .Add("R:|run:|r:|RUN:|Run:", s => { SetMainToFalse(); Run = true; })
-                .Add("S:|sql:|s:|SQL:|Sql", s => { SetMainToFalse(); Sql = true; });
-            oset.Parse(options);
+                .Add("f=|folder=|F=|FOLDER=|Folder=", s => { MigrationFolder = s.Trim(); })
+                .Add("cs=|connectionstring=|CS=|CONNECTIONSTRING=", s => { ConnectionString = s.Trim(); })
+                .Add("g=|gen=|G=|GEN=|Gen=|Generate=|generate=|GENERATE=", s => { 
+                    SetMainToFalse(); 
+                    Generate = true; 
+                    GenerateString = s.Trim();})
+                .Add("l:|list:|L:|LIST:|List:", s => { SetMainToFalse(); List = true; })
+                .Add("r:|run:|R:|RUN:|Run:", s => { SetMainToFalse(); Run = true; })
+                .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; });
+            
+            Extra = oset.Parse(options);
+            EnsureMigrationFolder();
         }
-
-
-
 
         public Configuration() {
             ResetOptions();
         }
 
-        public Configuration(IEnumerable<string> options):this() {
-            if(options==null || options.Count() == 0) {
+        public Configuration(IEnumerable<string> options)
+            : this() {
+            if (options == null || options.Count() == 0) {
                 return;
             }
             DebugWriteOutOptions(options);
@@ -35,10 +41,10 @@ namespace Humpback.ConfigurationOptions {
 
         [Conditional("DEBUG")]
         private void DebugWriteOutOptions(IEnumerable<string> options) {
-            foreach(string s in options) {
-                Debug.WriteLine("Option: " + s);
-                Trace.WriteLine("Option: " + s);
-                Console.WriteLine("Option: " + s);
+            foreach (string s in options) {
+                //Debug.WriteLine("Option: " + s);
+                //Trace.WriteLine("Option: " + s);
+                //Console.WriteLine("Option: " + s);
             }
         }
 
@@ -52,11 +58,11 @@ namespace Humpback.ConfigurationOptions {
         private void SetSpecificHelpPage(string v) {
             SetMainToFalse();
             WriteHelp = true;
-            if(String.IsNullOrWhiteSpace(v)) {
+            if (String.IsNullOrWhiteSpace(v)) {
                 HelpPage = HelpSection.All;
                 return;
             }
-            switch(v.ToUpperInvariant().Trim()) {
+            switch (v.ToUpperInvariant().Trim()) {
                 case "G":
                 case "GENERATE":
                 case "GEN":
@@ -78,14 +84,16 @@ namespace Humpback.ConfigurationOptions {
         }
 
         private void ResetOptions() {
-            WriteHelp = false;
+            WriteHelp = true;
             HelpPage = HelpSection.All;
             AssignDefaultConnectionString();
             Generate = false;
             List = false;
-            Run = true;
+            Run = false;
             Sql = false;
             SetMigrateToLatestVersion();
+            MigrationFolder = DefaultMigrationFolder();
+            GenerateString = "";
         }
         private void SetMainToFalse() {
             WriteHelp = false;
@@ -106,8 +114,15 @@ namespace Humpback.ConfigurationOptions {
         public bool Run { get; set; }
         public bool Sql { get; set; }
         public string ConnectionString { get; set; }
+        public IEnumerable<string> Extra { get; set; }
 
         // Sub Properties for Generate
+        public string GenerateString { get; set; }
+        private bool ExplicitExecute { get; set; }
+        private bool ExplicitFile { get; set; }
+
+
+
         // Sub Properties for List
         // Sub Properties for Run
         /*
@@ -116,5 +131,33 @@ namespace Humpback.ConfigurationOptions {
         public int MigrateToVersion { get; set; }
         // Sub Properties for Sql
 
+
+
+        public string MigrationFolder { get; set; }
+
+        private void EnsureMigrationFolder() {
+
+            if (String.IsNullOrWhiteSpace(MigrationFolder)) {
+                MigrationFolder = DefaultMigrationFolder();
+            }
+            if (!Directory.Exists(MigrationFolder)) {
+                Directory.CreateDirectory(MigrationFolder);
+            }
+            if (!Directory.Exists(Path.Combine(MigrationFolder,"..\\sql"))) {
+                Directory.CreateDirectory(Path.Combine(MigrationFolder,"..\\sql"));
+            }
+
+        }
+
+        private static string DefaultMigrationFolder() {
+            return Path.Combine(Environment.CurrentDirectory, @"db\migrations");
+        }
+    }
+
+    public enum GenerateActionType {
+        Empty, AddTable, RemoveTable, AddColumn, RemoveColumn, AddIndex, RemoveIndex, Sql, File
+    }
+    public enum RunActionType {
+        Up, Down
     }
 }
