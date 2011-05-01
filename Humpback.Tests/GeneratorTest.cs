@@ -207,6 +207,7 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("file"));
             Assert.IsTrue(file_writer.FileContents.Contains("mysqlfile"));
             Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            
         }
 
 
@@ -222,6 +223,8 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileName.Contains("SQL"));
             Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE Users (ID {pk}, first_name {string} NOT NULL, price_paid {money})"));
             Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            Assert.IsTrue(file_writer.FileContents.Contains("down"));
+            Assert.IsTrue(file_writer.FileContents.Contains("\"down\":\"\""));
         }
 
     }

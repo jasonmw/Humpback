@@ -157,8 +157,9 @@ namespace Humpback.Parts {
         }
 
         public void Sql() {
-            dynamic up = new { execute = String.Join(" ",GenerateColumns().Keys) };
-            dynamic output_object = new { up };
+            dynamic up = String.Join(" ",GenerateColumns().Keys);
+            dynamic down = "";
+            dynamic output_object = new { up,down};
 
             CreateFile("ExecuteSQL", output_object);
             Console.WriteLine("Generating Migration ExecuteSQL");
