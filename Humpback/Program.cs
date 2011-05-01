@@ -9,27 +9,29 @@ using Humpback.Parts;
 namespace Humpback {
     class Program {
         private static Configuration _configuration;
-        private static IPart _part;
+        private static IHumpbackCommand _humpback_command;
         private static IFileWriter _file_writer;
+        private static IMigrationProvider _migration_provider;
         static void Main(string[] args) {
             try {
 
                 _configuration = new Configuration(args);
                 _file_writer = new FileWriter();
+                _migration_provider = new FileMigrationProvider(_configuration);
 
                 if (_configuration.WriteHelp) {
-                    _part = new Help(_configuration);
+                    _humpback_command = new Help(_configuration);
                 } else if (_configuration.Generate) {
-                    _part = new Generator(_configuration,_file_writer);
+                    _humpback_command = new Generator(_configuration,_file_writer);
                 } else if (_configuration.List) {
-                    _part = new ListMigrations(_configuration);
+                    _humpback_command = new MigrationViewer(_migration_provider);
                 } else if (_configuration.Run) {
                     Run();
                 } else if (_configuration.Sql) {
                     Sql();
                 }
 
-                _part.Execute();
+                _humpback_command.Execute();
 
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
@@ -43,12 +45,6 @@ namespace Humpback {
            // Console.ReadLine();
         }
 
-        private static void PrintHelp() {
-            
-        }
-        private static void List() {
-            
-        }
         private static void Run() {
             
         }

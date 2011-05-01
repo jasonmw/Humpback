@@ -71,7 +71,7 @@ namespace Humpback.Tests
         public void GeneratorAddTableNoColumnsSpecified() {
             Configuration configuration = new Configuration(new[] { "-g","Users" });
             TestFileWriter file_writer = new TestFileWriter(); 
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileContents.Contains("create_table"));
@@ -83,7 +83,7 @@ namespace Humpback.Tests
         public void GeneratorAddTable1Column() {
             Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string" });
             TestFileWriter file_writer = new TestFileWriter(); 
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileContents.Contains("up"));
@@ -98,7 +98,7 @@ namespace Humpback.Tests
         public void GeneratorAddTableMultipleColumn() {
             Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string", "last_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileContents.Contains("create_table"));
@@ -114,7 +114,7 @@ namespace Humpback.Tests
         public void GeneratorDropTable() {
             Configuration configuration = new Configuration(new[] { "-g", "DropUsers" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("DropTable"));
@@ -127,7 +127,7 @@ namespace Humpback.Tests
         public void GeneratorRemoveColumn() {
             Configuration configuration = new Configuration(new[] { "-g", "Removefirst_nameFromUsers" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("RemoveColumn"));
@@ -142,7 +142,7 @@ namespace Humpback.Tests
         public void GeneratorAddSingleColumnTest() {
             Configuration configuration = new Configuration(new[] { "-g", "addfirst_nametoUsers" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("AddColumn"));
@@ -154,7 +154,7 @@ namespace Humpback.Tests
         public void GeneratorAddMultipleColumnTest() {
             Configuration configuration = new Configuration(new[] { "-g", "addfirst_nametoUsers", "first_name:string", "last_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("AddColumn"));
@@ -171,7 +171,7 @@ namespace Humpback.Tests
         public void GeneratorAddIndexTest() {
             Configuration configuration = new Configuration(new[] { "-g", "addindextoUsers", "first_name", "last_name" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("AddIndex"));
@@ -184,7 +184,7 @@ namespace Humpback.Tests
         public void GeneratorDropIndexTest() {
             Configuration configuration = new Configuration(new[] { "-g", "removeindexfromUsers", "first_name", "last_name" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("Users"));
             Assert.IsTrue(file_writer.FileName.Contains("RemoveIndex"));
@@ -201,7 +201,7 @@ namespace Humpback.Tests
         public void GeneratorFileTest() {
             Configuration configuration = new Configuration(new[] { "-g", "File", "mysqlfile" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("File"));
             Assert.IsTrue(file_writer.FileContents.Contains("file"));
@@ -218,7 +218,7 @@ namespace Humpback.Tests
         public void GeneratorSqlTest() {
             Configuration configuration = new Configuration(new[] { "-g", "SQL", "CREATE TABLE Users (ID {pk}, first_name {string} NOT NULL, price_paid {money})" });
             TestFileWriter file_writer = new TestFileWriter();
-            IPart target = new Generator(configuration, file_writer);
+            IHumpbackCommand target = new Generator(configuration, file_writer);
             target.Execute();
             Assert.IsTrue(file_writer.FileName.Contains("SQL"));
             Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE Users (ID {pk}, first_name {string} NOT NULL, price_paid {money})"));

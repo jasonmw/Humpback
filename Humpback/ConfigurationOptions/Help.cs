@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 
 namespace Humpback.ConfigurationOptions {
-    public class Help :IPart {
+    public class Help : IHumpbackCommand {
+
         private Configuration _configuration;
+
         public Help(Configuration configuration) {
             _configuration = configuration;
         }
-
-        
-
 
         public void Execute() {
             switch(_configuration.HelpPage) {
@@ -24,30 +23,31 @@ namespace Humpback.ConfigurationOptions {
                 case HelpSection.Sql:
                     break;
                 default:
-                    WriteGeneralHelp();
+                    write_general_help();
                     break;
             }
         }
 
-        private void WriteGeneralHelp() {
+        private static void write_general_help() {
             Console.WriteLine(@"
-Humpback Migration Help
-=============================
+Humpback Migration Information
+==============================
 
-Main Modes
+Main commands
   -generate -G | Generate JSON migration files
   -list     -L | List Migrations and current migration state
   -run      -R | Run Migrations against database
   -sql      -S | Generate SQL files from migration files
 
-For help about a specific topic use the following commands
 
-hump -?:generate
-hump -?:list
-hump -?:run
-hump -?:sql
+For information about a specific command use the following
 
-");
+  hump -?:generate
+  hump -?:list
+  hump -?:run
+  hump -?:sql
+
+"); // TODO: work out a way to not require the : in the help for a specific command
         }
     }
 }

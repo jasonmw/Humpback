@@ -6,34 +6,18 @@ using System.Text;
 using Humpback.ConfigurationOptions;
 
 namespace Humpback.Parts {
-    public class ListMigrations : IPart {
+    public class MigrationViewer : IHumpbackCommand {
         
-        private readonly Configuration _configuration;
-        public ListMigrations(Configuration configuration) {
-            if(!configuration.List) {
-                throw new InvalidOperationException("Configuration not correctly set for List");
-            }
-            _configuration = configuration;
-            
-        }
-        private SortedDictionary<string, string> _migrations;
-        private SortedDictionary<string,string> Migrations {
-            get {
-                if(_migrations == null) {
-                    _migrations = new SortedDictionary<string, string>();
-                    foreach(string file in Directory.GetFiles(_configuration.MigrationFolder)) {
-                        _migrations.Add(file, file);
-                    }
-                }
-                return _migrations;
-            }
+        private IMigrationProvider _migration_provider;
+        public MigrationViewer(IMigrationProvider migration_provider) {
+            _migration_provider = migration_provider;
         }
 
         public void Execute() {
             Console.WriteLine("===============================");
             Console.WriteLine("Humpback Migration List");
-            var migrations = Migrations;
-            Console.WriteLine(
+            var migrations = _migration_provider.GetMigrations();
+            Console.WriteLine(// Couldn't help myself, i hope leaving in the 'SSt' is enough for &copy; stuff??
                 @"
        __________...----..____..-'``-..___
      ,'.                                  ```--.._
@@ -50,13 +34,13 @@ namespace Humpback.Parts {
                                                            / \`.
                                                           /  _\-'
                                                          /_,'
-");
-            Console.WriteLine(migrations.Count + " Migrations Total");
-            Console.WriteLine("===============================");
-            // TODO: Get Current Migration Status for line updates
-            int migrationCounter = 1;
+"); // yes i know thats not actually a humpback whale, its a sperm whale, but for now thats too bad, theres not a terrible lot in ascii photos to choose from.
+    // also, if user doesnt' have monospaced font in their shell, it wont render right.   bummer for them!
+            Console.WriteLine(migrations.Count + @" Migrations Total     \o/ (yay) means its in your db already
+=================================================================");
+            int db_version = _migration_provider.DatabaseMigrationNumber();
             foreach(var m in migrations) {
-                Console.WriteLine("* {0} {1}", ((migrationCounter++).ToString()).PadLeft(3), new FileInfo(m.Value).Name);
+                Console.WriteLine("{0} {1} {2}", (m.Key > db_version ? "   " : "\\o/"), ((m.Key).ToString()).PadLeft(3), new FileInfo(m.Value).Name);
 
             }
         }

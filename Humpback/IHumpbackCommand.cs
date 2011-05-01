@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Humpback {
-    public class Generate {
+    public interface IHumpbackCommand {
+        void Execute();
     }
 }
