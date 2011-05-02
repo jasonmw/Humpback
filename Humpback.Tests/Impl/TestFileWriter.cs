@@ -6,7 +6,7 @@ using System.Text;
 namespace Humpback.Tests.Impl {
     public class TestFileWriter:IFileWriter {
         public void WriteFile(string path, string contents) {
-            FileContents = contents;
+            FileContents += contents;
             FileName = path;
             Console.WriteLine(path);
         }

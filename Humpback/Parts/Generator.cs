@@ -100,7 +100,7 @@ namespace Humpback.Parts {
             string serialized = Helpers.Json(obj);
             action = action.Replace(" ", "_");
             action = Regex.Replace(action, @"[^\w\-_]", ""); 
-            string file_name = string.Format("{0}_{1}.js",DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss"),action);
+            string file_name = string.Format("{0}_{1}.js",_configuration.NextSerialNumber(),action);
             var path = Path.Combine(_configuration.MigrationFolder,file_name);
             _file_writer.WriteFile(path, serialized);
         }

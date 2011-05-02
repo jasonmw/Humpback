@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationTest.cs" />
+    <Compile Include="DynamicTests.cs" />
     <Compile Include="GeneratorTest.cs" />
     <Compile Include="Impl\TestFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

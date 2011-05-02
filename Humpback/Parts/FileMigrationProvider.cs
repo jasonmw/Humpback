@@ -20,7 +20,9 @@ namespace Humpback.Parts {
                 _migrations = new SortedDictionary<int, string>();
                 var tmp_migrations = new SortedDictionary<string, string>();
                 foreach (string file in Directory.GetFiles(_configuration.MigrationFolder)) {
-                    tmp_migrations.Add(file, file);
+                    if (new FileInfo(file).Extension.Equals(".js", StringComparison.InvariantCultureIgnoreCase)) {
+                        tmp_migrations.Add(file, file);
+                    }
                 }
                 int ctr = 1;
                 foreach(var key in tmp_migrations.Keys) {

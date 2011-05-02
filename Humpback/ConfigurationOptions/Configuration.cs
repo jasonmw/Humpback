@@ -20,7 +20,14 @@ namespace Humpback.ConfigurationOptions {
                     GenerateString = s.Trim();})
                 .Add("l:|list:|L:|LIST:|List:", s => { SetMainToFalse(); List = true; })
                 .Add("r:|run:|R:|RUN:|Run:", s => { SetMainToFalse(); Run = true; })
-                .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; });
+                .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; })
+                .Add("all|ALL|All", a => All=true)
+                .Add("single|Single|SINGLE", s => Single = true)
+                .Add("dp|DP|Dp", dp => Deployed = true)
+                .Add("ndp|NDP|Ndp", ndp => NotDeployed = true)
+                .Add("screen|SCREEN|Screen", ndp => Screen = true)
+                .Add("output=|Output=|OUTPUT=", o => OutputFolder=o)
+                ;
             
             Extra = oset.Parse(options);
             EnsureMigrationFolder();
@@ -46,6 +53,11 @@ namespace Humpback.ConfigurationOptions {
                 //Trace.WriteLine("Option: " + s);
                 //Console.WriteLine("Option: " + s);
             }
+        }
+
+
+        public string NextSerialNumber() {
+            return DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss");
         }
 
 
@@ -118,9 +130,18 @@ namespace Humpback.ConfigurationOptions {
 
         // Sub Properties for Generate
         public string GenerateString { get; set; }
-        private bool ExplicitExecute { get; set; }
-        private bool ExplicitFile { get; set; }
 
+        private string _sqlFolder;
+        public string SqlFolder {
+            get {
+                if (_sqlFolder != null) {
+                    return _sqlFolder;
+                }
+                var i = new DirectoryInfo(MigrationFolder);
+                return Path.Combine(i.Parent.FullName, "sql");
+            }
+            set { _sqlFolder = value; }
+        }
 
 
         // Sub Properties for List
@@ -130,6 +151,25 @@ namespace Humpback.ConfigurationOptions {
          */
         public int MigrateToVersion { get; set; }
         // Sub Properties for Sql
+        private string _outputFolder;
+        public string OutputFolder {
+            get {
+                if (_outputFolder != null) {
+                    return _outputFolder;
+                }
+                var i = new DirectoryInfo(MigrationFolder);
+                return Path.Combine(i.Parent.FullName, "generated");
+            }
+            set { _outputFolder = value; }
+        }
+
+        public bool All { get; set; }
+        public bool Single { get; set; }
+        public bool Deployed { get; set; }
+        public bool NotDeployed { get; set; }
+        public bool Screen { get; set; }
+
+
 
 
 
@@ -143,8 +183,11 @@ namespace Humpback.ConfigurationOptions {
             if (!Directory.Exists(MigrationFolder)) {
                 Directory.CreateDirectory(MigrationFolder);
             }
-            if (!Directory.Exists(Path.Combine(MigrationFolder,"..\\sql"))) {
-                Directory.CreateDirectory(Path.Combine(MigrationFolder,"..\\sql"));
+            if (!Directory.Exists(SqlFolder)) {
+                Directory.CreateDirectory(SqlFolder);
+            }
+            if (!Directory.Exists(OutputFolder)) {
+                Directory.CreateDirectory(OutputFolder);
             }
 
         }

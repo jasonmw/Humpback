@@ -24,7 +24,7 @@ namespace Humpback.Parts {
             json = keywords_tab_level_2.Aggregate(json, (current, s) => current.Replace("\"" + s + "\":", Environment.NewLine + "\t\t\"" + s + "\":"));
             json = keywords_tab_level_3.Aggregate(json, (current, s) => current.Replace("\"" + s + "\":", Environment.NewLine + "\t\t\t\"" + s + "\":"));
             json = json.Replace("}},", Environment.NewLine + "\t\t}" + Environment.NewLine + "\t},");
-            json = json.Substring(0, json.Length - 2) + (json.Substring(0, json.Length - 2).Contains("\"")?"\"":"") + Environment.NewLine + "\t}" + Environment.NewLine + "}";
+            //json = json.Substring(0, json.Length - 2) + (json.Substring(0, json.Length - 2).Contains("\"")?"\"":"") + Environment.NewLine + "\t}" + Environment.NewLine + "}";
             return json;
         }
     }
