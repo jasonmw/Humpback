@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationOptions\Help.cs" />
-    <Compile Include="ConfigurationOptions\HelpSection.cs" />
     <Compile Include="ConfigurationOptions\Options.cs" />
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IMigrationProvider.cs" />
@@ -59,7 +58,7 @@
     <Compile Include="Parts\Generator.cs" />
     <Compile Include="Parts\Helpers.cs" />
     <Compile Include="Parts\MigrationViewer.cs" />
-    <Compile Include="Parts\Run.cs" />
+    <Compile Include="Parts\Migrate.cs" />
     <Compile Include="Parts\SQLDatabaseProvider.cs" />
     <Compile Include="Parts\SQLServerFormatter.cs" />
     <Compile Include="Program.cs" />

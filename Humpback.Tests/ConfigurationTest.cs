@@ -91,31 +91,26 @@ namespace Humpback.Tests
         public void HelpTestDash() {
             var target = new Configuration(new[]{"-?"});
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.All, target.HelpPage);
         }
         [TestMethod()]
         public void HelpTest_h() {
             var target = new Configuration(new[] { "-h" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.All, target.HelpPage);
         }
         [TestMethod()]
         public void HelpTest_H() {
             var target = new Configuration(new[] { "-H" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.All, target.HelpPage);
         }
         [TestMethod()]
         public void HelpTest_HELP() {
             var target = new Configuration(new[] { "-HELP" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.All, target.HelpPage);
         }
         [TestMethod()]
         public void HelpTest_help() {
             var target = new Configuration(new[] { "-help" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.All, target.HelpPage);
         }
 
         /// <summary>
@@ -123,59 +118,50 @@ namespace Humpback.Tests
         ///</summary>
         [TestMethod()]
         public void HelpModifierTest_Run() {
-            var target = new Configuration(new[] { "-? Run" });
+            var target = new Configuration(new[] { "-? Migrate" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Run, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_RUN() {
-            var target = new Configuration(new[] { "-? RUN" });
+            var target = new Configuration(new[] { "-? MIGRATE" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Run, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_List() {
             var target = new Configuration(new[] { "-? List" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.List, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_Generate() {
             var target = new Configuration(new[] { "-? Generate" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Generate, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_Sql() {
             var target = new Configuration(new[] { "-? Sql" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Sql, target.HelpPage);
         }
 
         [TestMethod()]
         public void HelpModifierTest_R() {
-            var target = new Configuration(new[] { "-? R" });
+            var target = new Configuration(new[] { "-? M" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Run, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_L() {
             var target = new Configuration(new[] { "-? L" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.List, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_G() {
             var target = new Configuration(new[] { "-? G" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.AreEqual(HelpSection.Generate, target.HelpPage);
         }
         [TestMethod()]
         public void HelpModifierTest_S_and_Ensure_Run_Off() {
             var target = new Configuration(new[] { "-? S" });
             Assert.IsTrue(target.WriteHelp);
-            Assert.IsFalse(target.Run);
-            Assert.AreEqual(HelpSection.Sql, target.HelpPage);
+            Assert.IsFalse(target.Migrate);
         }
 
 
@@ -189,14 +175,14 @@ namespace Humpback.Tests
             Configuration target = new Configuration(new[] { "--Sql" });
             Assert.IsTrue(target.Sql);
             Assert.IsFalse(target.WriteHelp);
-            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.Migrate);
         }
         [TestMethod()]
         public void BasicSqlTest3() {
             Configuration target = new Configuration(new[] { "/Sql" });
             Assert.IsTrue(target.Sql);
             Assert.IsFalse(target.WriteHelp);
-            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.Migrate);
             Assert.IsFalse(target.List);
             Assert.IsFalse(target.Generate);
         }
@@ -216,7 +202,7 @@ namespace Humpback.Tests
             Configuration target = new Configuration(new[] { "-G","AddMyMigration" });
             Assert.IsTrue(target.Generate);
             Assert.IsFalse(target.WriteHelp);
-            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.Migrate);
             Assert.IsFalse(target.List);
         }
 
@@ -225,7 +211,7 @@ namespace Humpback.Tests
             Configuration target = new Configuration(new[] { "-G", "table", "first_name:string", "last_name:string" });
             Assert.IsTrue(target.Generate);
             Assert.IsFalse(target.WriteHelp);
-            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.Migrate);
             Assert.IsFalse(target.List);
             Console.WriteLine(String.Join("|",target.Extra.ToArray()));
             Assert.IsNotNull(target.Extra);
@@ -252,13 +238,13 @@ namespace Humpback.Tests
             Configuration target = new Configuration(new[] { "-List" });
             Assert.IsTrue(target.List);
             Assert.IsFalse(target.WriteHelp);
-            Assert.IsFalse(target.Run);
+            Assert.IsFalse(target.Migrate);
             Assert.IsFalse(target.Generate);
         }
         [TestMethod()]
         public void BasicRunTest() {
             Configuration target = new Configuration(new[] { "-RUN" });
-            Assert.IsTrue(target.Run);
+            Assert.IsTrue(target.Migrate);
             Assert.IsFalse(target.WriteHelp);
             Assert.IsFalse(target.List);
             Assert.IsFalse(target.Generate);

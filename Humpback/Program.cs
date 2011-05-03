@@ -30,8 +30,8 @@ namespace Humpback {
                     _humpback_command = new Generator(_configuration,_file_writer);
                 } else if (_configuration.List) {
                     _humpback_command = new MigrationViewer(_configuration,_migration_provider);
-                } else if (_configuration.Run) {
-                    _humpback_command = new Run(_configuration, _sql_formatter, _database_provider);
+                } else if (_configuration.Migrate) {
+                    _humpback_command = new Migrate(_configuration, _sql_formatter, _database_provider);
                 } else if (_configuration.Sql) {
                     _humpback_command = new GenerateSQL(_configuration, _sql_formatter, _file_writer, _migration_provider);
                 }

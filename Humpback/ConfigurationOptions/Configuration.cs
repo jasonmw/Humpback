@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Humpback.ConfigurationOptions;
 using System.Configuration;
 
 namespace Humpback.ConfigurationOptions {
@@ -11,22 +10,22 @@ namespace Humpback.ConfigurationOptions {
 
         private void Parse(IEnumerable<string> options) {
             var oset = new OptionSet()
-                .Add("?:|help:|h:|HELP:|H:|Help:", SetSpecificHelpPage)
+                .Add("?|help|h|HELP|H|Help", h => WriteHelp=true)
                 .Add("f=|folder=|F=|FOLDER=|Folder=", s => { MigrationFolder = s.Trim(); })
+                .Add("output=|Output=|OUTPUT=", o => OutputFolder=o)
                 .Add("cs=|connectionstring=|CS=|CONNECTIONSTRING=", s => { ConnectionString = s.Trim(); })
                 .Add("g=|gen=|G=|GEN=|Gen=|Generate=|generate=|GENERATE=", s => { 
                     SetMainToFalse(); 
                     Generate = true; 
                     GenerateString = s.Trim();})
                 .Add("l:|list:|L:|LIST:|List:", s => { SetMainToFalse(); List = true; })
-                .Add("r:|run:|R:|RUN:|Run:", s => { SetMainToFalse(); Run = true; })
+                .Add("m:|migrate:|M:|MIGRATE:|Migrate:", s => { SetMainToFalse(); Migrate = true; })
                 .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; })
                 .Add("all|ALL|All", a => All=true)
                 .Add("single|Single|SINGLE", s => Single = true)
                 .Add("dp|DP|Dp", dp => Deployed = true)
                 .Add("ndp|NDP|Ndp", ndp => NotDeployed = true)
                 .Add("screen|SCREEN|Screen", ndp => Screen = true)
-                .Add("output=|Output=|OUTPUT=", o => OutputFolder=o)
                 ;
             
             Extra = oset.Parse(options);
@@ -42,18 +41,9 @@ namespace Humpback.ConfigurationOptions {
             if (options == null || options.Count() == 0) {
                 return;
             }
-            DebugWriteOutOptions(options);
             Parse(options);
         }
 
-        [Conditional("DEBUG")]
-        private void DebugWriteOutOptions(IEnumerable<string> options) {
-            foreach (string s in options) {
-                //Debug.WriteLine("Option: " + s);
-                //Trace.WriteLine("Option: " + s);
-                //Console.WriteLine("Option: " + s);
-            }
-        }
 
 
         public string NextSerialNumber() {
@@ -67,41 +57,14 @@ namespace Humpback.ConfigurationOptions {
                                    : ConfigurationManager.ConnectionStrings["default"].ConnectionString;
         }
 
-        private void SetSpecificHelpPage(string v) {
-            SetMainToFalse();
-            WriteHelp = true;
-            if (String.IsNullOrWhiteSpace(v)) {
-                HelpPage = HelpSection.All;
-                return;
-            }
-            switch (v.ToUpperInvariant().Trim()) {
-                case "G":
-                case "GENERATE":
-                case "GEN":
-                    HelpPage = HelpSection.Generate;
-                    break;
-                case "L":
-                case "LIST":
-                    HelpPage = HelpSection.List;
-                    break;
-                case "R":
-                case "RUN":
-                    HelpPage = HelpSection.Run;
-                    break;
-                case "S":
-                case "SQL":
-                    HelpPage = HelpSection.Sql;
-                    break;
-            }
-        }
+        
 
         private void ResetOptions() {
             WriteHelp = true;
-            HelpPage = HelpSection.All;
             AssignDefaultConnectionString();
             Generate = false;
             List = false;
-            Run = false;
+            Migrate = false;
             Sql = false;
             SetMigrateToLatestVersion();
             MigrationFolder = DefaultMigrationFolder();
@@ -111,7 +74,7 @@ namespace Humpback.ConfigurationOptions {
             WriteHelp = false;
             Generate = false;
             List = false;
-            Run = false;
+            Migrate = false;
             Sql = false;
         }
 
@@ -120,10 +83,9 @@ namespace Humpback.ConfigurationOptions {
         }
 
         public Boolean WriteHelp { get; set; }
-        public HelpSection HelpPage { get; set; }
         public bool Generate { get; set; }
         public bool List { get; set; }
-        public bool Run { get; set; }
+        public bool Migrate { get; set; }
         public bool Sql { get; set; }
         public string ConnectionString { get; set; }
         public IEnumerable<string> Extra { get; set; }
