@@ -6,6 +6,9 @@ _ReSharper.*
 *.ReSharper.user
 *.resharper
 *.suo
+*.swo
+*.vsdmi
+*.testsettings
 *.cache
 *~
 *.swp
