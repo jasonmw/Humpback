@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
+using Humpback.Tools;
 
 namespace Humpback.Parts {
     public static class Helpers {
@@ -26,6 +27,16 @@ namespace Humpback.Parts {
             json = json.Replace("}},", Environment.NewLine + "\t\t}" + Environment.NewLine + "\t},");
             //json = json.Substring(0, json.Length - 2) + (json.Substring(0, json.Length - 2).Contains("\"")?"\"":"") + Environment.NewLine + "\t}" + Environment.NewLine + "}";
             return json;
+        }
+
+
+        public static dynamic DeserializeMigration(string this_migration_contents) {
+            var serializer = new JavaScriptSerializer();
+            serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
+
+            dynamic obj = serializer.Deserialize(this_migration_contents, typeof(object));
+            return obj;
+
         }
     }
 }

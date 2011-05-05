@@ -85,7 +85,7 @@ namespace Humpback.Parts {
                     max = migration.Key;
                 }
                 var this_migration_contents = migration_contents[migration.Key];
-                dynamic migration_object = get_migration_object(this_migration_contents);
+                dynamic migration_object = Helpers.DeserializeMigration(this_migration_contents);
                 sql_commands.Add(_sql_formatter.SqlFileName(migration.Value), _sql_formatter.GenerateSQLUp(migration_object)[0]);
             }
             WriteFile(sql_commands,min,max);
@@ -129,14 +129,6 @@ namespace Humpback.Parts {
             }
         }
 
-        private static dynamic get_migration_object(string this_migration_contents) {
-            var serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-
-            dynamic obj = serializer.Deserialize(this_migration_contents, typeof(object));
-            return obj;
-
-        }
 
         private int SingleMigrationID() {
             int migration_id = 0;

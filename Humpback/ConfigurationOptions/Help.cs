@@ -106,6 +106,16 @@ Humpback Migration Information
 Executing Migrations
 ==============================
 
+Executes Migrations against the database.
+Available actions:
+
+> hump -m -all    | updates database to most recent migration
+> hump -m 12      | updates database to a specific migration (up or down)
+> hump -m -up     | migrates database up one migration
+> hump -m -down   | migrates database down one migration
+> hump -m -empty  | removes all migrations from database
+> hump -m -reset  | removes and re-adds all migrations (-empty, then -all)
+
 ");
         }
         private static void write_sql_help() {
@@ -118,14 +128,14 @@ Generating SQL Files
 Generates Sql files based on migrations.
 Available actions:
 
-> hump -all      | writes all migrations into sql file(s)
-> hump 12        | writes 1 specified migration into a sql file
-> hump -dp       | writes all deployed migraions into sql file(s)
-> hump -ndp      | writes all undeployed migrations into sql file(s)
-       -single   | specifies to write all sql to one file
-                 | default is seperate files per migration
-       -screen   | writes the sql to the screen for viewing
-                 | does NOT write file when screen is specified
+> hump -s -all      | writes all migrations into sql file(s)
+> hump -s 12        | writes 1 specified migration into a sql file
+> hump -s -dp       | writes all deployed migraions into sql file(s)
+> hump -s -ndp      | writes all undeployed migrations into sql file(s)
+          -single   | specifies to write all sql to one file
+                    | default is seperate files per migration
+          -screen   | writes the sql to the screen for viewing
+                    | does NOT write file when screen is specified
 
 ");
         }

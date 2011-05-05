@@ -10,5 +10,6 @@ namespace Humpback {
         SortedDictionary<int, string> GetMigrationsContents();
         KeyValuePair<string, string> GetMigrationWithContents(int migration_number);
         int DatabaseMigrationNumber();
+        void SetMigrationNumber(int number);
     }
 }

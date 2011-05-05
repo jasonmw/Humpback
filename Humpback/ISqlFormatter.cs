@@ -10,5 +10,9 @@ namespace Humpback {
 
 
         string SqlFileName(string p);
+        string sqlCreateSchemaInfoTable { get; }
+        string sqlInitializeSchemaInfo { get; }
+        string sqlGetSchemaInfo { get; }
+        string sqlUpdateSchemaInfo(int version);
     }
 }

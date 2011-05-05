@@ -6,8 +6,10 @@ using System.Text;
 namespace Humpback {
     public interface IDatabaseProvider {
 
-        bool ExecuteCommand(string command);
-        int GetMigrationVersion();        
-        bool EnsureSchemaInfo();
+        int ExecuteCommand(string command);
+        int GetMigrationVersion();
+        void UpdateMigrationVersion(int number);
+        int ExecuteUpCommand(dynamic up);
+        int ExecuteDownCommand(dynamic down);
     }
 }

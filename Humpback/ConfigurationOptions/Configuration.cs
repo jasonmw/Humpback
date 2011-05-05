@@ -21,11 +21,16 @@ namespace Humpback.ConfigurationOptions {
                 .Add("l:|list:|L:|LIST:|List:", s => { SetMainToFalse(); List = true; })
                 .Add("m:|migrate:|M:|MIGRATE:|Migrate:", s => { SetMainToFalse(); Migrate = true; })
                 .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; })
-                .Add("all|ALL|All", a => All=true)
-                .Add("single|Single|SINGLE", s => Single = true)
-                .Add("dp|DP|Dp", dp => Deployed = true)
-                .Add("ndp|NDP|Ndp", ndp => NotDeployed = true)
-                .Add("screen|SCREEN|Screen", ndp => Screen = true)
+                .Add("all", a => All=true)
+                .Add("single", s => Single = true)
+                .Add("dp", dp => Deployed = true)
+                .Add("ndp", ndp => NotDeployed = true)
+                .Add("screen", s => Screen = true)
+                .Add("up", u => Up = true)
+                .Add("down", d => Down = true)
+                .Add("empty", e => Empty = true)
+                .Add("reset", r => Reset = true)
+                .Add("v", v => Verbose = true)
                 ;
             
             Extra = oset.Parse(options);
@@ -53,7 +58,7 @@ namespace Humpback.ConfigurationOptions {
 
         private void AssignDefaultConnectionString() {
             ConnectionString = ConfigurationManager.ConnectionStrings["default"] == null
-                                   ? "server=.;database=default;Integrated Security=True;"
+                                   ? "server=.;database=Northwind;Integrated Security=True;"
                                    : ConfigurationManager.ConnectionStrings["default"].ConnectionString;
         }
 
@@ -108,9 +113,12 @@ namespace Humpback.ConfigurationOptions {
 
         // Sub Properties for List
         // Sub Properties for Run
-        /*
-            
-         */
+
+        public bool Up { get; set; }
+        public bool Down { get; set; }
+        public bool Empty { get; set; }
+        public bool Reset { get; set; }
+
         public int MigrateToVersion { get; set; }
         // Sub Properties for Sql
         private string _outputFolder;
@@ -136,6 +144,11 @@ namespace Humpback.ConfigurationOptions {
 
 
         public string MigrationFolder { get; set; }
+
+        public bool Verbose {
+            get;
+            set;
+        }
 
         private void EnsureMigrationFolder() {
 

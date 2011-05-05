@@ -15,15 +15,15 @@ namespace Humpback {
         private static IMigrationProvider _migration_provider;
         private static ISqlFormatter _sql_formatter;
         private static IDatabaseProvider _database_provider;
+
         static void Main(string[] args) {
             try {
-
-                _configuration = new Configuration(args);
                 _file_writer = new FileWriter();
-                _migration_provider = new FileMigrationProvider(_configuration);
+                _configuration = new Configuration(args);
                 _sql_formatter = new SQLServerFormatter(_configuration);
-                _database_provider = new SQLDatabaseProvider();
-
+                _database_provider = new SQLDatabaseProvider(_configuration,_sql_formatter);
+                _migration_provider = new FileMigrationProvider(_configuration, _database_provider);
+                
                 if (_configuration.WriteHelp) {
                     _humpback_command = new Help(_configuration);
                 } else if (_configuration.Generate) {
@@ -31,7 +31,7 @@ namespace Humpback {
                 } else if (_configuration.List) {
                     _humpback_command = new MigrationViewer(_configuration,_migration_provider);
                 } else if (_configuration.Migrate) {
-                    _humpback_command = new Migrate(_configuration, _sql_formatter, _database_provider);
+                    _humpback_command = new Migrate(_configuration, _database_provider, _migration_provider);
                 } else if (_configuration.Sql) {
                     _humpback_command = new GenerateSQL(_configuration, _sql_formatter, _file_writer, _migration_provider);
                 }

@@ -25,12 +25,31 @@ namespace Humpback.Parts {
             if (operation.down != null) {
                 return new string[] { GetCommand(operation.down) };
             }
+            if (operation.up != null) {
+                return new string[] { ReadMinds(operation.up) };
+            }
             return new string[0];
         }
 
 
         public string SqlFileName(string p) {
             return p.Substring(0,p.Length - 3) + ".sql";
+        }
+
+
+        public string sqlCreateSchemaInfoTable {
+            get { return "CREATE TABLE SchemaInfo (Version INT)"; }
+        }
+
+        public string sqlInitializeSchemaInfo {
+            get { return "INSERT INTO SchemaInfo(Version) VALUES(0)"; }
+        }
+
+        public string sqlUpdateSchemaInfo(int version) {
+            return String.Format("UPDATE SchemaInfo SET Version = {0}",version); 
+        }
+        public string sqlGetSchemaInfo {
+            get { return "SELECT Version FROM SchemaInfo"; }
         }
 
 
@@ -166,7 +185,7 @@ namespace Humpback.Parts {
                 result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
                 //DROP COLUMN
             } else if (op.remove_column != null) {
-                result = string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", op.remove_column.table, op.remove_column.name);
+                result = string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", op.remove_column.table, op.remove_column.column);
                 //CHANGE
             } else if (op.change_column != null) {
                 result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
@@ -183,6 +202,26 @@ namespace Humpback.Parts {
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// If a "down" isn't declared, this handy function will try and figure it out for you
+        /// </summary>
+        static string ReadMinds(dynamic up) {
+            //CREATE
+            if (up.create_table != null) {
+                return string.Format("DROP TABLE [{0}]", up.create_table.name);
+                //DROP COLUMN
+            }
+            if (up.add_column != null) {
+                return string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", up.add_column, up.add_column.columns[0].name);
+            }
+            if (up.add_index != null) {
+                // DROP INDEX
+                return string.Format("DROP INDEX {0}.{1}", up.add_index.table_name, CreateIndexName(up.add_index));
+            }
+            return "";
+
         }
     }
 }

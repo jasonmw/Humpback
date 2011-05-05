@@ -8,11 +8,13 @@ using Humpback.ConfigurationOptions;
 namespace Humpback.Parts {
     public class FileMigrationProvider : IMigrationProvider {
         private Configuration _configuration;
+        private IDatabaseProvider _database_provider;
         private SortedDictionary<int, string> _migrations;
         private SortedDictionary<int, string> _migration_contents;
 
-        public FileMigrationProvider(Configuration configuration) {
+        public FileMigrationProvider(Configuration configuration, IDatabaseProvider database_provider) {
             _configuration = configuration;
+            _database_provider = database_provider;
         }
 
         public SortedDictionary<int, string> GetMigrations() {
@@ -55,7 +57,11 @@ namespace Humpback.Parts {
         }
 
         public int DatabaseMigrationNumber() {
-            return 6; // TODO: this could change?
+            return _database_provider.GetMigrationVersion();
+        }
+
+        public void SetMigrationNumber(int number) {
+            _database_provider.UpdateMigrationVersion(number);
         }
     }
 }
