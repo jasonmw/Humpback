@@ -56,34 +56,34 @@ if you do not specify a primary key, one will be appointed for you.
 timestamps will be added automatically  
 
 create_table example ( tablename column_name:column_type column_name:column_type )  
-    > hump -g Person FirstName:string LastName:string Birthdate:datetime FavoriteNumber:int
+    `> hump -g Person FirstName:string LastName:string Birthdate:datetime FavoriteNumber:int`
 
 drop_table example ( DropTableName )  
-    > hump -g DropPerson
+    `> hump -g DropPerson`
 
 add_column example ( AddColumnNameToTableName column_name:column_type column_name:column_type  )  
-    > hump -g AddFavoriteThingsToPerson FavoriteColor:string FavoriteAnimal:string
+    `> hump -g AddFavoriteThingsToPerson FavoriteColor:string FavoriteAnimal:string`
 
 change_column example ( ChangeTableName column_name:column_type column_name:column_type )  
-    > hump -g ChangePerson FavoriteNumber:long
+    `> hump -g ChangePerson FavoriteNumber:long`
 
 remove_column example ( RemoveColumnNameFromTableName )  
 only removes one column currently
-    > hump -g RemoveBirthdayFromPerson
+    `> hump -g RemoveBirthdayFromPerson`
 
 add_index example ( AddIndexToTableName  column_name column_name)  
-    > hump -g AddIndexToPerson FirstName LastName
+    `> hump -g AddIndexToPerson FirstName LastName`
 
 remove_index ( RemoveIndexFromTableName  column_name column_name)  
 column names are required to be able to generate the index name
-    > hump -g RemoveIndexFromPerson FirstName LastName
+    `> hump -g RemoveIndexFromPerson FirstName LastName`
 
 file ( file SqlFileName )  
 the sql file will be generated for you
-    > hump -g file MyBigCreateStoredProcedureFile
+    `> hump -g file MyBigCreateStoredProcedureFile`
 
 sql ( sql SqlString )  
-    > hump -g sql ""CREATE VIEW PersonView AS SELECT FirstName,LastName from Person"" 
+    `> hump -g sql ""CREATE VIEW PersonView AS SELECT FirstName,LastName from Person""`
 
 
 
@@ -91,7 +91,6 @@ List Migrations and Details
 ---------------------------
 
 2 commands available for listing migrations
-
 
     > hump -list    | List all migrations and their deploy status
     > hump -list 6  | List single migration by number
