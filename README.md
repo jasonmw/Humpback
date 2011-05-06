@@ -28,10 +28,10 @@ Main commands
 
 For information about a specific command use the following  
 
-  hump -? generate  
-  hump -? migrate  
-  hump -? list  
-  hump -? sql  
+- hump -? generate  
+- hump -? migrate  
+- hump -? list  
+- hump -? sql  
 
 
 
