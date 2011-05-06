@@ -18,7 +18,8 @@ The analagous features are like so
 Using Humpback
 ------------------------------
 
-Main commands
+Main commands  
+
 - generate -g | Generate JSON migration files  
 - list     -l | List Migrations and current migration state  
 - migrate  -m | Run Migrations against database  
@@ -54,6 +55,8 @@ the migration types that can be generated are:
 
 if you do not specify a primary key, one will be appointed for you.  
 timestamps will be added automatically  
+
+just like rails, sequential filenames will be generated for you (UTC timestamp)  
 
 **create_table** example ( tablename column_name:column_type column_name:column_type )  
     `> hump -g Person FirstName:string LastName:string Birthdate:datetime FavoriteNumber:int`
