@@ -34,6 +34,9 @@ For information about a specific command use the following
     hump -? sql  
 
 
+The json syntax is explained very well by Rob at https://github.com/robconery/Manatee  
+This should generate / consume the exact files specified for manatee.  
+
 
 
 GENERATE
