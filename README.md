@@ -20,18 +20,18 @@ Using Humpback
 
 Main commands  
 
-- generate -g | Generate JSON migration files  
-- list     -l | List Migrations and current migration state  
-- migrate  -m | Run Migrations against database  
-- sql      -s | Generate SQL files from migration files  
+    generate -g | Generate JSON migration files  
+    list     -l | List Migrations and current migration state  
+    migrate  -m | Run Migrations against database  
+    sql      -s | Generate SQL files from migration files  
 
 
 For information about a specific command use the following  
 
-- hump -? generate  
-- hump -? migrate  
-- hump -? list  
-- hump -? sql  
+    hump -? generate  
+    hump -? migrate  
+    hump -? list  
+    hump -? sql  
 
 
 
