@@ -4,6 +4,8 @@ Inspired by Rails tooling and another project called Manatee https://github.com/
 
 The database migrations are similar to rails, the format they are stored in is json.
 
+Your interface is the command line.  
+
 Humpback does 4 Main things
 ---------------------------
 The analagous features are like so
