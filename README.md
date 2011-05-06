@@ -7,10 +7,10 @@ The database migrations are similar to rails, the format they are stored in is j
 Humpback does 4 Main things
 The analagous features are like so
 
-- Humpback > Generate ~ rails generate migration
-- Humpback > List     ~ manatee page and color coding
-- Humpback > Sql      ~ view/export sql files from migrations for safe keeping or direct usage
-- Humpback > Migrate  ~ rake db:migrate
+    Humpback > Generate ~ rails generate migration
+    Humpback > List     ~ manatee page and color coding
+    Humpback > Sql      ~ view/export sql files from migrations for safe keeping or direct usage
+    Humpback > Migrate  ~ rake db:migrate
 
 
 
