@@ -180,7 +180,7 @@ namespace Humpback.Parts {
 
                 //DROP 
             } else if (op.drop_table != null) {
-                return "DROP TABLE " + op.drop_table;
+                return "DROP TABLE [" + op.drop_table + "]";
                 //ADD COLUMN
             } else if (op.add_column != null) {
                 result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
@@ -195,7 +195,7 @@ namespace Humpback.Parts {
                 result = string.Format("CREATE NONCLUSTERED INDEX [{0}] ON [{1}] ({2} )", CreateIndexName(op.add_index), op.add_index.table_name, CreateIndexColumnString(op.add_index.columns));
                 //REMOVE INDEX
             } else if (op.remove_index != null) {
-                result = string.Format("DROP INDEX {0}.{1}", op.remove_index.table_name, CreateIndexName(op.remove_index));
+                result = string.Format("DROP INDEX [{0}].[{1}]", op.remove_index.table_name, CreateIndexName(op.remove_index));
             } else if (op.execute != null) {
                 result = op.execute;
             } else if (op.file != null) {
