@@ -65,26 +65,26 @@ timestamps will be added automatically
 
 just like rails, sequential filenames will be generated for you (UTC timestamp)  
 
-**create_table** example ( tablename column_name:column_type column_name:column_type )  
+**create_table** ( tablename column_name:column_type column_name:column_type )  
     `> hump -g Person FirstName:string LastName:string Birthdate:datetime FavoriteNumber:int`
 
-**drop_table** example ( DropTableName )  
+**drop_table** ( DropTableName )  
     `> hump -g DropPerson`
 
-**add_column** example ( AddColumnNameToTableName column_name:column_type column_name:column_type  )  
+**add_column** ( AddColumnNameToTableName column_name:column_type column_name:column_type  )  
     `> hump -g AddFavoriteThingsToPerson FavoriteColor:string FavoriteAnimal:string`
 
-**change_column** example ( ChangeTableName column_name:column_type column_name:column_type )  
+**change_column** ( ChangeTableName column_name:column_type column_name:column_type )  
     `> hump -g ChangePerson FavoriteNumber:long`
 
-**remove_column** example ( RemoveColumnNameFromTableName )  
+**remove_column** ( RemoveColumnNameFromTableName )  
 only removes one column currently
     `> hump -g RemoveBirthdayFromPerson`
 
-**add_index** example ( AddIndexToTableName  column_name column_name)  
+**add_index** ( AddIndexToTableName  column_name column_name)  
     `> hump -g AddIndexToPerson FirstName LastName`
 
-**remove_index** example ( RemoveIndexFromTableName  column_name column_name)  
+**remove_index** ( RemoveIndexFromTableName  column_name column_name)  
 column names are required to be able to generate the index name  
     `> hump -g RemoveIndexFromPerson FirstName LastName`
 
