@@ -133,11 +133,11 @@ Generates Sql files based on migrations.
 This can be valuable for a number of strategies.  
 Available actions:  
 
-> hump -s -all      | writes all migrations into sql file(s)
-> hump -s 12        | writes 1 specified migration into a sql file
-> hump -s -dp       | writes all deployed migraions into sql file(s)
-> hump -s -ndp      | writes all undeployed migrations into sql file(s)
-          -single   | specifies to write all sql to one file
-                    | default is seperate files per migration
-          -screen   | writes the sql to the screen for viewing
-                    | does NOT write file when screen is specified
+    > hump -s -all      | writes all migrations into sql file(s)
+    > hump -s 12        | writes 1 specified migration into a sql file
+    > hump -s -dp       | writes all deployed migraions into sql file(s)
+    > hump -s -ndp      | writes all undeployed migrations into sql file(s)
+              -single   | specifies to write all sql to one file
+                        | default is seperate files per migration
+              -screen   | writes the sql to the screen for viewing
+                        | does NOT write file when screen is specified
