@@ -3,7 +3,7 @@ Humpback is a database migration tool
 Inspired by Rails tooling and another project called Manatee https://github.com/robconery/Manatee.  
 (i totally took the Manatee idea and built the tools i would want, in order to use the concept outside of web matrix)
 
-The database migrations are similar to rails, the format they are stored in is json.
+The database migrations are similar to rails, they are stored as json.
 
 Your interface is the command line.  
 
