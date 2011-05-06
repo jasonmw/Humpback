@@ -1,6 +1,6 @@
 Humpback is a database migration tool
 =====================================
-Inspired by Rails tooling and another project called [Manatee][https://github.com/robconery/Manatee].
+Inspired by Rails tooling and another project called Manatee https://github.com/robconery/Manatee.
 
 The database migrations are similar to rails, the format they are stored in is json.
 
@@ -19,10 +19,10 @@ Using Humpback
 ------------------------------
 
 Main commands
-  -generate -g | Generate JSON migration files  
-  -list     -l | List Migrations and current migration state  
-  -migrate  -m | Run Migrations against database  
-  -sql      -s | Generate SQL files from migration files  
+- generate -g | Generate JSON migration files  
+- list     -l | List Migrations and current migration state  
+- migrate  -m | Run Migrations against database  
+- sql      -s | Generate SQL files from migration files  
 
 
 For information about a specific command use the following  
@@ -55,35 +55,35 @@ the migration types that can be generated are:
 if you do not specify a primary key, one will be appointed for you.  
 timestamps will be added automatically  
 
-create_table example ( tablename column_name:column_type column_name:column_type )  
+**create_table** example ( tablename column_name:column_type column_name:column_type )  
     `> hump -g Person FirstName:string LastName:string Birthdate:datetime FavoriteNumber:int`
 
-drop_table example ( DropTableName )  
+**drop_table** example ( DropTableName )  
     `> hump -g DropPerson`
 
-add_column example ( AddColumnNameToTableName column_name:column_type column_name:column_type  )  
+**add_column** example ( AddColumnNameToTableName column_name:column_type column_name:column_type  )  
     `> hump -g AddFavoriteThingsToPerson FavoriteColor:string FavoriteAnimal:string`
 
-change_column example ( ChangeTableName column_name:column_type column_name:column_type )  
+**change_column** example ( ChangeTableName column_name:column_type column_name:column_type )  
     `> hump -g ChangePerson FavoriteNumber:long`
 
-remove_column example ( RemoveColumnNameFromTableName )  
+**remove_column** example ( RemoveColumnNameFromTableName )  
 only removes one column currently
     `> hump -g RemoveBirthdayFromPerson`
 
-add_index example ( AddIndexToTableName  column_name column_name)  
+**add_index** example ( AddIndexToTableName  column_name column_name)  
     `> hump -g AddIndexToPerson FirstName LastName`
 
-remove_index ( RemoveIndexFromTableName  column_name column_name)  
-column names are required to be able to generate the index name
+**remove_index** example ( RemoveIndexFromTableName  column_name column_name)  
+column names are required to be able to generate the index name  
     `> hump -g RemoveIndexFromPerson FirstName LastName`
 
-file ( file SqlFileName )  
-the sql file will be generated for you
-    `> hump -g file MyBigCreateStoredProcedureFile`
-
-sql ( sql SqlString )  
+**sql** ( sql SqlString )  
     `> hump -g sql ""CREATE VIEW PersonView AS SELECT FirstName,LastName from Person""`
+
+**file** ( file SqlFileName )  
+the sql file will be generated for you  
+    `> hump -g file MyBigCreateStoredProcedureFile`
 
 
 
