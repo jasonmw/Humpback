@@ -55,6 +55,9 @@ namespace Humpback.Parts {
             } else if (generate_string_upper.StartsWith("DROP")) {
                 GenerateAction = GenerateActionType.RemoveTable;
 
+            } else if (generate_string_upper.StartsWith("CHANGE")) {
+                GenerateAction = GenerateActionType.ChangeColumn;
+
             } else {
                 GenerateAction = GenerateActionType.AddTable;
             }
@@ -76,6 +79,9 @@ namespace Humpback.Parts {
                 case GenerateActionType.AddColumn:
                     AddColumn();
                     break;
+                case GenerateActionType.ChangeColumn:
+                    ChangeColumn();
+                    break;
                 case GenerateActionType.RemoveColumn:
                     RemoveColumn();
                     break;
@@ -94,6 +100,27 @@ namespace Humpback.Parts {
             }
         }
 
+        private void ChangeColumn() {
+
+            var column_dictionary = GenerateColumns();
+
+            IList<dynamic> columns = new List<dynamic>();
+
+            foreach (var column in column_dictionary) {
+                columns.Add(new { name = column.Key, @type = column.Value });
+            }
+            if (!columns.Any()) {
+                columns.Add(new { name = "column_name_here", @type = "string" });
+            }
+
+            var name = _configuration.GenerateString;
+            dynamic up = new { change_column = new { name, columns } };
+            dynamic down = new { change_column = new { name, columns } };
+            dynamic output_object = new { up, down };
+            CreateFile("ChangeColumn_" + name, output_object);
+            Console.WriteLine("Generating Migration " + "ChangeColumn_" + name);
+            Console.WriteLine(Helpers.Json(output_object));
+        }
 
 
         private void CreateFile(string action, dynamic obj) {

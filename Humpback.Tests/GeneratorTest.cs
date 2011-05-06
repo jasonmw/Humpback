@@ -163,7 +163,36 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("first_name"));
             Assert.IsTrue(file_writer.FileContents.Contains("last_name"));
         }
-
+        /// <summary>
+        ///A test for AddColumn
+        ///</summary>
+        [TestMethod()]
+        public void GeneratorChangeSingleColumnTest() {
+            Configuration configuration = new Configuration(new[] { "-g", "ChangeUsers", "first_name:string" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, file_writer);
+            target.Execute();
+            Assert.IsTrue(file_writer.FileName.Contains("Users"));
+            Assert.IsTrue(file_writer.FileName.Contains("ChangeColumn"));
+            Assert.IsTrue(file_writer.FileContents.Contains("change_column"));
+            Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            Assert.IsTrue(file_writer.FileContents.Contains("first_name"));
+            Assert.IsTrue(file_writer.FileContents.Contains("down"));
+        }
+        [TestMethod()]
+        public void GeneratorChangeMultipleColumnTest() {
+            Configuration configuration = new Configuration(new[] { "-g", "ChangeUsers", "first_name:string", "last_name:string" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, file_writer);
+            target.Execute();
+            Assert.IsTrue(file_writer.FileName.Contains("Users"));
+            Assert.IsTrue(file_writer.FileName.Contains("ChangeColumn"));
+            Assert.IsTrue(file_writer.FileContents.Contains("change_column"));
+            Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            Assert.IsTrue(file_writer.FileContents.Contains("first_name"));
+            Assert.IsTrue(file_writer.FileContents.Contains("last_name"));
+            Assert.IsTrue(file_writer.FileContents.Contains("down"));
+        }
         /// <summary>
         ///A test for AddIndex
         ///</summary>

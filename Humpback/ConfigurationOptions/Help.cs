@@ -63,6 +63,9 @@ drop_table example ( DropTableName )
 add_column example ( AddColumnNameToTableName column_name:column_type column_name:column_type  )
 > hump -g AddFavoriteThingsToPerson FavoriteColor:string FavoriteAnimal:string
 
+change_column example ( ChangeTableName column_name:column_type column_name:column_type )
+> hump -g ChangePerson FavoriteNumber:long
+
 remove_column example ( RemoveColumnNameFromTableName )
 only removes one column currently
 > hump -g RemoveBirthdayFromPerson

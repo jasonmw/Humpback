@@ -58,14 +58,15 @@ namespace Humpback.Parts {
         /// </summary>
         static string SetColumnType(string colType) {
 
-            return colType.Replace("pk", "int PRIMARY KEY IDENTITY(1,1)")
-                .Replace("money", "decimal(8,2)")
+            return colType.Replace("pk", "int PRIMARY KEY NOT NULL IDENTITY(1,1)")
+                .Replace("money", "decimal(16,2)")
                 .Replace("date", "datetime")
+                .Replace("long", "bigint")
                 .Replace("string", "nvarchar(255)")
                 .Replace("boolean", "bit")
                 .Replace("text", "nvarchar(MAX)")
+                .Replace("image", "varbinary(MAX)")
                 .Replace("guid", "uniqueidentifier");
-
         }
 
         /// <summary>

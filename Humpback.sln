@@ -6,11 +6,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humpback.Tests", "Humpback.Tests\Humpback.Tests.csproj", "{0973A5D4-8B5B-4FFB-89E3-F8E42613D680}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CC74F4A-4CAA-4124-8FC2-8F7B6F17B6EA}"
-	ProjectSection(SolutionItems) = preProject
-		Humpback.vsmdi = Humpback.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
