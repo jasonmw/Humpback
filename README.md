@@ -115,8 +115,8 @@ Executing Migrations
 --------------------
 can you say rake db:migrate  
 Executes Migrations against the database.  
+  
 Available actions:  
-
     > hump -m -all    | updates database to most recent migration
     > hump -m 12      | updates database to a specific migration (up or down)
     > hump -m -up     | migrates database up one migration
@@ -131,8 +131,8 @@ Generating SQL Files
 
 Generates Sql files based on migrations.  
 This can be valuable for a number of strategies.  
+  
 Available actions:  
-
     > hump -s -all      | writes all migrations into sql file(s)
     > hump -s 12        | writes 1 specified migration into a sql file
     > hump -s -dp       | writes all deployed migraions into sql file(s)
