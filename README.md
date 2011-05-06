@@ -1,6 +1,7 @@
 Humpback is a database migration tool
 =====================================
-Inspired by Rails tooling and another project called Manatee https://github.com/robconery/Manatee.
+Inspired by Rails tooling and another project called Manatee https://github.com/robconery/Manatee.  
+(i totally took the Manatee idea and built the tools i would want, in order to use the concept outside of web matrix)
 
 The database migrations are similar to rails, the format they are stored in is json.
 
@@ -11,7 +12,7 @@ Humpback does 4 Main things
 The analagous features are like so
 
     Humpback > Generate ~ rails generate migration
-    Humpback > List     ~ manatee page and color coding
+    Humpback > List     ~ Manatee page and color coding
     Humpback > Sql      ~ view/export sql files from migrations for safe keeping or direct usage
     Humpback > Migrate  ~ rake db:migrate
 
