@@ -5,6 +5,7 @@ Inspired by Rails tooling and another project called Manatee https://github.com/
 The database migrations are similar to rails, the format they are stored in is json.
 
 Humpback does 4 Main things
+---------------------------
 The analagous features are like so
 
     Humpback > Generate ~ rails generate migration
