@@ -89,7 +89,7 @@ column names are required to be able to generate the index name
     `> hump -g RemoveIndexFromPerson FirstName LastName`
 
 **sql** ( sql SqlString )  
-    `> hump -g sql ""CREATE VIEW PersonView AS SELECT FirstName,LastName from Person""`
+    `> hump -g sql "CREATE VIEW PersonView AS SELECT FirstName,LastName from Person"`
 
 **file** ( file SqlFileName )  
 the sql file will be generated for you  
