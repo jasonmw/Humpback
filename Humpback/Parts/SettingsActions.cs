@@ -48,8 +48,8 @@ Humpback Migration Settings
                     Console.WriteLine(ex.Message);
                 }
             }
-            foreach(var setting in _current_settings.projects) {
-                if (setting.name == _current_settings.current_project) {
+            foreach(var setting in _current_settings.Projects) {
+                if (setting.name == _current_settings.CurrentProject) {
                     Console.Write(setting.name);
                     Console.WriteLine(" ***");
                 } else {

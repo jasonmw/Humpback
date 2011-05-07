@@ -9,22 +9,22 @@ using System.Web.Script.Serialization;
 namespace Humpback.ConfigurationOptions {
     public class Settings {
 
-        public string current_project { get; set; }
-        public Project[] projects { get; set; }
-
+        public string CurrentProject { get; set; }
+        public Project[] Projects { get; set; }
 
         public Settings() {
-            projects = new Project[0];
+            Projects = new Project[0];
         }
+
         public Settings(string project_name, Project[] projects) {
-            this.projects = projects;
-            current_project = project_name;
+            Projects = projects;
+            CurrentProject = project_name;
         }
 
         public static Settings Load() {
             if (!File.Exists(settings_file_path)) {
-                var settings = Create("default");
-                settings.Save();
+                var settings = create("default");
+                settings.save();
                 return settings;
             }
             var json = File.ReadAllText(settings_file_path);
@@ -32,20 +32,17 @@ namespace Humpback.ConfigurationOptions {
             return (Settings)serializer.Deserialize(json, typeof(Settings));
         }
 
-
         public Project SetCurrent(string project_name) {
             validate_current_project(project_name);
-            current_project = project_name.ToLower();
-            Save();
+            CurrentProject = project_name.ToLower();
+            save();
             return GetCurrent();
         }
 
-
         public Project GetCurrent() {
-            validate_current_project(current_project);
-            return projects.Single(p => p.name == current_project);
+            validate_current_project(CurrentProject);
+            return Projects.Single(p => p.name == CurrentProject);
         }
-
 
         public string SqlFileFolder() {
             var i = new DirectoryInfo(GetCurrent().directory);
@@ -61,6 +58,7 @@ namespace Humpback.ConfigurationOptions {
             var i = new DirectoryInfo(GetCurrent().directory);
             return Path.Combine(i.FullName, "generated");
         }
+
         public string ConnectionString() {
             return GetCurrent().connection_string;
         }
@@ -69,15 +67,16 @@ namespace Humpback.ConfigurationOptions {
             if (string.IsNullOrWhiteSpace(new_name)) {
                 throw new InvalidDataException("please specify a name with some printable characters.");
             }
-            foreach(var proj in projects) {
-                if(proj.name == current_project) {
+            foreach(var proj in Projects) {
+                if(proj.name == CurrentProject) {
                     proj.name = new_name.ToLower();
-                    current_project = new_name.ToLower();
+                    CurrentProject = new_name.ToLower();
                     break;
                 }
             }
-            Save();
+            save();
         }
+
         public void SetDirectory(string new_directory) {
             if (string.IsNullOrWhiteSpace(new_directory)) {
                 throw new InvalidDataException("please specify a directory path with some printable characters.");
@@ -86,15 +85,17 @@ namespace Humpback.ConfigurationOptions {
                 Directory.CreateDirectory(new_directory);
             }
             GetCurrent().directory = new_directory;
-            Save();
+            save();
         }
+
         public void SetConnectionString(string new_connection_string) {
             if (string.IsNullOrWhiteSpace(new_connection_string)) {
                 throw new InvalidDataException("please specify a connection string with some printable characters.");
             }
             GetCurrent().connection_string = new_connection_string;
-            Save();
+            save();
         }
+
         public void SetFlavor(string new_flavor) {
             if (string.IsNullOrWhiteSpace(new_flavor)) {
                 throw new InvalidDataException("please specify a flavor with some printable characters.");
@@ -104,16 +105,14 @@ namespace Humpback.ConfigurationOptions {
                 throw new InvalidDataException("currently sqlserver is the only flavor.");
             }
             GetCurrent().flavor = new_flavor.ToLower();
-            Save();
+            save();
         }
-
-
 
         public void AddProject(string project_name) {
             if (string.IsNullOrWhiteSpace(project_name)) {
                 throw new InvalidOperationException("No current project specified.");
             }
-            if (projects.Any(p => p.name == project_name)) {
+            if (Projects.Any(p => p.name == project_name)) {
                 throw new InvalidDataException(string.Format("'{0}' is already a project.", project_name));
             }
             var project = new Project {
@@ -122,13 +121,24 @@ namespace Humpback.ConfigurationOptions {
                 directory = Path.Combine(Environment.CurrentDirectory, "db"),
                 flavor = "sqlserver"
             };
-            current_project = project_name.ToLower();
-            var pjts = new List<Project>(projects) { project };
-            projects = pjts.ToArray();
-            Save();
+            CurrentProject = project_name.ToLower();
+            var pjts = new List<Project>(Projects) { project };
+            Projects = pjts.ToArray();
+            save();
         }
 
-        private static Settings Create(string project_name) {
+        public void Remove(string project_name) {
+            Projects = Projects.Where(p => p.name != project_name.ToLower()).ToArray();
+            if(CurrentProject == project_name.ToLower()) {
+                CurrentProject = "";
+                if(Projects.Length > 0) {
+                    CurrentProject = Projects.First().name;
+                }
+            }
+            save();
+        }
+
+        private static Settings create(string project_name) {
             var project = new Project {
                 name = project_name.ToLower(),
                 connection_string = "server=.;database=northwind;Integrated Security=True;",
@@ -136,8 +146,8 @@ namespace Humpback.ConfigurationOptions {
                 flavor = "sqlserver"
             };
             return new Settings {
-                current_project = project_name.ToLower(),
-                projects = new[] { project }
+                CurrentProject = project_name.ToLower(),
+                Projects = new[] { project }
             };
 
         }
@@ -146,30 +156,20 @@ namespace Humpback.ConfigurationOptions {
             if (string.IsNullOrWhiteSpace(project)) {
                 throw new InvalidOperationException("No current project set.");
             }
-            if (!projects.Any(p => p.name == project)) {
+            if (!Projects.Any(p => p.name == project)) {
                 throw new KeyNotFoundException(string.Format("'{0}' is not a valid project.", project));
             }
         }
-        public void Remove(string project_name) {
-            projects = projects.Where(p => p.name != project_name.ToLower()).ToArray();
-            if(current_project == project_name.ToLower()) {
-                current_project = "";
-                if(projects.Length > 0) {
-                    current_project = projects.First().name;
-                }
-            }
-            Save();
-        }
-        private void Save() {
-            string file_path = settings_file_path;
+
+        private void save() {
+            var file_path = settings_file_path;
             var serializer = new JavaScriptSerializer();
-            string output = serializer.Serialize(this);
+            var output = serializer.Serialize(this);
             File.WriteAllText(file_path, output, Encoding.UTF8);
-
-            EnsureDirectories();
+            ensure_directories();
         }
 
-        private void EnsureDirectories() {
+        private void ensure_directories() {
             if (!Directory.Exists(MigrationsFolder())) {
                 Directory.CreateDirectory(MigrationsFolder());
             }
@@ -180,7 +180,6 @@ namespace Humpback.ConfigurationOptions {
                 Directory.CreateDirectory(SqlFileFolder());
             }
         }
-
 
         private static string settings_file_path {
             get {
