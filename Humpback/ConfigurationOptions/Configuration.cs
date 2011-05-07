@@ -10,18 +10,30 @@ namespace Humpback.ConfigurationOptions {
 
         private void Parse(IEnumerable<string> options) {
             var oset = new OptionSet()
-                .Add("?|help|h|HELP|H|Help", h => WriteHelp=true)
-                .Add("f=|folder=|F=|FOLDER=|Folder=", s => { MigrationFolder = s.Trim(); })
-                .Add("output=|Output=|OUTPUT=", o => OutputFolder=o)
-                .Add("cs=|connectionstring=|CS=|CONNECTIONSTRING=", s => { ConnectionString = s.Trim(); })
-                .Add("g=|gen=|G=|GEN=|Gen=|Generate=|generate=|GENERATE=", s => { 
-                    SetMainToFalse(); 
-                    Generate = true; 
-                    GenerateString = s.Trim();})
-                .Add("l:|list:|L:|LIST:|List:", s => { SetMainToFalse(); List = true; })
-                .Add("m:|migrate:|M:|MIGRATE:|Migrate:", s => { SetMainToFalse(); Migrate = true; })
-                .Add("s:|sql:|S:|SQL:|Sql:", s => { SetMainToFalse(); Sql = true; })
-                .Add("all", a => All=true)
+                .Add("?|help|h|HELP|H|Help", h => WriteHelp = true)
+                .Add("g=|gen=|G=|GEN=|Gen=|Generate=|generate=|GENERATE=",
+                     s => {
+                         SetMainToFalse();
+                         Generate = true;
+                         GenerateString = s.Trim();
+                     })
+                .Add("l:|list:|L:|LIST:|List:",
+                     s => {
+                         SetMainToFalse();
+                         List = true;
+                     })
+                .Add("m:|migrate:|M:|MIGRATE:|Migrate:",
+                     s => {
+                         SetMainToFalse();
+                         Migrate = true;
+                     })
+                .Add("s:|sql:|S:|SQL:|Sql:",
+                     s => {
+                         SetMainToFalse();
+                         Sql = true;
+                     })
+                .Add("e|E|ENV|env|Env", e => {SetMainToFalse();Env = true;})
+                .Add("all", a => All = true)
                 .Add("single", s => Single = true)
                 .Add("dp", dp => Deployed = true)
                 .Add("ndp", ndp => NotDeployed = true)
@@ -31,11 +43,29 @@ namespace Humpback.ConfigurationOptions {
                 .Add("empty", e => Empty = true)
                 .Add("reset", r => Reset = true)
                 .Add("v", v => Verbose = true)
+                .Add("dir=", s => settings_dir=s)
+                .Add("cs=", s => settings_cs = s)
+                .Add("flavor=", s => settings_flavor = s)
+                .Add("rename=", s => settings_rename = s)
+                .Add("set=", s => set_current_settings = s)
+                .Add("add=", s => new_project_name = s)
+                .Add("remove=", s => remove_project_name = s)
                 ;
             
             Extra = oset.Parse(options);
-            EnsureMigrationFolder();
         }
+
+
+        public bool Env { get; private set; }
+        public string settings_dir { get; private set; }
+        public string settings_cs { get; private set; }
+        public string settings_flavor { get; private set; }
+        public string settings_rename { get; private set; }
+        public string set_current_settings { get; private set; }
+        public string new_project_name { get; private set; }
+        public string remove_project_name { get; private set; }
+
+
 
         public Configuration() {
             ResetOptions();
@@ -56,23 +86,16 @@ namespace Humpback.ConfigurationOptions {
         }
 
 
-        private void AssignDefaultConnectionString() {
-            ConnectionString = ConfigurationManager.ConnectionStrings["default"] == null
-                                   ? "server=.;database=Northwind;Integrated Security=True;"
-                                   : ConfigurationManager.ConnectionStrings["default"].ConnectionString;
-        }
-
         
 
         private void ResetOptions() {
             WriteHelp = true;
-            AssignDefaultConnectionString();
             Generate = false;
             List = false;
             Migrate = false;
             Sql = false;
+            Env = false;
             SetMigrateToLatestVersion();
-            MigrationFolder = DefaultMigrationFolder();
             GenerateString = "";
         }
         private void SetMainToFalse() {
@@ -81,6 +104,7 @@ namespace Humpback.ConfigurationOptions {
             List = false;
             Migrate = false;
             Sql = false;
+            Env = false;
         }
 
         private void SetMigrateToLatestVersion() {
@@ -92,23 +116,11 @@ namespace Humpback.ConfigurationOptions {
         public bool List { get; set; }
         public bool Migrate { get; set; }
         public bool Sql { get; set; }
-        public string ConnectionString { get; set; }
         public IEnumerable<string> Extra { get; set; }
 
         // Sub Properties for Generate
         public string GenerateString { get; set; }
 
-        private string _sqlFolder;
-        public string SqlFolder {
-            get {
-                if (_sqlFolder != null) {
-                    return _sqlFolder;
-                }
-                var i = new DirectoryInfo(MigrationFolder);
-                return Path.Combine(i.Parent.FullName, "sql");
-            }
-            set { _sqlFolder = value; }
-        }
 
 
         // Sub Properties for List
@@ -121,17 +133,6 @@ namespace Humpback.ConfigurationOptions {
 
         public int MigrateToVersion { get; set; }
         // Sub Properties for Sql
-        private string _outputFolder;
-        public string OutputFolder {
-            get {
-                if (_outputFolder != null) {
-                    return _outputFolder;
-                }
-                var i = new DirectoryInfo(MigrationFolder);
-                return Path.Combine(i.Parent.FullName, "generated");
-            }
-            set { _outputFolder = value; }
-        }
 
         public bool All { get; set; }
         public bool Single { get; set; }
@@ -140,32 +141,16 @@ namespace Humpback.ConfigurationOptions {
         public bool Screen { get; set; }
 
 
+        // sub props for settings
+        // shares All with sql
 
 
-
-        public string MigrationFolder { get; set; }
 
         public bool Verbose {
             get;
             set;
         }
 
-        private void EnsureMigrationFolder() {
-
-            if (String.IsNullOrWhiteSpace(MigrationFolder)) {
-                MigrationFolder = DefaultMigrationFolder();
-            }
-            if (!Directory.Exists(MigrationFolder)) {
-                Directory.CreateDirectory(MigrationFolder);
-            }
-            if (!Directory.Exists(SqlFolder)) {
-                Directory.CreateDirectory(SqlFolder);
-            }
-            if (!Directory.Exists(OutputFolder)) {
-                Directory.CreateDirectory(OutputFolder);
-            }
-
-        }
 
         private static string DefaultMigrationFolder() {
             return Path.Combine(Environment.CurrentDirectory, @"db\migrations");

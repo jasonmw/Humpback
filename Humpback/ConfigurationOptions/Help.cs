@@ -27,6 +27,8 @@ namespace Humpback.ConfigurationOptions {
                 write_migrate_help();
             } else if ("SQL".StartsWith(flag)) {
                 write_sql_help();
+            } else if ("ENVIRONMENT".StartsWith(flag)) {
+                write_environment_help();
             } else {
                 write_general_help();
             }
@@ -142,20 +144,51 @@ Available actions:
 
 ");
         }
+
+        private static void write_environment_help() {
+            Console.WriteLine(@"
+Humpback Migration Information
+==============================
+Managing environment settings
+==============================
+
+Environment settings are stored in a json format in a file called settings.js
+
+On the first run of the application, the file will be created if it does not exist.
+
+You may prefer to configure settings from the command line.
+
+Available actions:
+
+> hump -e           | lists environment information
+> hump -e -set x    | sets the current project to x if x is a valid project
+> hump -e -add x    | creates a new project called x and sets it to the current project
+> hump -e -remove x | removes the project named x
+> hump -e -rename x | renames the current project to x
+> hump -e -dir x    | sets the working directory of the current project to x
+> hump -e -cs x     | sets the connection string of the current project to x
+> hump -e -flavor x | sets the sql flavor of the current project to x (currently, only sqlserver available)
+
+");
+        }
+
+
         private static void write_general_help() {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
 
 Main commands
-  -generate -g | Generate JSON migration files
-  -list     -l | List Migrations and current migration state
-  -migrate  -m | Run Migrations against database
-  -sql      -s | Generate SQL files from migration files
+  -env       -e | Configure the migration environment
+  -generate  -g | Generate JSON migration files
+  -list      -l | List Migrations and current migration state
+  -migrate   -m | Run Migrations against database
+  -sql       -s | Generate SQL files from migration files
 
 
 For information about a specific command use the following
 
+  hump -? env
   hump -? generate
   hump -? migrate
   hump -? list

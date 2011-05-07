@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using Humpback.ConfigurationOptions;
 
 namespace Humpback.Parts {
     public class SQLDatabaseProvider : IDatabaseProvider {
 
         private ConfigurationOptions.Configuration _configuration;
+        private Settings _settings;
         private ISqlFormatter _sql_formatter;
 
         private SqlConnection GetOpenConnection() {
-            var rv = new SqlConnection(_configuration.ConnectionString);
+            var rv = new SqlConnection(_settings.ConnectionString());
             rv.Open();
             return rv;
         }
-        public SQLDatabaseProvider(ConfigurationOptions.Configuration configuration, ISqlFormatter sql_formatter) {
+        public SQLDatabaseProvider(Configuration configuration, Settings settings, ISqlFormatter sql_formatter) {
             _configuration = configuration;
+            _settings = settings;
             _sql_formatter = sql_formatter;
         }
 

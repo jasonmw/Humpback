@@ -24,6 +24,7 @@ Using Humpback
 
 Main commands  
 
+    env      -e | Configure the migration environment (working directory, connection string)
     generate -g | Generate JSON migration files  
     list     -l | List Migrations and current migration state  
     migrate  -m | Run Migrations against database  
@@ -32,6 +33,7 @@ Main commands
 
 For information about a specific command use the following  
 
+    hump -? env
     hump -? generate  
     hump -? migrate  
     hump -? list  
@@ -42,9 +44,29 @@ The json syntax is explained very well by Rob at https://github.com/robconery/Ma
 This should generate / consume the exact files specified for manatee.  
 
 
+Managing environment settings
+-----------------------------
+Environment settings are stored in a json format in a file called settings.js
 
-GENERATE
-------------------------------
+On the first run of the application, the file will be created if it does not exist.
+
+You may prefer to configure settings from the command line.
+
+Available actions:
+
+    > hump -e           | lists environment information
+    > hump -e -set x    | sets the current project to x if x is a valid project
+    > hump -e -add x    | creates a new project called x and sets it to the current project
+    > hump -e -remove x | removes the project named x
+    > hump -e -rename x | renames the current project to x
+    > hump -e -dir x    | sets the working directory of the current project to x
+    > hump -e -cs x     | sets the connection string of the current project to x
+    > hump -e -flavor x | sets the sql flavor of the current project to x (currently, only sqlserver available)
+
+
+
+Generate Migrations
+-------------------
 
 Generating migrations was modeled after the conventions in rails.  
 like addXXXtoXXX and removeXXXfromXXX  

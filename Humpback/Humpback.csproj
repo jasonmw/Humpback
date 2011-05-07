@@ -39,6 +39,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +49,8 @@
   <ItemGroup>
     <Compile Include="ConfigurationOptions\Help.cs" />
     <Compile Include="ConfigurationOptions\Options.cs" />
+    <Compile Include="ConfigurationOptions\Project.cs" />
+    <Compile Include="ConfigurationOptions\Settings.cs" />
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IMigrationProvider.cs" />
     <Compile Include="ISqlFormatter.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Parts\Helpers.cs" />
     <Compile Include="Parts\MigrationViewer.cs" />
     <Compile Include="Parts\Migrate.cs" />
+    <Compile Include="Parts\SettingsActions.cs" />
     <Compile Include="Parts\SQLDatabaseProvider.cs" />
     <Compile Include="Parts\SQLServerFormatter.cs" />
     <Compile Include="Program.cs" />

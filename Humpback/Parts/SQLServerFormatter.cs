@@ -9,9 +9,11 @@ namespace Humpback.Parts {
     public class SQLServerFormatter : ISqlFormatter {
 
         private Configuration _configuration;
+        private Settings _settings;
 
-        public SQLServerFormatter(Configuration configuration) {
+        public SQLServerFormatter(Configuration configuration, Settings settings) {
             _configuration = configuration;
+            _settings = settings;
         }
 
         public string[] GenerateSQLUp(dynamic operation) {
@@ -199,7 +201,7 @@ namespace Humpback.Parts {
             } else if (op.execute != null) {
                 result = op.execute;
             } else if (op.file != null) {
-                result = File.ReadAllText(Path.Combine(_configuration.SqlFolder, op.file));
+                result = File.ReadAllText(Path.Combine(_settings.SqlFileFolder(), op.file));
             }
 
             return result;

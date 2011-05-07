@@ -11,6 +11,10 @@ namespace Humpback.Tests.Impl {
             Console.WriteLine(path);
         }
 
+        public bool FileExists(string path) {
+            return false;
+        }
+
         public string FileName { get; private set; }
         public string FileContents { get; private set; }
         

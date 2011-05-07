@@ -14,13 +14,15 @@ namespace Humpback.Parts {
 
         private readonly Configuration _configuration;
         private readonly IFileWriter _file_writer;
+        private Settings _settings;
 
-        public Generator(Configuration configuration, IFileWriter file_writer) {
+        public Generator(Configuration configuration, Settings settings, IFileWriter file_writer) {
             if(!configuration.Generate) {
                 throw new InvalidOperationException("Configuration not correctly set for Generator");
             }
             _file_writer = file_writer;
             _configuration = configuration;
+            _settings = settings;
             set_generation_action();
         }
 
@@ -128,7 +130,7 @@ namespace Humpback.Parts {
             action = action.Replace(" ", "_");
             action = Regex.Replace(action, @"[^\w\-_]", ""); 
             string file_name = string.Format("{0}_{1}.js",_configuration.NextSerialNumber(),action);
-            var path = Path.Combine(_configuration.MigrationFolder,file_name);
+            var path = Path.Combine(_settings.MigrationsFolder(), file_name);
             _file_writer.WriteFile(path, serialized);
         }
 
@@ -269,14 +271,14 @@ namespace Humpback.Parts {
         public void File() {
 
             string sql_file_path_relative = "..\\sql\\" + String.Join("_", GenerateColumns().Keys);
-            string sql_file_path = Path.Combine(_configuration.MigrationFolder, sql_file_path_relative);
+            string sql_file_path = Path.Combine(_settings.MigrationsFolder(), sql_file_path_relative);
 
             if(!sql_file_path.ToUpperInvariant().EndsWith(".SQL")) {
                 sql_file_path += ".sql";
                 sql_file_path_relative += ".sql";
             }
             int counter = 0;
-            while(System.IO.File.Exists(sql_file_path)) { // TODO: This is messy and unreadable, come back and make nice.
+            while(_file_writer.FileExists(sql_file_path)) { // TODO: This is messy and unreadable, come back and make nice.
                 if (counter == 0) {
                     sql_file_path = sql_file_path.Replace(".sql", ++counter + ".sql");
                     sql_file_path_relative = sql_file_path_relative.Replace(".sql", counter + ".sql");
@@ -288,7 +290,7 @@ namespace Humpback.Parts {
             string text_path = sql_file_path_relative.Replace("..\\", "");
             dynamic up = new { file =  sql_file_path_relative };
             dynamic output_object = new { up };
-            System.IO.File.WriteAllText(sql_file_path, "-- Execute SQLFile Migration " + text_path);
+            _file_writer.WriteFile(sql_file_path, "-- Execute SQLFile Migration " + text_path);
             CreateFile("SQLFile_" + String.Join("_", GenerateColumns().Keys), output_object);
             Console.WriteLine("Generating Migration " + text_path);
             Console.WriteLine(Helpers.Json(output_object));

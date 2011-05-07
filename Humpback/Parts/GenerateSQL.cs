@@ -14,9 +14,11 @@ namespace Humpback.Parts {
         private IFileWriter _file_writer;
         private Configuration _configuration;
         private IMigrationProvider _migration_provider;
+        private Settings _settings;
 
-        public GenerateSQL(Configuration configuration, ISqlFormatter sql_formatter, IFileWriter file_writer, IMigrationProvider migration_provider) {
+        public GenerateSQL(Configuration configuration, Settings settings, ISqlFormatter sql_formatter, IFileWriter file_writer, IMigrationProvider migration_provider) {
             _configuration = configuration;
+            _settings = settings;
             _sql_formatter = sql_formatter;
             _file_writer = file_writer;
             _migration_provider = migration_provider;
@@ -125,7 +127,7 @@ namespace Humpback.Parts {
                 if(file_name.Contains("\\")){
                     file_name = new FileInfo(file_name).Name;
                 }
-                _file_writer.WriteFile(Path.Combine(_configuration.OutputFolder, file_name), sql_out);
+                _file_writer.WriteFile(Path.Combine(_settings.OutputFolder(), file_name), sql_out);
             }
         }
 

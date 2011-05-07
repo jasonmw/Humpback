@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Humpback.Parts;
 using Humpback.Tests.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -92,14 +93,17 @@ namespace Humpback.Tests
             string json = @"{'up':{remove_index:{table_name:'categories',columns:['title','slug']}}}";
             return Helpers.DeserializeMigration(json);
         }
+        private static Settings Settings {get {
+            return TestHelpers.TestSettings;
 
+        }}
         [TestMethod()]
         public void SqlFormatterAddTableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "1" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(1); // create table
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -116,9 +120,9 @@ namespace Humpback.Tests
         public void SqlFormatterDropTableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "2" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(2); // drop table
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -129,9 +133,9 @@ namespace Humpback.Tests
         public void SqlFormatterAddColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "3" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(3); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -144,9 +148,9 @@ namespace Humpback.Tests
         public void SqlFormatterChangeColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "4" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(3); // change col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -159,9 +163,9 @@ namespace Humpback.Tests
         public void SqlFormatterDropColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "5" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(4); // change col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -173,9 +177,9 @@ namespace Humpback.Tests
         public void SqlFormatterAddIndexTest() {
             Configuration configuration = new Configuration(new[] { "-s", "6" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(5); // add index
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
@@ -186,9 +190,9 @@ namespace Humpback.Tests
         public void SqlFormatterDropIndexTest() {
             Configuration configuration = new Configuration(new[] { "-s", "7" });
             TestFileWriter file_writer = new TestFileWriter();
-            ISqlFormatter formatter = new SQLServerFormatter(configuration);
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
-            IHumpbackCommand target = new GenerateSQL(configuration, formatter, file_writer, migrations);
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
             migrations.SetMigrationNumber(6); // add index
             target.Execute();
             Console.WriteLine(file_writer.FileContents);

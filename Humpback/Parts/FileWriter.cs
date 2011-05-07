@@ -7,5 +7,8 @@ namespace Humpback {
             System.IO.File.WriteAllText(path, contents, Encoding.UTF8);
         }
 
+        public bool FileExists(string path) {
+            return System.IO.File.Exists(path);
+        }
     }
 }

@@ -11,9 +11,11 @@ namespace Humpback.Parts {
         private IDatabaseProvider _database_provider;
         private SortedDictionary<int, string> _migrations;
         private SortedDictionary<int, string> _migration_contents;
+        private Settings _settings;
 
-        public FileMigrationProvider(Configuration configuration, IDatabaseProvider database_provider) {
+        public FileMigrationProvider(Configuration configuration, Settings settings, IDatabaseProvider database_provider) {
             _configuration = configuration;
+            _settings = settings;
             _database_provider = database_provider;
         }
 
@@ -21,7 +23,7 @@ namespace Humpback.Parts {
             if (_migrations == null) {
                 _migrations = new SortedDictionary<int, string>();
                 var tmp_migrations = new SortedDictionary<string, string>();
-                foreach (string file in Directory.GetFiles(_configuration.MigrationFolder)) {
+                foreach (string file in Directory.GetFiles(_settings.MigrationsFolder())) {
                     if (new FileInfo(file).Extension.Equals(".js", StringComparison.InvariantCultureIgnoreCase)) {
                         tmp_migrations.Add(file, file);
                     }

@@ -118,48 +118,48 @@ namespace Humpback.Tests
         ///</summary>
         [TestMethod()]
         public void HelpModifierTest_Run() {
-            var target = new Configuration(new[] { "-? Migrate" });
+            var target = new Configuration(new[] { "-?", "Migrate" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_RUN() {
-            var target = new Configuration(new[] { "-? MIGRATE" });
+            var target = new Configuration(new[] { "-?", "MIGRATE" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_List() {
-            var target = new Configuration(new[] { "-? List" });
+            var target = new Configuration(new[] { "-?", "List" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_Generate() {
-            var target = new Configuration(new[] { "-? Generate" });
+            var target = new Configuration(new[] { "-?", "Generate" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_Sql() {
-            var target = new Configuration(new[] { "-? Sql" });
+            var target = new Configuration(new[] { "-?", "Sql" });
             Assert.IsTrue(target.WriteHelp);
         }
 
         [TestMethod()]
         public void HelpModifierTest_R() {
-            var target = new Configuration(new[] { "-? M" });
+            var target = new Configuration(new[] { "-?", "M" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_L() {
-            var target = new Configuration(new[] { "-? L" });
+            var target = new Configuration(new[] { "-?", "L" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_G() {
-            var target = new Configuration(new[] { "-? G" });
+            var target = new Configuration(new[] { "-?","G" });
             Assert.IsTrue(target.WriteHelp);
         }
         [TestMethod()]
         public void HelpModifierTest_S_and_Ensure_Run_Off() {
-            var target = new Configuration(new[] { "-? S" });
+            var target = new Configuration(new[] { "-?", "S" });
             Assert.IsTrue(target.WriteHelp);
             Assert.IsFalse(target.Migrate);
         }
@@ -243,7 +243,7 @@ namespace Humpback.Tests
         }
         [TestMethod()]
         public void BasicRunTest() {
-            Configuration target = new Configuration(new[] { "-RUN" });
+            Configuration target = new Configuration(new[] { "-m" });
             Assert.IsTrue(target.Migrate);
             Assert.IsFalse(target.WriteHelp);
             Assert.IsFalse(target.List);
