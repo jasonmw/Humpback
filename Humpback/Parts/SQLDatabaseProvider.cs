@@ -30,16 +30,16 @@ namespace Humpback.Parts {
         public int ExecuteUpCommand(dynamic up) {
             var sql = _sql_formatter.GenerateSQLUp(up);
             foreach (var s in sql) {
-                return ExecuteCommand(s);
+                ExecuteCommand(s);
             }
-            return 0;
+            return sql.Length;
         }
         public int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
             foreach (var s in sql) {
-                return ExecuteCommand(s);
+                ExecuteCommand(s);
             }
-            return 0;
+            return sql.Length;
         }
         public int ExecuteCommand(string command) {
             if(string.IsNullOrWhiteSpace(command)) {

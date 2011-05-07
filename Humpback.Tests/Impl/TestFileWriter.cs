@@ -7,7 +7,7 @@ namespace Humpback.Tests.Impl {
     public class TestFileWriter:IFileWriter {
         public void WriteFile(string path, string contents) {
             FileContents += contents;
-            FileName = path;
+            FileName += path;
             Console.WriteLine(path);
         }
 

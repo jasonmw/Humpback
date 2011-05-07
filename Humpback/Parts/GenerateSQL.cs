@@ -88,7 +88,15 @@ namespace Humpback.Parts {
                 }
                 var this_migration_contents = migration_contents[migration.Key];
                 dynamic migration_object = Helpers.DeserializeMigration(this_migration_contents);
-                sql_commands.Add(_sql_formatter.SqlFileName(migration.Value), _sql_formatter.GenerateSQLUp(migration_object)[0]);
+                var commands = _sql_formatter.GenerateSQLUp(migration_object);
+                if(commands.Length == 1 ) {
+                    sql_commands.Add(_sql_formatter.SqlFileName(migration.Value), commands[0]);
+                } else {
+                    for (int i = 0; i < commands.Length; i++) {
+                        sql_commands.Add(_sql_formatter.SqlFileName(migration.Value) + "." + (i+1).ToString("000"), commands[i]);
+                    }
+                }
+                
             }
             WriteFile(sql_commands,min,max);
         }

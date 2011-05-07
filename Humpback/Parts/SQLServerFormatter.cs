@@ -17,18 +17,18 @@ namespace Humpback.Parts {
         }
 
         public string[] GenerateSQLUp(dynamic operation) {
-            if(operation.up != null) {
-                return new string[] {GetCommand(operation.up)};
+            if (operation.up != null) {
+                return ((IEnumerable<string>)GetCommands(operation.up)).ToArray();
             }
             return new string[0];
         }
 
         public string[] GenerateSQLDown(dynamic operation) {
             if (operation.down != null) {
-                return new string[] { GetCommand(operation.down) };
+                return ((IEnumerable<string>) GetCommands(operation.down)).ToArray();
             }
             if (operation.up != null) {
-                return new string[] { ReadMinds(operation.up) };
+                return ((IEnumerable<string>) GetReadMinds(operation.up)).ToArray();
             }
             return new string[0];
         }
@@ -96,6 +96,9 @@ namespace Humpback.Parts {
                     } else {
                         sb.Append(" NULL ");
                     }
+                    if (col.default_value != null) {
+                        sb.Append(" DEFAULT " + col.default_value + " ");
+                    }
                 }
 
                 counter++;
@@ -140,8 +143,17 @@ namespace Humpback.Parts {
             return sb.ToString();
         }
 
-        string GetCommand(dynamic op) {
-
+        private IEnumerable<string> GetCommands(dynamic op) {
+            string optype = op.GetType().ToString();
+            if(op.Count != null) {
+                foreach(var iter_op in op) {
+                    yield return GetCommand(iter_op);
+                }
+            } else {
+                yield return GetCommand(op);
+            }
+        }
+        private string GetCommand(dynamic op) {
             //the "op" here is an "up" or a "down". It's dynamic as that's what the JSON parser
             //will return. The neat thing about this parser is that the dynamic result will
             //return null if the key isn't present - so it's a simple null check for the operations/keys we need.
@@ -206,6 +218,19 @@ namespace Humpback.Parts {
 
             return result;
         }
+
+
+
+        private IEnumerable<string> GetReadMinds(dynamic op) {
+            if (op.GetType().ToString().EndsWith("[]")) {
+                foreach (var iter_op in op) {
+                    yield return ReadMinds(iter_op);
+                }
+            } else {
+                yield return ReadMinds(op);
+            }
+        }
+
 
         /// <summary>
         /// If a "down" isn't declared, this handy function will try and figure it out for you

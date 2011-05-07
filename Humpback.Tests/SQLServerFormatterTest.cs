@@ -73,6 +73,10 @@ namespace Humpback.Tests
             string json = @"{'up':{'drop_table':'tname'}}";
             return Helpers.DeserializeMigration(json);
         }
+        private dynamic Drop2Tables() {
+            string json = @"{'up':[{'drop_table':'tname1'},{'drop_table':'tname2'}]}";
+            return Helpers.DeserializeMigration(json);
+        }
         private dynamic AddColumns() {
             string json = @"{'up':{'add_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}},'down':{'remove_column':{'table':'tname','column':'name'}}}";
             return Helpers.DeserializeMigration(json);
@@ -129,6 +133,23 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileName.Contains("2"));
             Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname]"));
         }
+
+        [TestMethod()]
+        public void SqlFormatterDrop2TableTest() {
+            Configuration configuration = new Configuration(new[] { "-s", "8" });
+            TestFileWriter file_writer = new TestFileWriter();
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
+            IMigrationProvider migrations = new TestMigrationProvider();
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
+            migrations.SetMigrationNumber(8); // drop table
+            target.Execute();
+            Console.WriteLine(file_writer.FileName);
+            Console.WriteLine(file_writer.FileContents);
+            Assert.IsTrue(file_writer.FileName.Contains("8"));
+            Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname1]"));
+            Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname2]"));
+        }
+
         [TestMethod()]
         public void SqlFormatterAddColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "3" });
@@ -204,15 +225,15 @@ namespace Humpback.Tests
     public class TestMigrationProvider:IMigrationProvider {
         public SortedDictionary<int, string> GetMigrations() {
             var rv = new SortedDictionary<int,string>();
-            for(int i = 1; i <= 7; i++) {
-                rv.Add(i, i.ToString()+"xxx.sql");
+            for(int i = 1; i <= 8; i++) {
+                rv.Add(i, i + "xxx.sql");
             }
             return rv;
         }
 
         public SortedDictionary<int, string> GetMigrationsContents() {
             var rv = new SortedDictionary<int, string>();
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 1; i <= 8; i++) {
                 rv.Add(i, GetMigrationWithContents(i).Value);
             }
             return rv;
@@ -227,6 +248,7 @@ namespace Humpback.Tests
                 case 5: return RemoveColumn();
                 case 6: return AddIndex();
                 case 7: return RemoveIndex();
+                case 8: return Drop2Tables();
                 default:
                     return CreateTable();
             }
@@ -247,6 +269,9 @@ namespace Humpback.Tests
         }
         private KeyValuePair<string, string> DropTable() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'drop_table':'tname'}}");
+        }
+        private KeyValuePair<string, string> Drop2Tables() {
+            return new KeyValuePair<string, string>("7xxx.sql", @"{'up':[{'drop_table':'tname1'},{'drop_table':'tname2'}]}");
         }
         private KeyValuePair<string, string> AddColumns() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'add_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}},'down':{'remove_column':{'table':'tname','column':'name'}}}");
