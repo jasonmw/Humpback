@@ -249,5 +249,66 @@ namespace Humpback.Tests
             Assert.IsFalse(target.List);
             Assert.IsFalse(target.Generate);
         }
+
+
+        [TestMethod()]
+        public void EnvironmentTest() {
+            Configuration target = new Configuration(new[] { "-e" });
+            Assert.IsTrue(target.Env);
+            Assert.IsFalse(target.WriteHelp);
+            Assert.IsFalse(target.List);
+            Assert.IsFalse(target.Generate);
+        }
+
+        [TestMethod()]
+        public void EnvironmentTestSet() {
+            Configuration target = new Configuration(new[] { "-e", "-set", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.set_current_settings, "name");
+        }
+
+
+        [TestMethod()]
+        public void EnvironmentTestAdd() {
+            Configuration target = new Configuration(new[] { "-e", "-add", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.new_project_name, "name");
+        }
+
+        [TestMethod()]
+        public void EnvironmentTestRemove() {
+            Configuration target = new Configuration(new[] { "-e", "-remove", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.remove_project_name, "name");
+        }
+
+
+        [TestMethod()]
+        public void EnvironmentTestRename() {
+            Configuration target = new Configuration(new[] { "-e", "-rename", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.settings_rename, "name");
+        }
+
+        [TestMethod()]
+        public void EnvironmentTestDir() {
+            Configuration target = new Configuration(new[] { "-e", "-dir", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.settings_dir, "name");
+        }
+
+        [TestMethod()]
+        public void EnvironmentTestConnectionString() {
+            Configuration target = new Configuration(new[] { "-e", "-cs", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.settings_cs, "name");
+        }
+
+        [TestMethod()]
+        public void EnvironmentTestFlavor() {
+            Configuration target = new Configuration(new[] { "-e", "-flavor", "name" });
+            Assert.IsTrue(target.Env);
+            Assert.AreEqual(target.settings_flavor, "name");
+        }
     }
 }
