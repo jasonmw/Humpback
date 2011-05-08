@@ -82,7 +82,7 @@ and the sql that will be generated...
 	ALTER TABLE [Post] ADD CONSTRAINT [FK_post_user_userid] FOREIGN KEY (UserId)
 	REFERENCES User (Id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 	
-see https://github.com/jasonmw/Humpback/wiki/Migration-Format-Examples for more details
+see https://github.com/jasonmw/Humpback/wiki/Migration-Format-Examples for examples and details of the migration format
     
 just like rails, sequential filenames will be generated for you (UTC timestamp)  
 
