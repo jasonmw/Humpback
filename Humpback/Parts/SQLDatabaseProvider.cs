@@ -24,25 +24,63 @@ namespace Humpback.Parts {
         }
 
         public void UpdateMigrationVersion(int number) {
-            ExecuteCommand(_sql_formatter.sqlUpdateSchemaInfo(number));
+                ExecuteCommand(_sql_formatter.sqlUpdateSchemaInfo(number));
         }
 
         public int ExecuteUpCommand(dynamic up) {
             var sql = _sql_formatter.GenerateSQLUp(up);
-            foreach (var s in sql) {
-                ExecuteCommand(s);
+            using (var connection = GetOpenConnection()) {
+                var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
+
+                var cmd = connection.CreateCommand();
+                cmd.Transaction = transaction;
+                try {
+                    foreach (var s in sql) {
+
+                        if (_configuration.Verbose) {
+                            Console.WriteLine("Executing SQL: " + s);
+                        }
+                        cmd.CommandText = s;
+                        cmd.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                } catch {
+                    transaction.Rollback();
+                    throw;
+                } finally {
+                    connection.Close();
+                }
             }
             return sql.Length;
         }
         public int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
-            foreach (var s in sql) {
-                ExecuteCommand(s);
+            using (var connection = GetOpenConnection()) {
+                var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                var cmd = connection.CreateCommand();
+                cmd.Transaction = transaction;
+                try {
+                    foreach (var s in sql) {
+
+                        if (_configuration.Verbose) {
+                            Console.WriteLine("Executing SQL: " + s);
+                        }
+                        cmd.CommandText = s;
+                        cmd.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                } catch {
+                    transaction.Rollback();
+                    throw;
+                } finally {
+                    connection.Close();
+                }
             }
             return sql.Length;
         }
-        public int ExecuteCommand(string command) {
-            if(string.IsNullOrWhiteSpace(command)) {
+
+        private int ExecuteCommand(string command) {
+            if (string.IsNullOrWhiteSpace(command)) {
                 return 0;
             }
             using (var connection = GetOpenConnection()) {
@@ -55,7 +93,6 @@ namespace Humpback.Parts {
                 }
             }
         }
-
         public int GetMigrationVersion() {
             try {
                 using (var connection = GetOpenConnection()) {

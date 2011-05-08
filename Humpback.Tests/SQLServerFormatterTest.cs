@@ -165,6 +165,42 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("ADD [name]"));
             Assert.IsTrue(file_writer.FileContents.Contains("nvarchar(255)"));
         }
+        
+        [TestMethod()]
+        public void SqlFormatterAddColumnReferenceTest() {
+            Configuration configuration = new Configuration(new[] { "-s", "9" });
+            TestFileWriter file_writer = new TestFileWriter();
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
+            IMigrationProvider migrations = new TestMigrationProvider();
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
+            migrations.SetMigrationNumber(9); // add col
+            target.Execute();
+            Console.WriteLine(file_writer.FileContents);
+            Assert.IsTrue(file_writer.FileName.Contains("9"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE CASCADE ON UPDATE NO ACTION"));
+        }
+        
+
+        [TestMethod()]
+        public void SqlFormatterAddTableReferenceTest() {
+            Configuration configuration = new Configuration(new[] { "-s", "10" });
+            TestFileWriter file_writer = new TestFileWriter();
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
+            IMigrationProvider migrations = new TestMigrationProvider();
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
+            migrations.SetMigrationNumber(10); // add col
+            target.Execute();
+            Console.WriteLine(file_writer.FileContents);
+            Assert.IsTrue(file_writer.FileName.Contains("10"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE CASCADE ON UPDATE NO ACTION"));
+        }
+
+
+
         [TestMethod()]
         public void SqlFormatterChangeColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "4" });
@@ -225,7 +261,7 @@ namespace Humpback.Tests
     public class TestMigrationProvider:IMigrationProvider {
         public SortedDictionary<int, string> GetMigrations() {
             var rv = new SortedDictionary<int,string>();
-            for(int i = 1; i <= 8; i++) {
+            for(int i = 1; i <= 10; i++) {
                 rv.Add(i, i + "xxx.sql");
             }
             return rv;
@@ -233,7 +269,7 @@ namespace Humpback.Tests
 
         public SortedDictionary<int, string> GetMigrationsContents() {
             var rv = new SortedDictionary<int, string>();
-            for (int i = 1; i <= 8; i++) {
+            for (int i = 1; i <= 10; i++) {
                 rv.Add(i, GetMigrationWithContents(i).Value);
             }
             return rv;
@@ -241,14 +277,16 @@ namespace Humpback.Tests
 
         public KeyValuePair<string, string> GetMigrationWithContents(int migration_number) {
             switch(migration_number){
-                case 1: return CreateTable();
-                case 2: return DropTable();
-                case 3: return AddColumns();
-                case 4: return ChangeColumns();
-                case 5: return RemoveColumn();
-                case 6: return AddIndex();
-                case 7: return RemoveIndex();
-                case 8: return Drop2Tables();
+                case 1:  return CreateTable();
+                case 2:  return DropTable();
+                case 3:  return AddColumns();
+                case 4:  return ChangeColumns();
+                case 5:  return RemoveColumn();
+                case 6:  return AddIndex();
+                case 7:  return RemoveIndex();
+                case 8:  return Drop2Tables();
+                case 9:  return AddColumnReference();
+                case 10: return AddTableTwoReference();
                 default:
                     return CreateTable();
             }
@@ -288,6 +326,16 @@ namespace Humpback.Tests
         private KeyValuePair<string, string> RemoveIndex() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{remove_index:{table_name:'categories',columns:['title','slug']}}}");
         }
+        private KeyValuePair<string,string> AddColumnReference() {
+            return new KeyValuePair<string, string>("7xxx.sql",
+                                                    @"{'up': {'add_column': {'table': 'Orders','columns': [{'name': 'User','type': 'reference'}]}},'down': {'remove_column': {'table': 'Orders','column': 'UserId'}}}");
+        }
+
+        private KeyValuePair<string, string> AddTableTwoReference() {
+            return new KeyValuePair<string, string>("7xxx.sql",
+                                                    @"{'up': {'create_table': {'name': 'ApplicationControl','timestamps': true,'columns': [{'name': 'name','type': 'string'},{'name': 'ApplicationPage','type': 'reference'},{'name': 'Application','type': 'reference'}]}},'down': {'drop_table': 'ApplicationControl'}}");
+        }
+        //{'up': {'create_table': {'name': 'ApplicationControl','timestamps': true,'columns': [{'name': 'name','type': 'string'},{'name': 'ApplicationPage','type': 'reference'},{'name': 'Application','type': 'reference'}]}},'down': {'drop_table': 'ApplicationControl'}}
 
     }
 }

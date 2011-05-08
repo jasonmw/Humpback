@@ -193,6 +193,9 @@ namespace Humpback.Parts {
                 }
             }
             string drop_col_name = columns.First().name;
+            if(columns.First().type == "reference") {
+                drop_col_name += "Id";
+            }
             var table = table_name; // used for auto property naming in anon object below
             dynamic up = new { add_column = new { table, columns } };
             dynamic down = new { remove_column = new { table, column = drop_col_name } }; // TODO: need to allow for dropping multiple columns

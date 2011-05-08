@@ -6,7 +6,6 @@ using System.Text;
 namespace Humpback {
     public interface IDatabaseProvider {
 
-        int ExecuteCommand(string command);
         int GetMigrationVersion();
         void UpdateMigrationVersion(int number);
         int ExecuteUpCommand(dynamic up);

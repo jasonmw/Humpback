@@ -169,6 +169,23 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("first_name"));
             Assert.IsTrue(file_writer.FileContents.Contains("last_name"));
         }
+
+
+        [TestMethod()]
+        public void GeneratorAddReferenceColumnTest() {
+            Configuration configuration = new Configuration(new[] { "-g", "AddUserToOrders", "User:reference" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
+            target.Execute();
+            Assert.IsTrue(file_writer.FileName.Contains("AddColumn_Orders_UserId"));
+            Assert.IsTrue(file_writer.FileContents.Contains("add_column"));
+            Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            Assert.IsTrue(file_writer.FileContents.Contains("\"name\":\"User\",\"type\":\"reference\"}]"));
+            Assert.IsTrue(file_writer.FileContents.Contains("remove_column"));
+            Assert.IsTrue(file_writer.FileContents.Contains("\"column\":\"UserId\""));
+        }
+
+
         /// <summary>
         ///A test for AddColumn
         ///</summary>

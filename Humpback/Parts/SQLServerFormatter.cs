@@ -11,9 +11,12 @@ namespace Humpback.Parts {
         private Configuration _configuration;
         private Settings _settings;
 
+        private List<string> _commands_to_add;
+
         public SQLServerFormatter(Configuration configuration, Settings settings) {
             _configuration = configuration;
             _settings = settings;
+            _commands_to_add = new List<string>();
         }
 
         public string[] GenerateSQLUp(dynamic operation) {
@@ -74,30 +77,46 @@ namespace Humpback.Parts {
         /// <summary>
         /// Build a list of columns from the past-in array in the JSON file
         /// </summary>
-        static string BuildColumnList(dynamic columns) {
+        private string BuildColumnList(string table_name, dynamic columns) {
             //holds the output
             var sb = new System.Text.StringBuilder();
             var counter = 0;
             foreach (dynamic col in columns) {
                 //name
-                sb.AppendFormat(", [{0}] ", col.name);
+
+                string column_name = col.name;
+                string column_type = col.type;
+                bool nullable = true;
+                if(col.nullable != null) {
+                    nullable = col.nullable;
+                }
+                string default_value =col.default_value ?? "";
+
+                if(col.type != null && col.type.ToLower() == "reference") {
+                    string id_col_name = col.name + "Id";
+                    column_name = id_col_name;
+                    column_type = "INT";
+                    string fk_name = string.Format("FK_{0}_{1}_{2}",table_name.ToLower(),col.name.ToLower(),id_col_name.ToLower()); // FK_Orders_User_UserId
+                    string fk = string.Format("ALTER TABLE [{1}] ADD CONSTRAINT [{0}] FOREIGN KEY ({2}) REFERENCES {3} (Id) ON DELETE NO ACTION ON UPDATE NO ACTION;", fk_name, table_name, id_col_name, col.name);
+                    _commands_to_add.Add(fk);
+                    nullable = false;
+                }
+
+
+                sb.AppendFormat(", [{0}] ", column_name);
 
                 //append on the type. Don't do this in the formatter since the replacer might return no change at all
-                sb.Append(SetColumnType(col.type));
+                sb.Append(SetColumnType(column_type));
 
                 //nullability - don't set if this is the Primary Key
-                if (col.type != "pk") {
-                    if (col.nullable != null) {
-                        if (col.nullable) {
-                            sb.Append(" NULL ");
-                        } else {
-                            sb.Append(" NOT NULL ");
-                        }
-                    } else {
+                if (column_type != "pk") {
+                    if (nullable) {
                         sb.Append(" NULL ");
+                    } else {
+                        sb.Append(" NOT NULL ");
                     }
-                    if (col.default_value != null) {
-                        sb.Append(" DEFAULT " + col.default_value + " ");
+                    if (!string.IsNullOrWhiteSpace(default_value)) {
+                        sb.Append(" DEFAULT " + col.default_value);
                     }
                 }
 
@@ -144,13 +163,18 @@ namespace Humpback.Parts {
         }
 
         private IEnumerable<string> GetCommands(dynamic op) {
-            string optype = op.GetType().ToString();
+            _commands_to_add = new List<string>();
             if(op.Count != null) {
                 foreach(var iter_op in op) {
                     yield return GetCommand(iter_op);
                 }
             } else {
                 yield return GetCommand(op);
+            }
+            if(_commands_to_add.Count > 0) {
+                foreach(var cmd in _commands_to_add) {
+                    yield return cmd;
+                }
             }
         }
         private string GetCommand(dynamic op) {
@@ -171,7 +195,7 @@ namespace Humpback.Parts {
 
             //CREATE
             if (op.create_table != null) {
-                var columns = BuildColumnList(op.create_table.columns);
+                var columns = BuildColumnList(op.create_table.name, op.create_table.columns);
 
                 //add some timestamps?
                 if (op.create_table.timestamps != null) {
@@ -197,13 +221,13 @@ namespace Humpback.Parts {
                 return "DROP TABLE [" + op.drop_table + "]";
                 //ADD COLUMN
             } else if (op.add_column != null) {
-                result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
+                result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.table,op.add_column.columns)));
                 //DROP COLUMN
             } else if (op.remove_column != null) {
                 result = string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", op.remove_column.table, op.remove_column.column);
                 //CHANGE
             } else if (op.change_column != null) {
-                result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
+                result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.table,op.change_column.columns)));
                 //ADD INDEX
             } else if (op.add_index != null) {
                 result = string.Format("CREATE NONCLUSTERED INDEX [{0}] ON [{1}] ({2} )", CreateIndexName(op.add_index), op.add_index.table_name, CreateIndexColumnString(op.add_index.columns));
@@ -222,7 +246,7 @@ namespace Humpback.Parts {
 
 
         private IEnumerable<string> GetReadMinds(dynamic op) {
-            if (op.GetType().ToString().EndsWith("[]")) {
+            if (op.Count != null) {
                 foreach (var iter_op in op) {
                     yield return ReadMinds(iter_op);
                 }

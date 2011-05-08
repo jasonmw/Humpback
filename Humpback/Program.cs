@@ -47,9 +47,13 @@ namespace Humpback {
                 _humpback_command.Execute();
 
             } catch (Exception e)  {
-                Console.WriteLine(e.ToString());
-                //File.AppendAllText(Path.Combine(Environment.CurrentDirectory, "errorlog.txt"), e.ToString() + Environment.NewLine + Environment.NewLine);
-                Console.ReadKey();
+                Console.WriteLine(e.Message);
+                if(_configuration != null && _configuration.Verbose) {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+            if(System.Diagnostics.Debugger.IsAttached) {
+                Console.ReadLine();
             }
         }
 
