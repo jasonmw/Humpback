@@ -65,6 +65,7 @@ if you do not specify a primary key, one will be appointed for you.
 timestamps will be added automatically  
 
 if you add a column that is the name of another table, and specify the type as 'reference'
+(totally works for create table too)
 
     > hump -g AddUserToPost User:reference
     
