@@ -64,6 +64,26 @@ the migration types that can be generated are:
 if you do not specify a primary key, one will be appointed for you.  
 timestamps will be added automatically  
 
+if you add a column that is the name of another table, and specify the type as 'reference'
+
+    > hump -g AddUserToPost User:reference
+    
+would generate this as the up operation
+
+    'add_column':{'table':'Post', 'columns':[{'name':'User','type':'reference'}]}
+    
+
+and the sql that will be generated...
+
+    > hump -s 4 -screen ( this was my migration number 4.  see hump -? list )
+
+	ALTER TABLE [Post] ADD [UserId] INT NOT NULL
+	
+	ALTER TABLE [Post] ADD CONSTRAINT [FK_post_user_userid] FOREIGN KEY (UserId)
+	REFERENCES User (Id) ON DELETE NO ACTION ON UPDATE NO ACTION;
+	
+
+    
 just like rails, sequential filenames will be generated for you (UTC timestamp)  
 
 **create_table** ( tablename column_name:column_type column_name:column_type )  
