@@ -41,7 +41,8 @@ For information about a specific command use the following
 
 
 The json syntax is explained very well by Rob at https://github.com/robconery/Manatee  
-This should generate / consume the exact files specified for manatee.  
+and also [HERE](https://github.com/jasonmw/Humpback/wiki/Migration-Format-Examples)
+This should consume the files specified for manatee.  
 
 
 Generate Migrations
