@@ -179,7 +179,7 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileName.Contains("9"));
             Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
             Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE CASCADE ON UPDATE NO ACTION"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE NO ACTION ON UPDATE NO ACTION"));
         }
         
 
@@ -194,9 +194,10 @@ namespace Humpback.Tests
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
             Assert.IsTrue(file_writer.FileName.Contains("10"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE CASCADE ON UPDATE NO ACTION"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_applicationpage_applicationpageid"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_application_applicationid"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY (ApplicationPageId) REFERENCES ApplicationPage (Id)"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY (ApplicationId) REFERENCES Application (Id)"));
         }
 
 
