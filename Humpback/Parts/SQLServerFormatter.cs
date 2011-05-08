@@ -28,7 +28,7 @@ namespace Humpback.Parts {
                 return ((IEnumerable<string>) GetCommands(operation.down)).ToArray();
             }
             if (operation.up != null) {
-                return ((IEnumerable<string>) GetReadMinds(operation.up)).ToArray();
+                return ((IEnumerable<string>) GetReadMinds(operation.up)).Reverse().ToArray();
             }
             return new string[0];
         }
