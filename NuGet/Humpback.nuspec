@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Humpback</id>
+    <version>0.1</version>
+    <title>Humpback</title>
+    <authors>Jason W</authors>
+    <owners>Jason W</owners>
+    <projectUrl>https://github.com/jasonmw/Humpback</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Command Tool for generating, managing, and running database migrations.</description>
+    <summary>Database migrations.  No Compilation Necessecary. Generate, Run, Output SQL.</summary>
+    <language>en-US</language>
+    <tags>migrations json manatee database sql</tags>
+  </metadata>
+</package>

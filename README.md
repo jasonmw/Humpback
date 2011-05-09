@@ -5,7 +5,20 @@ Inspired by Rails tooling and another project called Manatee https://github.com/
 
 The database migrations are similar to rails, they are [stored as json](https://github.com/jasonmw/Humpback/wiki/Migration-Format-Examples).
 
-Your interface is the command line.  
+Your interface is the command line.
+
+##Available via NuGet as a package manager console tool
+From Visual Studio package manager console
+
+```
+Install-Package Humpback
+```
+or from the nuget.exe command line application.
+
+ ```
+ > nuget.exe install Humpback
+ ```
+ 
 
 Humpback does 4 Main things
 ---------------------------

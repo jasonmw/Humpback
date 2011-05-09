@@ -79,7 +79,7 @@ namespace Humpback.Parts {
         /// </summary>
         private string BuildColumnList(string table_name, dynamic columns) {
             //holds the output
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             var counter = 0;
             foreach (dynamic col in columns) {
                 //name
@@ -144,7 +144,7 @@ namespace Humpback.Parts {
         /// create unique name for index based on table and columns specified
         /// </summary>
         static string CreateIndexName(dynamic ix) {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             foreach (dynamic c in ix.columns) {
                 sb.AppendFormat("{1}{0}", c.Replace(" ", "_"), (sb.Length == 0 ? "" : "_")); // ternary to only add underscore if not first iteration
             }
@@ -155,13 +155,15 @@ namespace Humpback.Parts {
         /// create string for columns
         /// </summary>
         static string CreateIndexColumnString(dynamic columns) {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             foreach (dynamic c in columns) {
                 sb.AppendFormat("{1} [{0}] ASC", c, (sb.Length == 0 ? "" : ",")); // ternary to only add comma if not first iteration
             }
             return sb.ToString();
         }
 
+
+        // wrapped the get command to accomodate optional arrays of operations OR just a single op
         private IEnumerable<string> GetCommands(dynamic op) {
             _commands_to_add = new List<string>();
             if(op.Count != null) {
@@ -171,12 +173,14 @@ namespace Humpback.Parts {
             } else {
                 yield return GetCommand(op);
             }
-            if(_commands_to_add.Count > 0) {
+            if(_commands_to_add.Count > 0) { // post main commands here, i.e. FK's
                 foreach(var cmd in _commands_to_add) {
                     yield return cmd;
                 }
             }
         }
+
+
         private string GetCommand(dynamic op) {
             //the "op" here is an "up" or a "down". It's dynamic as that's what the JSON parser
             //will return. The neat thing about this parser is that the dynamic result will
