@@ -49,14 +49,15 @@ namespace Humpback.ConfigurationOptions {
                 .Add("rename=", s => settings_rename = s)
                 .Add("set=", s => set_current_settings = s)
                 .Add("add=", s => new_project_name = s)
+                .Add("init", s => env_init = true)
                 .Add("remove=", s => remove_project_name = s)
                 ;
             
             Extra = oset.Parse(options);
         }
 
-
         public bool Env { get; private set; }
+        public bool env_init { get; private set; }
         public string settings_dir { get; private set; }
         public string settings_cs { get; private set; }
         public string settings_flavor { get; private set; }
@@ -151,10 +152,6 @@ namespace Humpback.ConfigurationOptions {
             set;
         }
 
-
-        private static string DefaultMigrationFolder() {
-            return Path.Combine(Environment.CurrentDirectory, @"db\migrations");
-        }
     }
 
     public enum GenerateActionType {

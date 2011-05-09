@@ -7,14 +7,14 @@ using System.Text;
 using Humpback.ConfigurationOptions;
 
 namespace Humpback.Parts {
-    public class FileMigrationProvider : IMigrationProvider {
+    public class JsonFileMigrationProvider : IMigrationProvider {
         private Configuration _configuration;
         private IDatabaseProvider _database_provider;
         private SortedDictionary<int, string> _migrations;
         private SortedDictionary<int, string> _migration_contents;
         private Settings _settings;
 
-        public FileMigrationProvider(Configuration configuration, Settings settings, IDatabaseProvider database_provider) {
+        public JsonFileMigrationProvider(Configuration configuration, Settings settings, IDatabaseProvider database_provider) {
             _configuration = configuration;
             _settings = settings;
             _database_provider = database_provider;

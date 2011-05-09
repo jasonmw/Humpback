@@ -53,7 +53,7 @@
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IMigrationProvider.cs" />
     <Compile Include="ISqlFormatter.cs" />
-    <Compile Include="Parts\FileMigrationProvider.cs" />
+    <Compile Include="Parts\JsonFileMigrationProvider.cs" />
     <Compile Include="Parts\FileWriter.cs" />
     <Compile Include="IFileWriter.cs" />
     <Compile Include="IHumpbackCommand.cs" />

@@ -169,7 +169,7 @@ namespace Humpback.ConfigurationOptions {
             ensure_directories();
         }
 
-        private void ensure_directories() {
+        internal void ensure_directories() {
             if (!Directory.Exists(MigrationsFolder())) {
                 Directory.CreateDirectory(MigrationsFolder());
             }
