@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web.Script.Serialization;
 using Humpback.ConfigurationOptions;
-using Humpback.Tools;
+using Humpback.Interfaces;
 
 namespace Humpback.Parts {
     public class GenerateSQL : IHumpbackCommand {

@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 using System.Linq;
 using System.Text;
 using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
 
 namespace Humpback.Parts {
-    public class SQLDatabaseProvider : IDatabaseProvider {
+    public class SQLCEDatabaseProvider : IDatabaseProvider {
 
-        private ConfigurationOptions.Configuration _configuration;
+        private Configuration _configuration;
         private Settings _settings;
         private ISqlFormatter _sql_formatter;
 
-        private SqlConnection GetOpenConnection() {
-            var rv = new SqlConnection(_settings.ConnectionString());
+        private SqlCeConnection GetOpenConnection() {
+            var rv = new SqlCeConnection(_settings.ConnectionString());
             rv.Open();
             return rv;
         }
-        public SQLDatabaseProvider(Configuration configuration, Settings settings, ISqlFormatter sql_formatter) {
+        public SQLCEDatabaseProvider(Configuration configuration, Settings settings, ISqlFormatter sql_formatter) {
             _configuration = configuration;
             _settings = settings;
             _sql_formatter = sql_formatter;

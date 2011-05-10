@@ -5,6 +5,7 @@ using Humpback.Tests.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 
 namespace Humpback.Tests
 {

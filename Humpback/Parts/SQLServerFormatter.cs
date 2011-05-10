@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 
 namespace Humpback.Parts {
     public class SQLServerFormatter : ISqlFormatter {
@@ -97,7 +98,7 @@ namespace Humpback.Parts {
                     column_name = id_col_name;
                     column_type = "INT";
                     string fk_name = string.Format("FK_{0}_{1}_{2}",table_name.ToLower(),col.name.ToLower(),id_col_name.ToLower()); // FK_Orders_User_UserId
-                    string fk = string.Format("ALTER TABLE [{1}] ADD CONSTRAINT [{0}] FOREIGN KEY ({2}) REFERENCES {3} (Id) ON DELETE NO ACTION ON UPDATE NO ACTION;", fk_name, table_name, id_col_name, col.name);
+                    string fk = string.Format("ALTER TABLE [{1}] ADD CONSTRAINT [{0}] FOREIGN KEY ([{2}]) REFERENCES [{3}] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;", fk_name, table_name, id_col_name, col.name);
                     _commands_to_add.Add(fk);
                     nullable = false;
                 }

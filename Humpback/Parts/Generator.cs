@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 
 namespace Humpback.Parts {
     public class Generator : IHumpbackCommand {

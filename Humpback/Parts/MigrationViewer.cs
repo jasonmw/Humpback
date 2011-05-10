@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 
 namespace Humpback.Parts {
     public class MigrationViewer : IHumpbackCommand {

@@ -50,12 +50,9 @@
     <Compile Include="ConfigurationOptions\Options.cs" />
     <Compile Include="ConfigurationOptions\Project.cs" />
     <Compile Include="ConfigurationOptions\Settings.cs" />
-    <Compile Include="IDatabaseProvider.cs" />
-    <Compile Include="IMigrationProvider.cs" />
-    <Compile Include="ISqlFormatter.cs" />
+    <Compile Include="Parts\SQLCEDatabaseProvider.cs" />
     <Compile Include="Parts\JsonFileMigrationProvider.cs" />
     <Compile Include="Parts\FileWriter.cs" />
-    <Compile Include="IFileWriter.cs" />
     <Compile Include="IHumpbackCommand.cs" />
     <Compile Include="Parts\GenerateSQL.cs" />
     <Compile Include="Parts\Generator.cs" />
@@ -69,6 +66,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationOptions\Configuration.cs" />
     <Compile Include="Tools\DynamicJavascriptConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Humpback.Interfaces\Humpback.Interfaces.csproj">
+      <Project>{B830E3E4-3942-48BB-97A8-3E9BB0E9F1E1}</Project>
+      <Name>Humpback.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

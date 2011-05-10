@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 using Humpback.Parts;
 
 namespace Humpback {

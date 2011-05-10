@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Humpback")]
-[assembly: AssemblyDescription("Humpback Database Migration Tool")]
+[assembly: AssemblyTitle("Humpback.Interfaces")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jason")]
-[assembly: AssemblyProduct("Humpback")]
-[assembly: AssemblyCopyright("Copyright © Jason Welty 2011")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Humpback.Interfaces")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fbe207ef-760f-40d3-9821-604602de11de")]
+[assembly: Guid("11266294-df7c-4416-8aae-9f9290fc8382")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,6 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.2.0")]
-[assembly: AssemblyFileVersion("0.1.2.0")]
-[assembly: InternalsVisibleTo("Humpback.Tests")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humpback {
+﻿namespace Humpback.Interfaces {
     public interface IFileWriter {
         void WriteFile(string path, string contents);
         bool FileExists(string path);

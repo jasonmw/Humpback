@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Humpback.ConfigurationOptions;
+﻿using System.Collections.Generic;
 
-namespace Humpback {
+namespace Humpback.Interfaces {
     public interface IMigrationProvider {
         SortedDictionary<int, string> GetMigrations();
         SortedDictionary<int, string> GetMigrationsContents();
