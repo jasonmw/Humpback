@@ -87,11 +87,9 @@ namespace Humpback.Parts {
 
                 string column_name = col.name;
                 string column_type = col.type;
-                bool nullable = true;
-                if(col.nullable != null) {
-                    nullable = col.nullable;
-                }
-                string default_value =col.default_value ?? "";
+                bool nullable = col.nullable ?? true;
+                string default_value =col.@default ?? "";
+                string extra_col_def = col.extra ?? "";
 
                 if(col.type != null && col.type.ToLower() == "reference") {
                     string id_col_name = col.name + "Id";
@@ -117,7 +115,10 @@ namespace Humpback.Parts {
                         sb.Append(" NOT NULL ");
                     }
                     if (!string.IsNullOrWhiteSpace(default_value)) {
-                        sb.Append(" DEFAULT " + col.default_value);
+                        sb.Append(" DEFAULT (" + default_value + ") ");
+                    }
+                    if(!string.IsNullOrWhiteSpace(extra_col_def)) {
+                        sb.Append(extra_col_def);
                     }
                 }
 
@@ -204,7 +205,7 @@ namespace Humpback.Parts {
 
                 //add some timestamps?
                 if (op.create_table.timestamps != null) {
-                    columns += "\n\t, CreatedOn datetime DEFAULT getdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getdate() NOT NULL";
+                    columns += "\n\t, CreatedOn datetime DEFAULT getutcdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getutcdate() NOT NULL";
                 }
 
                 //make sure we have a PK :)

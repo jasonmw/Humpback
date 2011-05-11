@@ -66,38 +66,7 @@ namespace Humpback.Tests
 
 
 
-        private KeyValuePair<string, string> CreateTable() {
-            var json = @"{'up':{'create_table':{'name':'tname','columns':[{'name':'first_name','type':'string'},{'name':'last_name','type':'money'}]}},'down':{'drop_table':'tname'}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic DropTable() {
-            string json = @"{'up':{'drop_table':'tname'}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic Drop2Tables() {
-            string json = @"{'up':[{'drop_table':'tname1'},{'drop_table':'tname2'}]}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic AddColumns() {
-            string json = @"{'up':{'add_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}},'down':{'remove_column':{'table':'tname','column':'name'}}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic RemoveColumn() {
-            string json = @"{'up':{'remove_column':{'table':'tname','column':'name'}}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic ModifyColumn() {
-            string json = @"{'up':{'change_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic AddIndex() {
-            string json = @"{'up':{add_index:{table_name:'categories',columns:['title','slug']}}}";
-            return Helpers.DeserializeMigration(json);
-        }
-        private dynamic RemoveIndex() {
-            string json = @"{'up':{remove_index:{table_name:'categories',columns:['title','slug']}}}";
-            return Helpers.DeserializeMigration(json);
-        }
+
         private static Settings Settings {get {
             return TestHelpers.TestSettings;
 
@@ -116,11 +85,29 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
             Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
             Assert.IsTrue(file_writer.FileContents.Contains("[last_name] decimal"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getdate() NOT NULL"));
+            Assert.IsTrue(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
             Assert.IsTrue(file_writer.FileContents.Contains("Id"));
             Assert.IsTrue(file_writer.FileContents.Contains("PRIMARY KEY"));
         }
-
+        [TestMethod()]
+        public void SqlFormatterAddTableTestWithNullableAndDefault() {
+            Configuration configuration = new Configuration(new[] { "-s", "11" });
+            TestFileWriter file_writer = new TestFileWriter();
+            ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
+            IMigrationProvider migrations = new TestMigrationProvider();
+            IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
+            //migrations.SetMigrationNumber(11); // create table
+            target.Execute();
+            Console.WriteLine(file_writer.FileContents);
+            Assert.IsTrue(file_writer.FileName.Contains("11"));
+            Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
+            Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
+            Assert.IsTrue(file_writer.FileContents.Contains("[last_name] decimal"));
+            Assert.IsTrue(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
+            Assert.IsTrue(file_writer.FileContents.Contains("Id"));
+            Assert.IsTrue(file_writer.FileContents.Contains("PRIMARY KEY"));
+            Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255) NOT NULL  DEFAULT ('JASON')"));
+        }
         [TestMethod()]
         public void SqlFormatterDropTableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "2" });
@@ -174,13 +161,13 @@ namespace Humpback.Tests
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
             IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
-            migrations.SetMigrationNumber(9); // add col
+            //migrations.SetMigrationNumber(9); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
             Assert.IsTrue(file_writer.FileName.Contains("9"));
             Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
             Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY (UserId) REFERENCES User (Id) ON DELETE NO ACTION ON UPDATE NO ACTION"));
+            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION"));
         }
         
 
@@ -191,14 +178,14 @@ namespace Humpback.Tests
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
             IMigrationProvider migrations = new TestMigrationProvider();
             IHumpbackCommand target = new GenerateSQL(configuration, Settings, formatter, file_writer, migrations);
-            migrations.SetMigrationNumber(10); // add col
+            //migrations.SetMigrationNumber(10); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
             Assert.IsTrue(file_writer.FileName.Contains("10"));
             Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_applicationpage_applicationpageid"));
             Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_application_applicationid"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY (ApplicationPageId) REFERENCES ApplicationPage (Id)"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY (ApplicationId) REFERENCES Application (Id)"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationPageId]) REFERENCES [ApplicationPage] ([Id])"));
+            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationId]) REFERENCES [Application] ([Id])"));
         }
 
 
@@ -262,36 +249,26 @@ namespace Humpback.Tests
 
     public class TestMigrationProvider:IMigrationProvider {
         public SortedDictionary<int, string> GetMigrations() {
-            var rv = new SortedDictionary<int,string>();
-            for(int i = 1; i <= 10; i++) {
-                rv.Add(i, i + "xxx.sql");
+            var rv = new SortedDictionary<int, string>();
+            foreach (var key in functions_dictionary.Keys) {
+                rv.Add(key, key + "xxx.sql");
             }
             return rv;
         }
 
         public SortedDictionary<int, string> GetMigrationsContents() {
             var rv = new SortedDictionary<int, string>();
-            for (int i = 1; i <= 10; i++) {
-                rv.Add(i, GetMigrationWithContents(i).Value);
+            foreach(var key in functions_dictionary.Keys) {
+                rv.Add(key, functions_dictionary[key]().Value);
             }
             return rv;
         }
 
         public KeyValuePair<string, string> GetMigrationWithContents(int migration_number) {
-            switch(migration_number){
-                case 1:  return CreateTable();
-                case 2:  return DropTable();
-                case 3:  return AddColumns();
-                case 4:  return ChangeColumns();
-                case 5:  return RemoveColumn();
-                case 6:  return AddIndex();
-                case 7:  return RemoveIndex();
-                case 8:  return Drop2Tables();
-                case 9:  return AddColumnReference();
-                case 10: return AddTableTwoReference();
-                default:
-                    return CreateTable();
+            if (functions_dictionary.ContainsKey(migration_number)) {
+                return functions_dictionary[migration_number]();
             }
+            return functions_dictionary[1]();
         }
 
         private int migration_number = 0;
@@ -303,41 +280,58 @@ namespace Humpback.Tests
             migration_number = number;
         }
 
+        private readonly Dictionary<int,Func<KeyValuePair<string, string>>> functions_dictionary =
+            new Dictionary<int,Func<KeyValuePair<string, string>>> {
+                {1, CreateTable},
+                {2, DropTable},
+                {3, AddColumns},
+                {4, ChangeColumns},
+                {5, RemoveColumn},
+                {6, AddIndex},
+                {7, RemoveIndex},
+                {8, Drop2Tables},
+                {9, AddColumnReference},
+                {10, AddTableTwoReference},
+                {11, CreateTableWithNullAndDefault}
+            };
 
-        private KeyValuePair<string,string> CreateTable() {
+
+
+        private static KeyValuePair<string,string> CreateTable() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'create_table':{'name':'tname','timestamps':true,'columns':[{'name':'first_name','type':'string'},{'name':'last_name','type':'money'}]}},'down':{'drop_table':'tname'}}");
         }
-        private KeyValuePair<string, string> DropTable() {
+        private static KeyValuePair<string, string> DropTable() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'drop_table':'tname'}}");
         }
-        private KeyValuePair<string, string> Drop2Tables() {
+        private static KeyValuePair<string, string> Drop2Tables() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':[{'drop_table':'tname1'},{'drop_table':'tname2'}]}");
         }
-        private KeyValuePair<string, string> AddColumns() {
+        private static KeyValuePair<string, string> AddColumns() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'add_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}},'down':{'remove_column':{'table':'tname','column':'name'}}}");
         }
-        private KeyValuePair<string, string> RemoveColumn() {
+        private static KeyValuePair<string, string> RemoveColumn() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'remove_column':{'table':'tname','column':'name'}}}");
         }
-        private KeyValuePair<string, string> ChangeColumns() {
+        private static KeyValuePair<string, string> ChangeColumns() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'change_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}}}");
         }
-        private KeyValuePair<string, string> AddIndex() {
+        private static KeyValuePair<string, string> AddIndex() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{add_index:{table_name:'categories',columns:['title','slug']}}}");
         }
-        private KeyValuePair<string, string> RemoveIndex() {
+        private static KeyValuePair<string, string> RemoveIndex() {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{remove_index:{table_name:'categories',columns:['title','slug']}}}");
         }
-        private KeyValuePair<string,string> AddColumnReference() {
+        private static KeyValuePair<string, string> AddColumnReference() {
             return new KeyValuePair<string, string>("7xxx.sql",
                                                     @"{'up': {'add_column': {'table': 'Orders','columns': [{'name': 'User','type': 'reference'}]}},'down': {'remove_column': {'table': 'Orders','column': 'UserId'}}}");
         }
-
-        private KeyValuePair<string, string> AddTableTwoReference() {
+        private static KeyValuePair<string, string> AddTableTwoReference() {
             return new KeyValuePair<string, string>("7xxx.sql",
                                                     @"{'up': {'create_table': {'name': 'ApplicationControl','timestamps': true,'columns': [{'name': 'name','type': 'string'},{'name': 'ApplicationPage','type': 'reference'},{'name': 'Application','type': 'reference'}]}},'down': {'drop_table': 'ApplicationControl'}}");
         }
-        //{'up': {'create_table': {'name': 'ApplicationControl','timestamps': true,'columns': [{'name': 'name','type': 'string'},{'name': 'ApplicationPage','type': 'reference'},{'name': 'Application','type': 'reference'}]}},'down': {'drop_table': 'ApplicationControl'}}
-
+        private static KeyValuePair<string, string> CreateTableWithNullAndDefault() {
+            return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'create_table':{'name':'tname','timestamps':true,'columns':[{'name':'first_name','type':'string', 'nullable':false, default:""'JASON'""},{'name':'last_name','type':'money'}]}},'down':{'drop_table':'tname'}}");
+        }
+        
     }
 }
