@@ -18,7 +18,7 @@ namespace Humpback {
         private static IDatabaseProvider _database_provider;
         private static Settings _settings;
 
-        static void Main(string[] args) {
+        static int Main(string[] args) {
             try {
                 _settings = Settings.Load();
                 _file_writer = new FileWriter();
@@ -56,10 +56,16 @@ namespace Humpback {
                 if(_configuration != null && _configuration.Verbose) {
                     Console.WriteLine(e.ToString());
                 }
+
+                if (Debugger.IsAttached) {
+                    Console.ReadLine();
+                }
+                return -1;
             }
-            if(System.Diagnostics.Debugger.IsAttached) {
+            if(Debugger.IsAttached) {
                 Console.ReadLine();
             }
+            return 0;
         }
 
     }
