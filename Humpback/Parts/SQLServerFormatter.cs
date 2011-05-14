@@ -29,33 +29,94 @@ namespace Humpback.Parts {
 
         public string[] GenerateSQLDown(dynamic operation) {
             if (operation.down != null) {
-                return ((IEnumerable<string>) GetCommands(operation.down)).ToArray();
+                return ((IEnumerable<string>)GetCommands(operation.down)).ToArray();
             }
             if (operation.up != null) {
-                return ((IEnumerable<string>) GetReadMinds(operation.up)).Reverse().ToArray();
+                return ((IEnumerable<string>)GetReadMinds(operation.up)).Reverse().ToArray();
             }
             return new string[0];
         }
 
 
-        public string SqlFileName(string p) {
-            return p.Substring(0,p.Length - 3) + ".sql";
+        public string sql_file_name(string p) {
+            return p.Substring(0, p.Length - 3) + ".sql";
         }
 
 
-        public string sqlCreateSchemaInfoTable {
+        public string sql_create_schema_info_table {
             get { return "CREATE TABLE SchemaInfo (Version INT)"; }
         }
 
-        public string sqlInitializeSchemaInfo {
+        public string sql_initialize_schema_info {
             get { return "INSERT INTO SchemaInfo(Version) VALUES(0)"; }
         }
 
-        public string sqlUpdateSchemaInfo(int version) {
-            return String.Format("UPDATE SchemaInfo SET Version = {0}",version); 
+        public string sql_update_schema_info(int version) {
+            return String.Format("UPDATE SchemaInfo SET Version = {0}", version);
         }
-        public string sqlGetSchemaInfo {
+        public string sql_get_schema_info {
             get { return "SELECT Version FROM SchemaInfo"; }
+        }
+
+        public string sql_fs_foreign_key {
+            get {
+                return "ALTER TABLE [{1}] ADD CONSTRAINT [{0}] FOREIGN KEY ([{2}]) REFERENCES [{3}] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;";
+            }
+        }
+
+        public string sql_fs_foreign_key_name {
+            get {
+                return "FK_{0}_{1}_{2}";
+            }
+        }
+        public string sql_fs_Timestamps {
+            get {
+                return "\n\t, CreatedOn datetime DEFAULT getutcdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getutcdate() NOT NULL";
+            }
+        }
+        public string sql_fs_primary_key {
+            get {
+                return "Id int PRIMARY KEY IDENTITY(1,1) NOT NULL \n\t";
+            }
+        }
+
+        public string sql_fs_create_table {
+            get {
+                return "CREATE TABLE [{0}]\r\n\t ({1}) ";
+            }
+        }
+
+        public string sql_fs_drop_table {
+            get {
+                return "DROP TABLE [{0}]";
+            }
+        }
+
+        public string sql_fs_alter_table_add_column {
+            get {
+                return "ALTER TABLE [{0}] ADD {1} ";
+            }
+        }
+        public string sql_fs_alter_table_drop_column {
+            get {
+                return "ALTER TABLE [{0}] DROP COLUMN [{1}]";
+            }
+        }
+        public string sql_fs_alter_table_alter_column {
+            get {
+                return "ALTER TABLE [{0}] ALTER COLUMN {1}";
+            }
+        }
+
+        public string sql_fs_add_index {
+            get {
+                return "CREATE NONCLUSTERED INDEX [{0}] ON [{1}] ({2} )";
+            }
+        }
+        public string sql_fs_drop_index {
+            get {
+                return "DROP INDEX [{0}].[{1}]";
+            }
         }
 
 
@@ -64,9 +125,12 @@ namespace Humpback.Parts {
         /// </summary>
         static string SetColumnType(string colType) {
 
+            if (!colType.Equals("datetime")) {
+                colType = colType.Replace("date", "datetime");
+            }
+
             return colType.Replace("pk", "int PRIMARY KEY NOT NULL IDENTITY(1,1)")
                 .Replace("money", "decimal(16,2)")
-                .Replace("date", "datetime")
                 .Replace("long", "bigint")
                 .Replace("string", "nvarchar(255)")
                 .Replace("boolean", "bit")
@@ -88,15 +152,15 @@ namespace Humpback.Parts {
                 string column_name = col.name;
                 string column_type = col.type;
                 bool nullable = col.nullable ?? true;
-                string default_value =col.@default ?? "";
+                string default_value = col.@default ?? "";
                 string extra_col_def = col.extra ?? "";
 
-                if(col.type != null && col.type.ToLower() == "reference") {
+                if (col.type != null && col.type.ToLower() == "reference") {
                     string id_col_name = col.name + "Id";
                     column_name = id_col_name;
                     column_type = "INT";
-                    string fk_name = string.Format("FK_{0}_{1}_{2}",table_name.ToLower(),col.name.ToLower(),id_col_name.ToLower()); // FK_Orders_User_UserId
-                    string fk = string.Format("ALTER TABLE [{1}] ADD CONSTRAINT [{0}] FOREIGN KEY ([{2}]) REFERENCES [{3}] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;", fk_name, table_name, id_col_name, col.name);
+                    string fk_name = string.Format(sql_fs_foreign_key_name, table_name.ToLower(), col.name.ToLower(), id_col_name.ToLower()); // FK_Orders_User_UserId
+                    string fk = string.Format(sql_fs_foreign_key, fk_name, table_name, id_col_name, col.name);
                     _commands_to_add.Add(fk);
                     nullable = false;
                 }
@@ -117,7 +181,7 @@ namespace Humpback.Parts {
                     if (!string.IsNullOrWhiteSpace(default_value)) {
                         sb.Append(" DEFAULT (" + default_value + ") ");
                     }
-                    if(!string.IsNullOrWhiteSpace(extra_col_def)) {
+                    if (!string.IsNullOrWhiteSpace(extra_col_def)) {
                         sb.Append(extra_col_def);
                     }
                 }
@@ -145,7 +209,7 @@ namespace Humpback.Parts {
         /// <summary>
         /// create unique name for index based on table and columns specified
         /// </summary>
-        static string CreateIndexName(dynamic ix) {
+        public string CreateIndexName(dynamic ix) {
             var sb = new StringBuilder();
             foreach (dynamic c in ix.columns) {
                 sb.AppendFormat("{1}{0}", c.Replace(" ", "_"), (sb.Length == 0 ? "" : "_")); // ternary to only add underscore if not first iteration
@@ -156,7 +220,7 @@ namespace Humpback.Parts {
         /// <summary>
         /// create string for columns
         /// </summary>
-        static string CreateIndexColumnString(dynamic columns) {
+        public string CreateIndexColumnString(dynamic columns) {
             var sb = new StringBuilder();
             foreach (dynamic c in columns) {
                 sb.AppendFormat("{1} [{0}] ASC", c, (sb.Length == 0 ? "" : ",")); // ternary to only add comma if not first iteration
@@ -168,15 +232,15 @@ namespace Humpback.Parts {
         // wrapped the get command to accomodate optional arrays of operations OR just a single op
         private IEnumerable<string> GetCommands(dynamic op) {
             _commands_to_add = new List<string>();
-            if(op.Count != null) {
-                foreach(var iter_op in op) {
+            if (op.Count != null) {
+                foreach (var iter_op in op) {
                     yield return GetCommand(iter_op);
                 }
             } else {
                 yield return GetCommand(op);
             }
-            if(_commands_to_add.Count > 0) { // post main commands here, i.e. FK's
-                foreach(var cmd in _commands_to_add) {
+            if (_commands_to_add.Count > 0) { // post main commands here, i.e. FK's
+                foreach (var cmd in _commands_to_add) {
                     yield return cmd;
                 }
             }
@@ -205,12 +269,12 @@ namespace Humpback.Parts {
 
                 //add some timestamps?
                 if (op.create_table.timestamps != null) {
-                    columns += "\n\t, CreatedOn datetime DEFAULT getutcdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getutcdate() NOT NULL";
+                    columns += sql_fs_Timestamps;
                 }
 
                 //make sure we have a PK :)
                 if (!columns.Contains("PRIMARY KEY") & !columns.Contains("IDENTITY")) {
-                    columns = "Id int PRIMARY KEY IDENTITY(1,1) NOT NULL \n\t" + columns;
+                    columns = sql_fs_primary_key + columns;
                 } else {
                     foreach (var col in op.create_table.columns) {
                         if (col.type.ToString() == "pk") {
@@ -220,26 +284,26 @@ namespace Humpback.Parts {
                     }
                 }
                 columns = StripLeadingComma(columns);
-                result = string.Format("CREATE TABLE [{0}]\r\n\t ({1}) ", op.create_table.name, columns);
+                result = string.Format(sql_fs_create_table, op.create_table.name, columns);
 
                 //DROP 
             } else if (op.drop_table != null) {
-                return "DROP TABLE [" + op.drop_table + "]";
+                return string.Format(sql_fs_drop_table,op.drop_table);
                 //ADD COLUMN
             } else if (op.add_column != null) {
-                result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.table,op.add_column.columns)));
+                result = string.Format(sql_fs_alter_table_add_column, op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.table, op.add_column.columns)));
                 //DROP COLUMN
             } else if (op.remove_column != null) {
-                result = string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", op.remove_column.table, op.remove_column.column);
+                result = string.Format(sql_fs_alter_table_drop_column, op.remove_column.table, op.remove_column.column);
                 //CHANGE
             } else if (op.change_column != null) {
-                result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.table,op.change_column.columns)));
+                result = string.Format(sql_fs_alter_table_alter_column, op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.table, op.change_column.columns)));
                 //ADD INDEX
             } else if (op.add_index != null) {
-                result = string.Format("CREATE NONCLUSTERED INDEX [{0}] ON [{1}] ({2} )", CreateIndexName(op.add_index), op.add_index.table_name, CreateIndexColumnString(op.add_index.columns));
+                result = string.Format(sql_fs_add_index, CreateIndexName(op.add_index), op.add_index.table_name, CreateIndexColumnString(op.add_index.columns));
                 //REMOVE INDEX
             } else if (op.remove_index != null) {
-                result = string.Format("DROP INDEX [{0}].[{1}]", op.remove_index.table_name, CreateIndexName(op.remove_index));
+                result = string.Format(sql_fs_drop_index, op.remove_index.table_name, CreateIndexName(op.remove_index));
             } else if (op.execute != null) {
                 result = op.execute;
             } else if (op.file != null) {
@@ -265,18 +329,18 @@ namespace Humpback.Parts {
         /// <summary>
         /// If a "down" isn't declared, this handy function will try and figure it out for you
         /// </summary>
-        static string ReadMinds(dynamic up) {
+        public string ReadMinds(dynamic up) {
             //CREATE
             if (up.create_table != null) {
-                return string.Format("DROP TABLE [{0}]", up.create_table.name);
+                return string.Format(sql_fs_drop_table, up.create_table.name);
                 //DROP COLUMN
             }
             if (up.add_column != null) {
-                return string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", up.add_column, up.add_column.columns[0].name);
+                return string.Format(sql_fs_alter_table_drop_column, up.add_column.table, up.add_column.columns[0].name);
             }
             if (up.add_index != null) {
                 // DROP INDEX
-                return string.Format("DROP INDEX {0}.{1}", up.add_index.table_name, CreateIndexName(up.add_index));
+                return string.Format(sql_fs_drop_index, up.add_index.table_name, CreateIndexName(up.add_index));
             }
             return "";
 

@@ -156,6 +156,29 @@ namespace Humpback.Tests
             Assert.IsTrue(file_writer.FileContents.Contains("up"));
             Assert.IsTrue(file_writer.FileContents.Contains("first_name"));
         }
+
+        [TestMethod()]
+        public void GeneratorAddSingleColumnTest_Escaped_To() {
+            Configuration configuration = new Configuration(new[] { "-g", "addcustomer_name_to_Users" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
+            target.Execute();
+            Assert.IsTrue(file_writer.FileName.Contains("Users"));
+            Assert.IsTrue(file_writer.FileName.Contains("AddColumn"));
+            Assert.IsTrue(file_writer.FileContents.Contains("add_column"));
+            Assert.IsTrue(file_writer.FileContents.Contains("up"));
+            Assert.IsTrue(file_writer.FileContents.Contains("customer_name"));
+        }
+
+        [TestMethod()]
+        public void GeneratorAddSingleColumnTestDuplicateTo() {
+            Configuration configuration = new Configuration(new[] { "-g", "addcustomernametoUsers" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
+            target.Execute();
+            Assert.IsNull(file_writer.FileContents);
+        }
+
         [TestMethod()]
         public void GeneratorAddMultipleColumnTest() {
             Configuration configuration = new Configuration(new[] { "-g", "addfirst_nametoUsers", "first_name:string", "last_name:string" });

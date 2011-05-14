@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.SqlServer.Management.Common;
+using Configuration = Humpback.ConfigurationOptions.Configuration;
+using Settings = Humpback.ConfigurationOptions.Settings;
 
 namespace Humpback.Parts {
     public class SQLDatabaseProvider : IDatabaseProvider {
@@ -25,34 +29,44 @@ namespace Humpback.Parts {
         }
 
         public void UpdateMigrationVersion(int number) {
-                ExecuteCommand(_sql_formatter.sqlUpdateSchemaInfo(number));
+                ExecuteCommand(_sql_formatter.sql_update_schema_info(number));
         }
 
         public int ExecuteUpCommand(dynamic up) {
+
             var sql = _sql_formatter.GenerateSQLUp(up);
-            using (var connection = GetOpenConnection()) {
-                var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
-
-                var cmd = connection.CreateCommand();
-                cmd.Transaction = transaction;
-                try {
-                    foreach (var s in sql) {
-
-                        if (_configuration.Verbose) {
-                            Console.WriteLine("Executing SQL: " + s);
-                        }
-                        cmd.CommandText = s;
-                        cmd.ExecuteNonQuery();
-                    }
-                    transaction.Commit();
-                } catch {
-                    transaction.Rollback();
-                    throw;
-                } finally {
-                    connection.Close();
+            // test for file
+            if (up.up.file != null) {
+                using (var conn = GetOpenConnection()) {
+                    var server = new Server(new ServerConnection(conn));
+                    server.ConnectionContext.ExecuteNonQuery(sql[0]);
                 }
+                return 1;
+            } else {
+                using (var connection = GetOpenConnection()) {
+                    var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
+
+                    var cmd = connection.CreateCommand();
+                    cmd.Transaction = transaction;
+                    try {
+                        foreach (var s in sql) {
+
+                            if (_configuration.Verbose) {
+                                Console.WriteLine("Executing SQL: " + s);
+                            }
+                            cmd.CommandText = s;
+                            cmd.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    } catch {
+                        transaction.Rollback();
+                        throw;
+                    } finally {
+                        connection.Close();
+                    }
+                }
+                return sql.Length;
             }
-            return sql.Length;
         }
         public int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
@@ -94,11 +108,12 @@ namespace Humpback.Parts {
                 }
             }
         }
+        
         public int GetMigrationVersion() {
             try {
                 using (var connection = GetOpenConnection()) {
                     using (var cmd = connection.CreateCommand()) {
-                        cmd.CommandText = _sql_formatter.sqlGetSchemaInfo;
+                        cmd.CommandText = _sql_formatter.sql_get_schema_info;
                         var reader = cmd.ExecuteReader();
                         if (reader.HasRows && reader.Read()) {
                             var rv = reader.GetInt32(0);
@@ -108,7 +123,7 @@ namespace Humpback.Parts {
 
                         reader.Close();
                         using (var cmd_init = connection.CreateCommand()) {
-                            cmd_init.CommandText = _sql_formatter.sqlInitializeSchemaInfo;
+                            cmd_init.CommandText = _sql_formatter.sql_initialize_schema_info;
                             cmd.ExecuteNonQuery();
                         }
                         return 0;
@@ -124,10 +139,10 @@ namespace Humpback.Parts {
 
         private void EnsureSchemaInfo() {
             try {
-                ExecuteCommand(_sql_formatter.sqlGetSchemaInfo);
+                ExecuteCommand(_sql_formatter.sql_get_schema_info);
             } catch {
-                ExecuteCommand(_sql_formatter.sqlCreateSchemaInfoTable);
-                ExecuteCommand(_sql_formatter.sqlInitializeSchemaInfo);
+                ExecuteCommand(_sql_formatter.sql_create_schema_info_table);
+                ExecuteCommand(_sql_formatter.sql_initialize_schema_info);
             }
         }
 

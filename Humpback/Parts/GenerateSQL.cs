@@ -89,10 +89,10 @@ namespace Humpback.Parts {
                 dynamic migration_object = Helpers.DeserializeMigration(this_migration_contents);
                 var commands = _sql_formatter.GenerateSQLUp(migration_object);
                 if(commands.Length == 1 ) {
-                    sql_commands.Add(_sql_formatter.SqlFileName(migration.Value), commands[0]);
+                    sql_commands.Add(_sql_formatter.sql_file_name(migration.Value), commands[0]);
                 } else {
                     for (int i = 0; i < commands.Length; i++) {
-                        sql_commands.Add(_sql_formatter.SqlFileName(migration.Value) + "." + (i+1).ToString("000"), commands[i]);
+                        sql_commands.Add(_sql_formatter.sql_file_name(migration.Value) + "." + (i+1).ToString("000"), commands[i]);
                     }
                 }
                 
@@ -120,7 +120,7 @@ namespace Humpback.Parts {
 
             } else {
                 foreach (var cmd in sql_commands) {
-                    string file_name = _sql_formatter.SqlFileName(cmd.Key);
+                    string file_name = _sql_formatter.sql_file_name(cmd.Key);
                     string sql_out = string.Format("{0}{0}{1}{0}{0}{0}", Environment.NewLine, cmd.Value);
                     WriteOutput(sql_out, file_name);
                 }

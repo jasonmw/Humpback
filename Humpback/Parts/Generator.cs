@@ -40,6 +40,7 @@ namespace Humpback.Parts {
                 GenerateAction = GenerateActionType.File;
             } else if (generate_string_upper.StartsWith("ADD")) {
 
+
                 // check for keywords
                 if (generate_string_upper.StartsWith("ADDINDEXTO")) {
                     GenerateAction = GenerateActionType.AddIndex;
@@ -173,9 +174,26 @@ namespace Humpback.Parts {
         public void AddColumn() {
             string table_name = "";
             string generate_string_upper = _configuration.GenerateString.ToUpperInvariant();
-            if (generate_string_upper.StartsWith("ADD") && generate_string_upper.Contains("TO")) {
-                int ix = generate_string_upper.IndexOf("TO"); // TODO: substring matching issue: could be an issue here when this sequence is in the tablename, could go from end, but then column name has same issue.
+            int esc_to_count = Regex.Matches(generate_string_upper, "_TO_").Count;
+            int to_count = Regex.Matches(generate_string_upper, "TO").Count;
+            string column_name = "";
+            if (esc_to_count == 1) {
+                int ix = generate_string_upper.IndexOf("_TO_"); // TODO: substring matching issue: could be an issue here when this sequence is in the tablename, could go from end, but then column name has same issue.
+                table_name = _configuration.GenerateString.Substring(ix + 4);
+                column_name = _configuration.GenerateString.Substring(3, ix - 3);
+            } else if (to_count > 1) {
+                Console.WriteLine("Humpback is trying to help you.");
+                Console.WriteLine(
+                    "You Are attempting to add a column to a table, but the letters 'TO' occur in the column name or the table name");
+                Console.WriteLine(
+                    "You need to use _TO_ with underscores to explicitly specify which to to split the column and table names");
+                Console.WriteLine("For instance AddCustomerName_TO_Orders");
+                Console.WriteLine("Migration NOT Created");
+                return;
+            } else if (generate_string_upper.StartsWith("ADD") && generate_string_upper.Contains("TO")) {
+                int ix = generate_string_upper.IndexOf("TO");
                 table_name = _configuration.GenerateString.Substring(ix + 2);
+                column_name = _configuration.GenerateString.Substring(3, ix - 3);
             }
 
             var column_dictionary = GenerateColumns();
@@ -187,7 +205,6 @@ namespace Humpback.Parts {
                 if (generate_string_upper.StartsWith("ADD") && generate_string_upper.Contains("TO")) {
                     string s = _configuration.GenerateString.Substring(3);
                     int ix = s.ToUpperInvariant().IndexOf("TO");
-                    var column_name = s.Substring(0, ix);
                     columns.Add(new { name = column_name, @type = "string" });
                 } else {
                     columns.Add(new {name = "add_column_name_here", @type = "string"});

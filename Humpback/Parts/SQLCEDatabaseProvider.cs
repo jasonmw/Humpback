@@ -26,7 +26,7 @@ namespace Humpback.Parts {
         }
 
         public void UpdateMigrationVersion(int number) {
-                ExecuteCommand(_sql_formatter.sqlUpdateSchemaInfo(number));
+                ExecuteCommand(_sql_formatter.sql_update_schema_info(number));
         }
 
         public int ExecuteUpCommand(dynamic up) {
@@ -99,7 +99,7 @@ namespace Humpback.Parts {
             try {
                 using (var connection = GetOpenConnection()) {
                     using (var cmd = connection.CreateCommand()) {
-                        cmd.CommandText = _sql_formatter.sqlGetSchemaInfo;
+                        cmd.CommandText = _sql_formatter.sql_get_schema_info;
                         var reader = cmd.ExecuteReader();
                         if (reader.HasRows && reader.Read()) {
                             var rv = reader.GetInt32(0);
@@ -109,7 +109,7 @@ namespace Humpback.Parts {
 
                         reader.Close();
                         using (var cmd_init = connection.CreateCommand()) {
-                            cmd_init.CommandText = _sql_formatter.sqlInitializeSchemaInfo;
+                            cmd_init.CommandText = _sql_formatter.sql_initialize_schema_info;
                             cmd.ExecuteNonQuery();
                         }
                         return 0;
@@ -125,10 +125,10 @@ namespace Humpback.Parts {
 
         private void EnsureSchemaInfo() {
             try {
-                ExecuteCommand(_sql_formatter.sqlGetSchemaInfo);
+                ExecuteCommand(_sql_formatter.sql_get_schema_info);
             } catch {
-                ExecuteCommand(_sql_formatter.sqlCreateSchemaInfoTable);
-                ExecuteCommand(_sql_formatter.sqlInitializeSchemaInfo);
+                ExecuteCommand(_sql_formatter.sql_create_schema_info_table);
+                ExecuteCommand(_sql_formatter.sql_initialize_schema_info);
             }
         }
 
