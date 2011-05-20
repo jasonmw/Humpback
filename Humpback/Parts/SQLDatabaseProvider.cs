@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using Humpback.Interfaces;
-using Microsoft.SqlServer.Management.Smo;
-using Microsoft.SqlServer.Management.Common;
 using Configuration = Humpback.ConfigurationOptions.Configuration;
 using Settings = Humpback.ConfigurationOptions.Settings;
 
 namespace Humpback.Parts {
     public class SQLDatabaseProvider : IDatabaseProvider {
 
-        private ConfigurationOptions.Configuration _configuration;
+        private Configuration _configuration;
         private Settings _settings;
         private ISqlFormatter _sql_formatter;
 
@@ -36,11 +36,8 @@ namespace Humpback.Parts {
 
             var sql = _sql_formatter.GenerateSQLUp(up);
             // test for file
-            if (up.up.file != null) {
-                using (var conn = GetOpenConnection()) {
-                    var server = new Server(new ServerConnection(conn));
-                    server.ConnectionContext.ExecuteNonQuery(sql[0]);
-                }
+            if (up.up.filesmo != null) {
+                ExecuteSmo(_settings.ConnectionString(), sql[0]);
                 return 1;
             } else {
                 using (var connection = GetOpenConnection()) {
@@ -68,30 +65,68 @@ namespace Humpback.Parts {
                 return sql.Length;
             }
         }
+
+        // due to dependency, kinda pulling this out on an as needed basis
+        // this way if someone doenst' have smo, and doesnt try to call, never has an issue.
+        private int ExecuteSmo(string connection_string, string sql) {
+            // Smo.Executor.Execute(_settings.ConnectionString(), sql[0]);
+            if(smo_assembly == null) {
+                load_smo_assembly();
+            }
+            var Executor = smo_assembly.GetType("Humpback.Smo.Executor");
+            var Execute = Executor.GetMethod("Execute");
+            return (int)Execute.Invoke(null, new[] { connection_string, sql });
+        }
+
+        private void load_smo_assembly() {
+            var _assembly = Assembly.GetExecutingAssembly();
+            using(var resource_stream = _assembly.GetManifestResourceStream("Humpback.Artifacts.Humpback.Smo.dll")) {
+                smo_assembly = Assembly.Load(ReadFully(resource_stream));
+            }
+        }
+
+        // Thank you Jon Skeet!  http://stackoverflow.com/questions/221925/creating-a-byte-array-from-a-stream/221941#221941
+        public static byte[] ReadFully(Stream input) {
+            var buffer = new byte[16 * 1024];
+            using (var ms = new MemoryStream()) {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0) {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+        private Assembly smo_assembly;
+
         public int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
-            using (var connection = GetOpenConnection()) {
-                var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                var cmd = connection.CreateCommand();
-                cmd.Transaction = transaction;
-                try {
-                    foreach (var s in sql) {
+            if (down.down.filesmo != null) {
+                ExecuteSmo(_settings.ConnectionString(), sql[0]);
+                return 1;
+            } else {
+                using (var connection = GetOpenConnection()) {
+                    var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                    var cmd = connection.CreateCommand();
+                    cmd.Transaction = transaction;
+                    try {
+                        foreach (var s in sql) {
 
-                        if (_configuration.Verbose) {
-                            Console.WriteLine("Executing SQL: " + s);
+                            if (_configuration.Verbose) {
+                                Console.WriteLine("Executing SQL: " + s);
+                            }
+                            cmd.CommandText = s;
+                            cmd.ExecuteNonQuery();
                         }
-                        cmd.CommandText = s;
-                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    } catch {
+                        transaction.Rollback();
+                        throw;
+                    } finally {
+                        connection.Close();
                     }
-                    transaction.Commit();
-                } catch {
-                    transaction.Rollback();
-                    throw;
-                } finally {
-                    connection.Close();
                 }
+                return sql.Length;
             }
-            return sql.Length;
         }
 
         private int ExecuteCommand(string command) {

@@ -155,7 +155,8 @@ namespace Humpback.ConfigurationOptions {
     }
 
     public enum GenerateActionType {
-        Empty, AddTable, RemoveTable, AddColumn, ChangeColumn, RemoveColumn, AddIndex, RemoveIndex, Sql, File
+        Empty, AddTable, RemoveTable, AddColumn, ChangeColumn, RemoveColumn, AddIndex, RemoveIndex, Sql, File,
+        FileSmo
     }
     public enum RunActionType {
         Up, Down

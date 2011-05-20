@@ -38,6 +38,8 @@ namespace Humpback.Parts {
                 GenerateAction = GenerateActionType.Sql;
             } else if (generate_string.Equals("FILE", ignore_case)) {
                 GenerateAction = GenerateActionType.File;
+            } else if (generate_string.Equals("SMO", ignore_case) || generate_string.Equals("FILESMO", ignore_case)) {
+                GenerateAction = GenerateActionType.FileSmo;
             } else if (generate_string_upper.StartsWith("ADD")) {
 
 
@@ -100,6 +102,9 @@ namespace Humpback.Parts {
                     break;
                 case GenerateActionType.File:
                     File();
+                    break;
+                case GenerateActionType.FileSmo:
+                    FileSmo();
                     break;
             }
         }
@@ -310,6 +315,33 @@ namespace Humpback.Parts {
             }
             string text_path = sql_file_path_relative.Replace("..\\", "");
             dynamic up = new { file =  sql_file_path_relative };
+            dynamic output_object = new { up };
+            _file_writer.WriteFile(sql_file_path, "-- Execute SQLFile Migration " + text_path);
+            CreateFile("SQLFile_" + String.Join("_", GenerateColumns().Keys), output_object);
+            Console.WriteLine("Generating Migration " + text_path);
+            Console.WriteLine(Helpers.Json(output_object));
+        }
+        public void FileSmo() {
+
+            string sql_file_path_relative = "..\\sql\\" + String.Join("_", GenerateColumns().Keys);
+            string sql_file_path = Path.Combine(_settings.MigrationsFolder(), sql_file_path_relative);
+
+            if (!sql_file_path.ToUpperInvariant().EndsWith(".SQL")) {
+                sql_file_path += ".sql";
+                sql_file_path_relative += ".sql";
+            }
+            int counter = 0;
+            while (_file_writer.FileExists(sql_file_path)) { // TODO: This is messy and unreadable, come back and make nice.
+                if (counter == 0) {
+                    sql_file_path = sql_file_path.Replace(".sql", ++counter + ".sql");
+                    sql_file_path_relative = sql_file_path_relative.Replace(".sql", counter + ".sql");
+                } else {
+                    sql_file_path = sql_file_path.Replace(counter++ + ".sql", counter + ".sql");
+                    sql_file_path_relative = sql_file_path_relative.Replace((counter - 1) + ".sql", counter + ".sql");
+                }
+            }
+            string text_path = sql_file_path_relative.Replace("..\\", "");
+            dynamic up = new { filesmo = sql_file_path_relative };
             dynamic output_object = new { up };
             _file_writer.WriteFile(sql_file_path, "-- Execute SQLFile Migration " + text_path);
             CreateFile("SQLFile_" + String.Join("_", GenerateColumns().Keys), output_object);

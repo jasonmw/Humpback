@@ -308,6 +308,8 @@ namespace Humpback.Parts {
                 result = op.execute;
             } else if (op.file != null) {
                 result = File.ReadAllText(Path.Combine(_settings.SqlFileFolder(), op.file));
+            } else if (op.filesmo != null) {
+                result = File.ReadAllText(Path.Combine(_settings.SqlFileFolder(), op.filesmo));
             }
 
             return result;
