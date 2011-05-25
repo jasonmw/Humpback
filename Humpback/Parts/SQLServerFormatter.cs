@@ -232,13 +232,27 @@ namespace Humpback.Parts {
         // wrapped the get command to accomodate optional arrays of operations OR just a single op
         private IEnumerable<string> GetCommands(dynamic op) {
             _commands_to_add = new List<string>();
-            if (op.Count != null) {
-                foreach (var iter_op in op) {
-                    yield return GetCommand(iter_op);
-                }
-            } else {
-                yield return GetCommand(op);
+
+            bool failed_count = false;
+
+            try {
+                var isnull = op.Count != null;
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
+                failed_count = true;
             }
+
+            if (failed_count) {
+                yield return GetCommand(op);
+            } else {
+                if (op.Count != null) {
+                    foreach (var iter_op in op) {
+                        yield return GetCommand(iter_op);
+                    }
+                } else {
+                    yield return GetCommand(op);
+                }
+            }
+
             if (_commands_to_add.Count > 0) { // post main commands here, i.e. FK's
                 foreach (var cmd in _commands_to_add) {
                     yield return cmd;
@@ -288,7 +302,7 @@ namespace Humpback.Parts {
 
                 //DROP 
             } else if (op.drop_table != null) {
-                return string.Format(sql_fs_drop_table,op.drop_table);
+                return string.Format(sql_fs_drop_table, op.drop_table);
                 //ADD COLUMN
             } else if (op.add_column != null) {
                 result = string.Format(sql_fs_alter_table_add_column, op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.table, op.add_column.columns)));

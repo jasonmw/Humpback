@@ -15,7 +15,7 @@ namespace Humpback.Parts {
 
         private Configuration _configuration;
         private Settings _settings;
-        private ISqlFormatter _sql_formatter;
+        protected ISqlFormatter _sql_formatter;
 
         private SqlConnection GetOpenConnection() {
             var rv = new SqlConnection(_settings.ConnectionString());
@@ -32,11 +32,18 @@ namespace Humpback.Parts {
                 ExecuteCommand(_sql_formatter.sql_update_schema_info(number));
         }
 
-        public int ExecuteUpCommand(dynamic up) {
+        public virtual int ExecuteUpCommand(dynamic up) {
 
             var sql = _sql_formatter.GenerateSQLUp(up);
             // test for file
-            if (up.up.filesmo != null) {
+            bool has_filesmo = false;
+            try {
+                bool fsmo = up.up.filesmo != null;
+                has_filesmo = true;
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
+                
+            }
+            if (has_filesmo) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);
                 return 1;
             } else {
@@ -98,7 +105,7 @@ namespace Humpback.Parts {
         }
         private Assembly smo_assembly;
 
-        public int ExecuteDownCommand(dynamic down) {
+        public virtual int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
             if (down.down.filesmo != null) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);
@@ -129,7 +136,7 @@ namespace Humpback.Parts {
             }
         }
 
-        private int ExecuteCommand(string command) {
+        protected virtual int ExecuteCommand(string command) {
             if (string.IsNullOrWhiteSpace(command)) {
                 return 0;
             }

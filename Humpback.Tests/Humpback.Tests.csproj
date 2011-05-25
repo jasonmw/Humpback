@@ -57,7 +57,9 @@
     <Compile Include="DynamicTests.cs" />
     <Compile Include="GeneratorTest.cs" />
     <Compile Include="Impl\TestFileWriter.cs" />
+    <Compile Include="Impl\TestSQLDatabaseProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLGeneratorTests.cs" />
     <Compile Include="SQLServerFormatterTest.cs" />
     <Compile Include="TestHelpers.cs" />
   </ItemGroup>
