@@ -44,7 +44,7 @@ namespace Humpback.Tests.Impl {
 
         public virtual int ExecuteDownCommand(dynamic down) {
 
-            var sql = _sql_formatter.GenerateSQLUp(down);
+            var sql = _sql_formatter.GenerateSQLDown(down);
             // test for file
             bool has_filesmo = false;
             try {

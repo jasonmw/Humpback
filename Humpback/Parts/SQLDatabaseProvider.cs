@@ -107,7 +107,14 @@ namespace Humpback.Parts {
 
         public virtual int ExecuteDownCommand(dynamic down) {
             var sql = _sql_formatter.GenerateSQLDown(down);
-            if (down.down.filesmo != null) {
+            bool has_filesmo = false;
+            try {
+                bool fsmo = down.down.filesmo != null;
+                has_filesmo = true;
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
+
+            }
+            if (has_filesmo) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);
                 return 1;
             } else {
