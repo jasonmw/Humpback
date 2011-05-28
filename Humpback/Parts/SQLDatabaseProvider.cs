@@ -40,8 +40,8 @@ namespace Humpback.Parts {
             try {
                 bool fsmo = up.up.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
-                
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+                // intentionally let thru, no smo object
             }
             if (has_filesmo) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);
@@ -111,8 +111,8 @@ namespace Humpback.Parts {
             try {
                 bool fsmo = down.down.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
-
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+                // intentionally let thru, no smo object
             }
             if (has_filesmo) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);

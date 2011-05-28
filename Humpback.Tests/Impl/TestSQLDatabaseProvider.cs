@@ -19,7 +19,7 @@ namespace Humpback.Tests.Impl {
         public string LastCommand { get; private set; }
 
 
-        public virtual int ExecuteUpCommand(dynamic up) {
+        public new virtual int ExecuteUpCommand(dynamic up) {
 
             var sql = _sql_formatter.GenerateSQLUp(up);
             // test for file
@@ -27,8 +27,8 @@ namespace Humpback.Tests.Impl {
             try {
                 bool fsmo = up.up.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
-
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+                // intentionally let thru, no smo object
             }
             if (has_filesmo) {
                 LastCommand = sql[0];
@@ -42,7 +42,7 @@ namespace Humpback.Tests.Impl {
             return 1;
         }
 
-        public virtual int ExecuteDownCommand(dynamic down) {
+        public new virtual int ExecuteDownCommand(dynamic down) {
 
             var sql = _sql_formatter.GenerateSQLDown(down);
             // test for file
@@ -50,8 +50,8 @@ namespace Humpback.Tests.Impl {
             try {
                 bool fsmo = down.down.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
-
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+                // intentionally let thru, no smo object
             }
             if (has_filesmo) {
                 LastCommand = sql[0];

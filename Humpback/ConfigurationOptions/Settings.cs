@@ -181,11 +181,30 @@ namespace Humpback.ConfigurationOptions {
             }
         }
 
+
         private static string settings_file_path {
             get {
-                var path = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-                return Path.Combine(path, "settings.js");
+                // if local exists, use it, otherwise return the Application Settings Version
+                return local_settings_file_if_exists() ?? application_settings_file_path();
             }
+        }
+
+        private static string application_settings_file_path() {
+            var app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            var app_settings_path = Path.Combine(app_data_path, "humpback");
+            var app_settings_file_path = Path.Combine(app_settings_path, "settings.js");
+            if(!Directory.Exists(app_settings_path)) {
+                Directory.CreateDirectory(app_settings_path);
+            }
+            return app_settings_file_path;
+        }
+        private static string local_settings_file_if_exists() {
+            var current_path = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
+            var local_file_path = Path.Combine(current_path, "settings.js");
+            if (File.Exists(local_file_path)) {
+                return local_file_path;
+            }
+            return null;
         }
     }
 }

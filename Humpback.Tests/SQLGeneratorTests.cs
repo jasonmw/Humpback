@@ -90,7 +90,6 @@ namespace Humpback.Tests {
             _database_provider.ExecuteDownCommand(migration_object);
             Assert.AreEqual("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
 
-
         }
 
 

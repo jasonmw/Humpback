@@ -237,7 +237,7 @@ namespace Humpback.Parts {
 
             try {
                 var isnull = op.Count != null;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException rbex) {
+            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
                 failed_count = true;
             }
 
