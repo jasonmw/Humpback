@@ -39,7 +39,7 @@ namespace Humpback.Parts {
             bool has_filesmo = false;
             try {
                 bool fsmo = up.up.filesmo != null;
-                has_filesmo = true;
+                has_filesmo = fsmo;
             } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
                 // intentionally let thru, no smo object
             }
