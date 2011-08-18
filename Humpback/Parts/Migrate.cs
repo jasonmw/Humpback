@@ -28,6 +28,9 @@ namespace Humpback.Parts {
         public void Execute() {
             int top_migration = _migration_provider.GetMigrations().Max(m => m.Key);
             int current_migration = _migration_provider.DatabaseMigrationNumber();
+            if(current_migration > top_migration) {
+                current_migration = top_migration;
+            }
 
             if(_configuration.All) {
                 MigrateTo(top_migration);
@@ -53,6 +56,9 @@ namespace Humpback.Parts {
             var migrations = _migration_provider.GetMigrations();
             int current = _migration_provider.DatabaseMigrationNumber();
 
+            if (migrations.Count < current) {
+                current = migrations.Count;
+            }
             if(migration > migrations.Max(m => m.Key) || migration < 0) {
                 Console.WriteLine("Invalid Migration");
                 return;

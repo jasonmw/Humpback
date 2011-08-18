@@ -32,18 +32,18 @@ namespace Humpback {
                     _humpback_command = new Help(_configuration);
                 } else if (_configuration.Generate) {
                     Console.WriteLine("current project: " + _settings.CurrentProject);
-                    _settings.ensure_directories();
+                    _settings.EnsureDirectories();
                     _humpback_command = new Generator(_configuration, _settings, _file_writer);
                 } else if (_configuration.List) {
-                    _settings.ensure_directories();
+                    _settings.EnsureDirectories();
                     _humpback_command = new MigrationViewer(_configuration,_migration_provider);
                 } else if (_configuration.Migrate) {
                     Console.WriteLine("current project: " + _settings.CurrentProject);
-                    _settings.ensure_directories();
+                    _settings.EnsureDirectories();
                     _humpback_command = new Migrate(_configuration, _database_provider, _migration_provider);
                 } else if (_configuration.Sql) {
                     Console.WriteLine("current project: " + _settings.CurrentProject);
-                    _settings.ensure_directories();
+                    _settings.EnsureDirectories();
                     _humpback_command = new GenerateSQL(_configuration, _settings, _sql_formatter, _file_writer, _migration_provider);
                 } else if(_configuration.Env) {
                     _humpback_command = new SettingsActions(_configuration, _settings);

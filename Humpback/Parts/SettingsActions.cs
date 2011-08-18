@@ -48,6 +48,7 @@ Humpback Migration Settings
                     _current_settings.SetCurrent(_configuraion.set_current_settings);
                     Console.WriteLine("new current project: " + _configuraion.set_current_settings.ToLower());
                 }
+            Console.WriteLine("Settings file " + Settings.SettingsFilePath);
             foreach(var setting in _current_settings.Projects) {
                 if (setting.name == _current_settings.CurrentProject) {
                     Console.Write(setting.name);

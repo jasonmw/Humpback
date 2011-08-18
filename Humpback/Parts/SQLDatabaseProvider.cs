@@ -106,6 +106,9 @@ namespace Humpback.Parts {
         private Assembly smo_assembly;
 
         public virtual int ExecuteDownCommand(dynamic down) {
+            if(down.down == null) {
+                return 0;
+            }
             var sql = _sql_formatter.GenerateSQLDown(down);
             bool has_filesmo = false;
             try {

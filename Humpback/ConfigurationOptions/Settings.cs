@@ -22,12 +22,12 @@ namespace Humpback.ConfigurationOptions {
         }
 
         public static Settings Load() {
-            if (!File.Exists(settings_file_path)) {
+            if (!File.Exists(SettingsFilePath)) {
                 var settings = create("default");
                 settings.save();
                 return settings;
             }
-            var json = File.ReadAllText(settings_file_path);
+            var json = File.ReadAllText(SettingsFilePath);
             var serializer = new JavaScriptSerializer();
             return (Settings)serializer.Deserialize(json, typeof(Settings));
         }
@@ -96,7 +96,7 @@ namespace Humpback.ConfigurationOptions {
             save();
         }
 
-        public void SetFlavor(string new_flavor) {
+        internal void SetFlavor(string new_flavor) {
             if (string.IsNullOrWhiteSpace(new_flavor)) {
                 throw new InvalidDataException("please specify a flavor with some printable characters.");
             }
@@ -108,7 +108,7 @@ namespace Humpback.ConfigurationOptions {
             save();
         }
 
-        public void AddProject(string project_name) {
+        internal void AddProject(string project_name) {
             if (string.IsNullOrWhiteSpace(project_name)) {
                 throw new InvalidOperationException("No current project specified.");
             }
@@ -127,7 +127,7 @@ namespace Humpback.ConfigurationOptions {
             save();
         }
 
-        public void Remove(string project_name) {
+        internal void Remove(string project_name) {
             Projects = Projects.Where(p => p.name != project_name.ToLower()).ToArray();
             if(CurrentProject == project_name.ToLower()) {
                 CurrentProject = "";
@@ -162,14 +162,19 @@ namespace Humpback.ConfigurationOptions {
         }
 
         private void save() {
-            var file_path = settings_file_path;
+            var file_path = SettingsFilePath;
+            var fi = new FileInfo(file_path);
+            if (!fi.Directory.Exists) {
+                Directory.CreateDirectory(fi.Directory.FullName);
+            }
+
             var serializer = new JavaScriptSerializer();
             var output = serializer.Serialize(this);
             File.WriteAllText(file_path, output, Encoding.UTF8);
-            ensure_directories();
+            EnsureDirectories();
         }
 
-        internal void ensure_directories() {
+        internal void EnsureDirectories() {
             if (!Directory.Exists(MigrationsFolder())) {
                 Directory.CreateDirectory(MigrationsFolder());
             }
@@ -182,7 +187,7 @@ namespace Humpback.ConfigurationOptions {
         }
 
 
-        private static string settings_file_path {
+        internal static string SettingsFilePath {
             get {
                 // if local exists, use it, otherwise return the Application Settings Version
                 return local_settings_file_if_exists() ?? application_settings_file_path();
@@ -193,9 +198,6 @@ namespace Humpback.ConfigurationOptions {
             var app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             var app_settings_path = Path.Combine(app_data_path, "humpback");
             var app_settings_file_path = Path.Combine(app_settings_path, "settings.js");
-            if(!Directory.Exists(app_settings_path)) {
-                Directory.CreateDirectory(app_settings_path);
-            }
             return app_settings_file_path;
         }
         private static string local_settings_file_if_exists() {

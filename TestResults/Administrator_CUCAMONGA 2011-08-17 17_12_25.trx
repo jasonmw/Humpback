@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="30c39515-41d0-45eb-9c2f-dc5184495eac" name="Administrator@CUCAMONGA 2011-08-17 17:12:25" runUser="CUCAMONGA\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="0681059b-e24b-4aa4-a996-50077b927e98">
+    <Deployment runDeploymentRoot="Administrator_CUCAMONGA 2011-08-17 17_12_25">
+      <DeploymentItem filename="C:\Projects\Humpback\Humpback\bin\Debug\Hump.exe" />
+      <DeploymentItem filename="C:\Projects\Humpback\Humpback.Interfaces\bin\Debug\Humpback.Interfaces.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-08-17T17:12:25.8010326-07:00" queuing="2011-08-17T17:12:28.5101876-07:00" start="2011-08-17T17:12:28.6511957-07:00" finish="2011-08-17T17:12:34.1385095-07:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="70" executed="70" passed="70" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="HelpTest_H" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="92dbc9fd-8625-52e9-87e0-f4f933c33d3e">
+      <Execution id="93a1d0b5-a173-4aaa-b6fa-a8293f264db8" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpTest_H" />
+    </UnitTest>
+    <UnitTest name="BasicSqlTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="977522ec-36ab-7467-e984-16e06673af6f">
+      <Execution id="d0204d38-2b35-4d58-896e-e1b8af23fb5a" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicSqlTest" />
+    </UnitTest>
+    <UnitTest name="GeneratorFileTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="2a84bd86-8ca4-1eec-bb5f-cdc52d11f0ed">
+      <Execution id="51fd7a27-1be3-41d9-8e48-80500b9ebe9d" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorFileTest" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestSet" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="80d6448f-0f06-5c6f-9efd-c6199e7a4680">
+      <Execution id="dbb76a31-4155-42e8-80f5-162c7985e36a" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestSet" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="04f82181-a0a0-268d-8961-6593b0283527">
+      <Execution id="648fafd0-58ac-4287-a5e8-abafe1a47662" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTest" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddTableTestWithNullableAndDefault" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="932f94f6-db59-e4fb-db9c-4892e9feb731">
+      <Execution id="ae63b6e2-dcd1-4b19-8220-25b528686471" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddTableTestWithNullableAndDefault" />
+    </UnitTest>
+    <UnitTest name="TestForArray" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="08b5b9c9-6f47-d78c-ccbb-c81dcaf801d4">
+      <Execution id="6cb8e1f7-3f5a-4368-8f74-93d0144e3fe2" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.DynamicTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForArray" />
+    </UnitTest>
+    <UnitTest name="TestForTypeOfArray" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="20d19967-444e-dc24-b335-97edc08b5909">
+      <Execution id="acaf3f84-4ec5-4861-b7f7-3a06ad6e9ddb" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.DynamicTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForTypeOfArray" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddSingleColumnTest_Escaped_To" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="b5bbd01e-9ce5-7737-6c5e-33b038bbfcef">
+      <Execution id="cca2e43f-111d-4ee7-871c-a36ffe9c3056" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddSingleColumnTest_Escaped_To" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterChangeColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a8a040ac-527d-a3e5-eb1e-6eb6f9128096">
+      <Execution id="3db1b61e-7809-451c-bb51-fd4524af7d3b" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterChangeColumnTest" />
+    </UnitTest>
+    <UnitTest name="BasicListTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="16f64c72-025c-ebb3-6b93-684532a9fa63">
+      <Execution id="edb235fb-76f2-4a49-a0a0-9ab2aaa8b4c1" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicListTest" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterDropColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="6fa915c5-6ab5-24c3-610a-84f83ee2d7ae">
+      <Execution id="0c119fb5-44c7-443f-be90-de497470bf79" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterDropColumnTest" />
+    </UnitTest>
+    <UnitTest name="TestGeneratePlainSQLStringDown" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="f2fd06d6-bc32-5afa-9fd6-c66d5415c515">
+      <Execution id="cb49c97a-932e-41ff-afba-8b83e2f66de7" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLGeneratorTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestGeneratePlainSQLStringDown" />
+    </UnitTest>
+    <UnitTest name="GeneratorDropTable" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="058de0ad-729f-7726-204c-f9b6197ace80">
+      <Execution id="06e3e88f-95d2-4ce8-ae7d-6a0e22ec9499" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorDropTable" />
+    </UnitTest>
+    <UnitTest name="GeneratorSqlTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e7403101-b8a8-6884-112a-c39c176e3e12">
+      <Execution id="1ca22a9a-a55d-45ff-b108-7a2f68b31791" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorSqlTest" />
+    </UnitTest>
+    <UnitTest name="HelpTest_help" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="156e597f-0b1d-a2d7-359e-abcce95cc492">
+      <Execution id="811054ac-e8e8-4164-a737-7151c1adbb27" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpTest_help" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddTableTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="274b4467-35d6-4a34-11dc-f60e719c1a5c">
+      <Execution id="858b2fee-7e75-420d-813c-dd315838273a" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddTableTest" />
+    </UnitTest>
+    <UnitTest name="TestForString" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="d5cc0cd9-833d-a38d-dcfc-767927d698f4">
+      <Execution id="65ef7e72-9974-426c-a1e5-dcb658e1afdf" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.DynamicTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForString" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_RUN" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="bffd13bd-a98a-7359-d86a-98f61a84657f">
+      <Execution id="59243af6-8c33-49b7-a307-64daf514341c" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_RUN" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddTable1Column" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="d24e533b-e361-fd8b-5f8c-9fe89753d6c0">
+      <Execution id="58185afb-7846-4a04-b84c-52cb4653840e" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddTable1Column" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddIndexTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="c4268f76-efd3-124d-873f-390998bcba88">
+      <Execution id="077b61c4-d8c6-4086-8c7f-5f8aade15602" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddIndexTest" />
+    </UnitTest>
+    <UnitTest name="BasicSqlTest2" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a1158286-c9a0-d3c5-048f-b0851d3cf5b7">
+      <Execution id="3572e17e-e957-4f4c-a878-a8129d95a9c1" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicSqlTest2" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddReferenceColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="eea9a346-9943-e3ff-416c-0311a8030615">
+      <Execution id="1deafe28-6e17-4f5a-bb5d-c243287421d6" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddReferenceColumnTest" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_Generate" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="90590812-d0cd-47d6-f358-c315d0722334">
+      <Execution id="77f4fd11-5fc9-426e-b23f-9ce886e95cd8" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_Generate" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_Sql" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="5e541083-8183-1e9e-0c99-d0d43511a838">
+      <Execution id="d2ef4d0e-7e36-4796-a354-689573d45abb" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_Sql" />
+    </UnitTest>
+    <UnitTest name="GenerateTest_CreateTable" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="ada74037-4e7b-b673-a356-32752802c102">
+      <Execution id="156ccdcf-9056-480c-b1d8-3b0228720d4c" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GenerateTest_CreateTable" />
+    </UnitTest>
+    <UnitTest name="HelpTestDash" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="3aa6cae7-870d-5dc1-6dfc-f66069c5d485">
+      <Execution id="442309c9-567e-416c-9481-62877b5b9007" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpTestDash" />
+    </UnitTest>
+    <UnitTest name="HelpTest_h" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="0356bc7f-811f-e594-9294-69e99427592b">
+      <Execution id="30a4922e-2491-4235-a305-736b365fd24e" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpTest_h" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddTableNoColumnsSpecified" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e3d50d12-abab-4c5b-f710-5f3f1de8b01b">
+      <Execution id="819d5d90-5f5d-433c-aaf5-6476871860e1" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddTableNoColumnsSpecified" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddSingleColumnTestDuplicateTo" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="90f97baa-3070-9016-3865-a65e9e00b567">
+      <Execution id="9d2e39a9-e66c-4ea8-8f49-cc82d4a707f1" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddSingleColumnTestDuplicateTo" />
+    </UnitTest>
+    <UnitTest name="ConfigurationConstructorTestNullConstructorParam" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a48aa486-0eb9-1571-ae7a-ae83f5502512">
+      <Execution id="afcc992b-9b5d-4be4-b526-b5eba2f25935" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ConfigurationConstructorTestNullConstructorParam" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_L" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="70f03247-8a89-43a1-08ac-8bf7b89adba6">
+      <Execution id="150d1231-272c-4190-adaa-c2db5f0adb27" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_L" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestRemove" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="b8b4c87a-5edf-cb32-37de-b42575b67aae">
+      <Execution id="980a64bb-0edf-48b5-a6b4-02a43614073c" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestRemove" />
+    </UnitTest>
+    <UnitTest name="GeneratorDropIndexTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a32922e2-f1df-7982-29dc-57f3885bc9ec">
+      <Execution id="1292c9ec-8c78-41c8-83e3-aecc4490c97e" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorDropIndexTest" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddMultipleColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e3746a4e-3caf-94de-d5a9-64823fac0d7b">
+      <Execution id="18879980-4a85-4bc3-975d-7be23aeab399" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddMultipleColumnTest" />
+    </UnitTest>
+    <UnitTest name="TestGeneratePlainSQLStringArray" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="67302ab4-5dc8-75b9-8b54-6f42f8cae66b">
+      <Execution id="0b9092f6-a209-4de8-bb00-b1d22a86fcfe" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLGeneratorTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestGeneratePlainSQLStringArray" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_List" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="dbcb9613-54a5-05d2-9009-31ab037ddbcd">
+      <Execution id="9c0809a6-7a25-4426-bbf8-bfc9fc001202" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_List" />
+    </UnitTest>
+    <UnitTest name="BasicSqlTest3" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="9efa9754-2bd6-6a4e-e57a-a525ac22479a">
+      <Execution id="4cb35911-89cc-4428-b267-106eddcd25a9" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicSqlTest3" />
+    </UnitTest>
+    <UnitTest name="BasicGenerateTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="cc3c90a7-a6c8-747e-feb1-95a067a4287c">
+      <Execution id="cc2219b2-f301-4135-b095-aeec46e75a99" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicGenerateTest" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="7b132a8e-2b56-7bd7-f605-35a2acab7b8e">
+      <Execution id="801e91bd-1dce-499f-9400-fdee91069343" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddColumnTest" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestAdd" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="b2badb01-a4d3-5bb4-c5c8-e59600e727e6">
+      <Execution id="786b2263-da8a-480b-824e-61a15e0877e3" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestAdd" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddTableReferenceTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="d9c6079b-83c7-f50c-b1b8-59be9fe5c717">
+      <Execution id="57be2a59-a27e-4b29-874d-4f995cf44e23" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddTableReferenceTest" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterDropTableTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="9a492a35-95c4-81bf-5741-83962893c6bd">
+      <Execution id="97e0d870-690e-4d5e-aac4-8f9cc9a583ea" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterDropTableTest" />
+    </UnitTest>
+    <UnitTest name="TestForStringOnArray" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="8616b539-ff11-f5fa-cddc-12ec76c45a9e">
+      <Execution id="b312bb86-bea1-4d78-b32f-8f188c8692f2" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.DynamicTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForStringOnArray" />
+    </UnitTest>
+    <UnitTest name="GeneratorChangeMultipleColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="ac0c20c0-6966-79b8-4b6c-7c633eb53e87">
+      <Execution id="42ef4329-a8ef-486b-a5f8-f1e9f9c48e3b" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorChangeMultipleColumnTest" />
+    </UnitTest>
+    <UnitTest name="TestForArrayOnString" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="71dd6206-1db7-63ae-e0fc-471c5670527e">
+      <Execution id="09817fde-5ffb-412b-a909-f226b9d9cd51" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.DynamicTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForArrayOnString" />
+    </UnitTest>
+    <UnitTest name="TestGeneratePlainSQLString" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="44f823e3-baf8-a2f1-8bcb-877df097c535">
+      <Execution id="2f5b15ee-cba1-454f-b47a-36136e10cbe5" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLGeneratorTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestGeneratePlainSQLString" />
+    </UnitTest>
+    <UnitTest name="ConfigurationConstructorTestDefaultConstructor" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="561a8314-b780-173e-57e0-31e74c4df3cf">
+      <Execution id="55c2fc92-6a71-4ae9-8f2f-da9e5f0356f4" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ConfigurationConstructorTestDefaultConstructor" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterDropIndexTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="df1cc607-527c-2f80-18f8-81c729911b19">
+      <Execution id="df9cd26d-70d2-45d2-aa61-7c365b756aa0" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterDropIndexTest" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestFlavor" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e5422223-4a43-76a5-9333-72544862540e">
+      <Execution id="d1661bc6-388c-4143-9f5d-53f71dd03091" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestFlavor" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddTableMultipleColumn" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="7f896794-b7c7-3810-619d-60223efc527e">
+      <Execution id="fc2d62a4-caee-4920-985d-4251924d140a" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddTableMultipleColumn" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_S_and_Ensure_Run_Off" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="d36c404f-9cbf-9a72-0ca6-674693b7650a">
+      <Execution id="b49dc8d0-faf2-445b-b457-7c7481e29a94" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_S_and_Ensure_Run_Off" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddSingleColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="f06f0d8c-2149-231d-5806-47e9c07d846e">
+      <Execution id="12c98d0c-351a-455a-94b1-1d45d1d6eb42" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddSingleColumnTest" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterAddColumnReferenceTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="817536ec-3ac9-c694-54db-1da1a386b924">
+      <Execution id="2dcc7ef0-a87e-4881-abd1-c61450236b7f" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterAddColumnReferenceTest" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_G" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="311db638-4b68-3900-bf42-4b797187ac8a">
+      <Execution id="5aa15706-4292-496f-9642-fec013cc09cd" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_G" />
+    </UnitTest>
+    <UnitTest name="GeneratorRemoveColumn" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e493e469-79fd-ce9c-3be1-757f4015d392">
+      <Execution id="a8322148-3b43-495a-9a37-e574fe723c85" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorRemoveColumn" />
+    </UnitTest>
+    <UnitTest name="GenerateTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="7eda8c0b-4083-4def-9614-a659eccc9620">
+      <Execution id="5979fe7c-e3f9-4d84-a562-27072ba4e556" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GenerateTest" />
+    </UnitTest>
+    <UnitTest name="BasicGenerateErrorTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="bb1a840f-7c75-47b3-fb81-a8b38c6bbd4f">
+      <Execution id="fe1bc757-32f6-4f08-b9e5-f6890bf496ed" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicGenerateErrorTest" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_R" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="289d24b8-7498-9a77-6aaf-02719bbf6dbf">
+      <Execution id="ad997b19-3779-4769-bbbf-f70e0b4f06b5" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_R" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestDir" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="4ec5d776-a082-2b7a-d6be-4f76f8d00f67">
+      <Execution id="9b58e6c3-b183-4db1-b239-c054479a3eba" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestDir" />
+    </UnitTest>
+    <UnitTest name="HelpModifierTest_Run" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="0bd60c8b-330c-58f9-5cd5-451e64e5064d">
+      <Execution id="b7ae81bc-b6d7-4028-a4f6-df4cd42670de" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpModifierTest_Run" />
+    </UnitTest>
+    <UnitTest name="GenerateTest_ModifyTable" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="669bad0e-ab50-8768-3d79-24a420607811">
+      <Execution id="464f2c25-9e28-423d-aab5-c08135b4761d" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GenerateTest_ModifyTable" />
+    </UnitTest>
+    <UnitTest name="TestGeneratePlainSQLStringArrayDown" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="e2673458-a0dd-29e1-8ae8-ec51fe236682">
+      <Execution id="348270ae-6b57-4563-836f-bcb05abda7f2" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLGeneratorTests, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestGeneratePlainSQLStringArrayDown" />
+    </UnitTest>
+    <UnitTest name="SqlFormatterDrop2TableTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="53bdf8b3-0cb0-c5cc-f9bd-dc976049c613">
+      <Execution id="fefa527e-4860-45ef-9ced-d890ba7c0ab3" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.SQLServerFormatterTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="SqlFormatterDrop2TableTest" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestRename" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="1b8a7801-d82d-1746-889b-a337f48ed4dd">
+      <Execution id="2b3fd910-d196-436f-9657-9bee52964ed1" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestRename" />
+    </UnitTest>
+    <UnitTest name="BasicRunTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="6085e726-dd8d-693b-9aae-ed39953bc073">
+      <Execution id="b75f523b-c584-4955-9c93-03be033dda9b" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BasicRunTest" />
+    </UnitTest>
+    <UnitTest name="GeneratorAddIndexTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="82bd9517-f389-4445-1fce-8aa42a855b86">
+      <Execution id="61fa1f26-1bc0-440a-9063-5a25b6b81caa" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorAddIndexTest" />
+    </UnitTest>
+    <UnitTest name="HelpTest_HELP" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="f7bb9a21-a4c3-3fc0-8813-25cea4ce6edc">
+      <Execution id="71d943f6-918c-47ac-8a7c-871e6ce6375e" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HelpTest_HELP" />
+    </UnitTest>
+    <UnitTest name="GeneratorChangeSingleColumnTest" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a97753fc-8cb0-87d5-3a02-f49b1a000a2a">
+      <Execution id="ff054574-b377-471d-991a-e43819f348bd" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.GeneratorTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GeneratorChangeSingleColumnTest" />
+    </UnitTest>
+    <UnitTest name="EnvironmentTestConnectionString" storage="c:\projects\humpback\humpback.tests\bin\debug\humpback.tests.dll" id="a5719ce4-6290-8d0e-bbaa-fb0f4cae04cb">
+      <Execution id="a6072959-f5ac-48b4-82eb-28508b7b9fe7" />
+      <TestMethod codeBase="C:/Projects/Humpback/Humpback.Tests/bin/Debug/Humpback.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Humpback.Tests.ConfigurationTest, Humpback.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EnvironmentTestConnectionString" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="e3d50d12-abab-4c5b-f710-5f3f1de8b01b" executionId="819d5d90-5f5d-433c-aaf5-6476871860e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d24e533b-e361-fd8b-5f8c-9fe89753d6c0" executionId="58185afb-7846-4a04-b84c-52cb4653840e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7f896794-b7c7-3810-619d-60223efc527e" executionId="fc2d62a4-caee-4920-985d-4251924d140a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="058de0ad-729f-7726-204c-f9b6197ace80" executionId="06e3e88f-95d2-4ce8-ae7d-6a0e22ec9499" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e493e469-79fd-ce9c-3be1-757f4015d392" executionId="a8322148-3b43-495a-9a37-e574fe723c85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f06f0d8c-2149-231d-5806-47e9c07d846e" executionId="12c98d0c-351a-455a-94b1-1d45d1d6eb42" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5bbd01e-9ce5-7737-6c5e-33b038bbfcef" executionId="cca2e43f-111d-4ee7-871c-a36ffe9c3056" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="90f97baa-3070-9016-3865-a65e9e00b567" executionId="9d2e39a9-e66c-4ea8-8f49-cc82d4a707f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3746a4e-3caf-94de-d5a9-64823fac0d7b" executionId="18879980-4a85-4bc3-975d-7be23aeab399" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eea9a346-9943-e3ff-416c-0311a8030615" executionId="1deafe28-6e17-4f5a-bb5d-c243287421d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a97753fc-8cb0-87d5-3a02-f49b1a000a2a" executionId="ff054574-b377-471d-991a-e43819f348bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ac0c20c0-6966-79b8-4b6c-7c633eb53e87" executionId="42ef4329-a8ef-486b-a5f8-f1e9f9c48e3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82bd9517-f389-4445-1fce-8aa42a855b86" executionId="61fa1f26-1bc0-440a-9063-5a25b6b81caa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a32922e2-f1df-7982-29dc-57f3885bc9ec" executionId="1292c9ec-8c78-41c8-83e3-aecc4490c97e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a84bd86-8ca4-1eec-bb5f-cdc52d11f0ed" executionId="51fd7a27-1be3-41d9-8e48-80500b9ebe9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e7403101-b8a8-6884-112a-c39c176e3e12" executionId="1ca22a9a-a55d-45ff-b108-7a2f68b31791" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="274b4467-35d6-4a34-11dc-f60e719c1a5c" executionId="858b2fee-7e75-420d-813c-dd315838273a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="932f94f6-db59-e4fb-db9c-4892e9feb731" executionId="ae63b6e2-dcd1-4b19-8220-25b528686471" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a492a35-95c4-81bf-5741-83962893c6bd" executionId="97e0d870-690e-4d5e-aac4-8f9cc9a583ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="53bdf8b3-0cb0-c5cc-f9bd-dc976049c613" executionId="fefa527e-4860-45ef-9ced-d890ba7c0ab3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b132a8e-2b56-7bd7-f605-35a2acab7b8e" executionId="801e91bd-1dce-499f-9400-fdee91069343" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="817536ec-3ac9-c694-54db-1da1a386b924" executionId="2dcc7ef0-a87e-4881-abd1-c61450236b7f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d9c6079b-83c7-f50c-b1b8-59be9fe5c717" executionId="57be2a59-a27e-4b29-874d-4f995cf44e23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a8a040ac-527d-a3e5-eb1e-6eb6f9128096" executionId="3db1b61e-7809-451c-bb51-fd4524af7d3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6fa915c5-6ab5-24c3-610a-84f83ee2d7ae" executionId="0c119fb5-44c7-443f-be90-de497470bf79" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c4268f76-efd3-124d-873f-390998bcba88" executionId="077b61c4-d8c6-4086-8c7f-5f8aade15602" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="df1cc607-527c-2f80-18f8-81c729911b19" executionId="df9cd26d-70d2-45d2-aa61-7c365b756aa0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44f823e3-baf8-a2f1-8bcb-877df097c535" executionId="2f5b15ee-cba1-454f-b47a-36136e10cbe5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67302ab4-5dc8-75b9-8b54-6f42f8cae66b" executionId="0b9092f6-a209-4de8-bb00-b1d22a86fcfe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f2fd06d6-bc32-5afa-9fd6-c66d5415c515" executionId="cb49c97a-932e-41ff-afba-8b83e2f66de7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2673458-a0dd-29e1-8ae8-ec51fe236682" executionId="348270ae-6b57-4563-836f-bcb05abda7f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="08b5b9c9-6f47-d78c-ccbb-c81dcaf801d4" executionId="6cb8e1f7-3f5a-4368-8f74-93d0144e3fe2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="71dd6206-1db7-63ae-e0fc-471c5670527e" executionId="09817fde-5ffb-412b-a909-f226b9d9cd51" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5cc0cd9-833d-a38d-dcfc-767927d698f4" executionId="65ef7e72-9974-426c-a1e5-dcb658e1afdf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8616b539-ff11-f5fa-cddc-12ec76c45a9e" executionId="b312bb86-bea1-4d78-b32f-8f188c8692f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20d19967-444e-dc24-b335-97edc08b5909" executionId="acaf3f84-4ec5-4861-b7f7-3a06ad6e9ddb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a48aa486-0eb9-1571-ae7a-ae83f5502512" executionId="afcc992b-9b5d-4be4-b526-b5eba2f25935" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="561a8314-b780-173e-57e0-31e74c4df3cf" executionId="55c2fc92-6a71-4ae9-8f2f-da9e5f0356f4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3aa6cae7-870d-5dc1-6dfc-f66069c5d485" executionId="442309c9-567e-416c-9481-62877b5b9007" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0356bc7f-811f-e594-9294-69e99427592b" executionId="30a4922e-2491-4235-a305-736b365fd24e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="92dbc9fd-8625-52e9-87e0-f4f933c33d3e" executionId="93a1d0b5-a173-4aaa-b6fa-a8293f264db8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7bb9a21-a4c3-3fc0-8813-25cea4ce6edc" executionId="71d943f6-918c-47ac-8a7c-871e6ce6375e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="156e597f-0b1d-a2d7-359e-abcce95cc492" executionId="811054ac-e8e8-4164-a737-7151c1adbb27" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0bd60c8b-330c-58f9-5cd5-451e64e5064d" executionId="b7ae81bc-b6d7-4028-a4f6-df4cd42670de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bffd13bd-a98a-7359-d86a-98f61a84657f" executionId="59243af6-8c33-49b7-a307-64daf514341c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbcb9613-54a5-05d2-9009-31ab037ddbcd" executionId="9c0809a6-7a25-4426-bbf8-bfc9fc001202" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="90590812-d0cd-47d6-f358-c315d0722334" executionId="77f4fd11-5fc9-426e-b23f-9ce886e95cd8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5e541083-8183-1e9e-0c99-d0d43511a838" executionId="d2ef4d0e-7e36-4796-a354-689573d45abb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="289d24b8-7498-9a77-6aaf-02719bbf6dbf" executionId="ad997b19-3779-4769-bbbf-f70e0b4f06b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="70f03247-8a89-43a1-08ac-8bf7b89adba6" executionId="150d1231-272c-4190-adaa-c2db5f0adb27" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="311db638-4b68-3900-bf42-4b797187ac8a" executionId="5aa15706-4292-496f-9642-fec013cc09cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d36c404f-9cbf-9a72-0ca6-674693b7650a" executionId="b49dc8d0-faf2-445b-b457-7c7481e29a94" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="977522ec-36ab-7467-e984-16e06673af6f" executionId="d0204d38-2b35-4d58-896e-e1b8af23fb5a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1158286-c9a0-d3c5-048f-b0851d3cf5b7" executionId="3572e17e-e957-4f4c-a878-a8129d95a9c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9efa9754-2bd6-6a4e-e57a-a525ac22479a" executionId="4cb35911-89cc-4428-b267-106eddcd25a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb1a840f-7c75-47b3-fb81-a8b38c6bbd4f" executionId="fe1bc757-32f6-4f08-b9e5-f6890bf496ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cc3c90a7-a6c8-747e-feb1-95a067a4287c" executionId="cc2219b2-f301-4135-b095-aeec46e75a99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7eda8c0b-4083-4def-9614-a659eccc9620" executionId="5979fe7c-e3f9-4d84-a562-27072ba4e556" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ada74037-4e7b-b673-a356-32752802c102" executionId="156ccdcf-9056-480c-b1d8-3b0228720d4c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="669bad0e-ab50-8768-3d79-24a420607811" executionId="464f2c25-9e28-423d-aab5-c08135b4761d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16f64c72-025c-ebb3-6b93-684532a9fa63" executionId="edb235fb-76f2-4a49-a0a0-9ab2aaa8b4c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6085e726-dd8d-693b-9aae-ed39953bc073" executionId="b75f523b-c584-4955-9c93-03be033dda9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="04f82181-a0a0-268d-8961-6593b0283527" executionId="648fafd0-58ac-4287-a5e8-abafe1a47662" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="80d6448f-0f06-5c6f-9efd-c6199e7a4680" executionId="dbb76a31-4155-42e8-80f5-162c7985e36a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b2badb01-a4d3-5bb4-c5c8-e59600e727e6" executionId="786b2263-da8a-480b-824e-61a15e0877e3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b8b4c87a-5edf-cb32-37de-b42575b67aae" executionId="980a64bb-0edf-48b5-a6b4-02a43614073c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b8a7801-d82d-1746-889b-a337f48ed4dd" executionId="2b3fd910-d196-436f-9657-9bee52964ed1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ec5d776-a082-2b7a-d6be-4f76f8d00f67" executionId="9b58e6c3-b183-4db1-b239-c054479a3eba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a5719ce4-6290-8d0e-bbaa-fb0f4cae04cb" executionId="a6072959-f5ac-48b4-82eb-28508b7b9fe7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e5422223-4a43-76a5-9333-72544862540e" executionId="d1661bc6-388c-4143-9f5d-53f71dd03091" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="819d5d90-5f5d-433c-aaf5-6476871860e1" testId="e3d50d12-abab-4c5b-f710-5f3f1de8b01b" testName="GeneratorAddTableNoColumnsSpecified" computerName="CUCAMONGA" duration="00:00:00.4713270" startTime="2011-08-17T17:12:29.0482184-07:00" endTime="2011-08-17T17:12:31.0493328-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="819d5d90-5f5d-433c-aaf5-6476871860e1">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001230_AddTable_Users.js
+Generating Migration AddTable_Users
+{
+	"up":{
+		"create_table":{
+			"name":"Users",
+			"timestamps":true,
+			"columns":[{
+			"name":"column_name_here","type":"string"}]
+		}
+	},
+	"down":{
+		"drop_table":"Users"}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="58185afb-7846-4a04-b84c-52cb4653840e" testId="d24e533b-e361-fd8b-5f8c-9fe89753d6c0" testName="GeneratorAddTable1Column" computerName="CUCAMONGA" duration="00:00:00.0009444" startTime="2011-08-17T17:12:31.0583333-07:00" endTime="2011-08-17T17:12:31.0643337-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58185afb-7846-4a04-b84c-52cb4653840e">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddTable_Users.js
+Generating Migration AddTable_Users
+{
+	"up":{
+		"create_table":{
+			"name":"Users",
+			"timestamps":true,
+			"columns":[{
+			"name":"first_name","type":"string"}]
+		}
+	},
+	"down":{
+		"drop_table":"Users"}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fc2d62a4-caee-4920-985d-4251924d140a" testId="7f896794-b7c7-3810-619d-60223efc527e" testName="GeneratorAddTableMultipleColumn" computerName="CUCAMONGA" duration="00:00:00.0010402" startTime="2011-08-17T17:12:31.0683339-07:00" endTime="2011-08-17T17:12:31.0743343-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc2d62a4-caee-4920-985d-4251924d140a">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddTable_Users.js
+Generating Migration AddTable_Users
+{
+	"up":{
+		"create_table":{
+			"name":"Users",
+			"timestamps":true,
+			"columns":[{
+			"name":"first_name","type":"string"},{
+			"name":"last_name","type":"string"}]
+		}
+	},
+	"down":{
+		"drop_table":"Users"}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="06e3e88f-95d2-4ce8-ae7d-6a0e22ec9499" testId="058de0ad-729f-7726-204c-f9b6197ace80" testName="GeneratorDropTable" computerName="CUCAMONGA" duration="00:00:00.0056587" startTime="2011-08-17T17:12:31.0783345-07:00" endTime="2011-08-17T17:12:31.0883351-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06e3e88f-95d2-4ce8-ae7d-6a0e22ec9499">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_DropTable_Users.js
+Generating Migration DropTable_Users
+{
+	"up":{
+		"drop_table":"Users"}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a8322148-3b43-495a-9a37-e574fe723c85" testId="e493e469-79fd-ce9c-3be1-757f4015d392" testName="GeneratorRemoveColumn" computerName="CUCAMONGA" duration="00:00:00.0048318" startTime="2011-08-17T17:12:31.0923353-07:00" endTime="2011-08-17T17:12:31.1023359-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8322148-3b43-495a-9a37-e574fe723c85">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_RemoveColumn_Users_first_name.js
+Generating Migration RemoveColumn_Users_first_name
+{
+	"up":{
+		"remove_column":{
+			"table":"Users",
+			"column":"first_name"}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="12c98d0c-351a-455a-94b1-1d45d1d6eb42" testId="f06f0d8c-2149-231d-5806-47e9c07d846e" testName="GeneratorAddSingleColumnTest" computerName="CUCAMONGA" duration="00:00:00.0166420" startTime="2011-08-17T17:12:31.1063361-07:00" endTime="2011-08-17T17:12:31.1273373-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="12c98d0c-351a-455a-94b1-1d45d1d6eb42">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddColumn_Users_first_name.js
+Generating Migration AddColumn_Users_first_name
+{
+	"up":{
+		"add_column":{
+			"table":"Users",
+			"columns":[{
+			"name":"first_name","type":"string"}]
+		}
+	},
+	"down":{
+		"remove_column":{
+			"table":"Users",
+			"column":"first_name"}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cca2e43f-111d-4ee7-871c-a36ffe9c3056" testId="b5bbd01e-9ce5-7737-6c5e-33b038bbfcef" testName="GeneratorAddSingleColumnTest_Escaped_To" computerName="CUCAMONGA" duration="00:00:00.0009538" startTime="2011-08-17T17:12:31.1333376-07:00" endTime="2011-08-17T17:12:31.1393380-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cca2e43f-111d-4ee7-871c-a36ffe9c3056">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddColumn_Users_customer_name.js
+Generating Migration AddColumn_Users_customer_name
+{
+	"up":{
+		"add_column":{
+			"table":"Users",
+			"columns":[{
+			"name":"customer_name","type":"string"}]
+		}
+	},
+	"down":{
+		"remove_column":{
+			"table":"Users",
+			"column":"customer_name"}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9d2e39a9-e66c-4ea8-8f49-cc82d4a707f1" testId="90f97baa-3070-9016-3865-a65e9e00b567" testName="GeneratorAddSingleColumnTestDuplicateTo" computerName="CUCAMONGA" duration="00:00:00.0004048" startTime="2011-08-17T17:12:31.1433382-07:00" endTime="2011-08-17T17:12:31.1483385-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d2e39a9-e66c-4ea8-8f49-cc82d4a707f1">
+      <Output>
+        <StdOut>Humpback is trying to help you.
+You Are attempting to add a column to a table, but the letters 'TO' occur in the column name or the table name
+You need to use _TO_ with underscores to explicitly specify which to to split the column and table names
+For instance AddCustomerName_TO_Orders
+Migration NOT Created</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="18879980-4a85-4bc3-975d-7be23aeab399" testId="e3746a4e-3caf-94de-d5a9-64823fac0d7b" testName="GeneratorAddMultipleColumnTest" computerName="CUCAMONGA" duration="00:00:00.0010145" startTime="2011-08-17T17:12:31.1523387-07:00" endTime="2011-08-17T17:12:31.1583391-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="18879980-4a85-4bc3-975d-7be23aeab399">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddColumn_Users_first_name.js
+Generating Migration AddColumn_Users_first_name
+{
+	"up":{
+		"add_column":{
+			"table":"Users",
+			"columns":[{
+			"name":"first_name","type":"string"},{
+			"name":"last_name","type":"string"}]
+		}
+	},
+	"down":{
+		"remove_column":{
+			"table":"Users",
+			"column":"first_name"}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1deafe28-6e17-4f5a-bb5d-c243287421d6" testId="eea9a346-9943-e3ff-416c-0311a8030615" testName="GeneratorAddReferenceColumnTest" computerName="CUCAMONGA" duration="00:00:00.0007272" startTime="2011-08-17T17:12:31.1633394-07:00" endTime="2011-08-17T17:12:31.1683396-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1deafe28-6e17-4f5a-bb5d-c243287421d6">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddColumn_Orders_UserId.js
+Generating Migration AddColumn_Orders_UserId
+{
+	"up":{
+		"add_column":{
+			"table":"Orders",
+			"columns":[{
+			"name":"User","type":"reference"}]
+		}
+	},
+	"down":{
+		"remove_column":{
+			"table":"Orders",
+			"column":"UserId"}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ff054574-b377-471d-991a-e43819f348bd" testId="a97753fc-8cb0-87d5-3a02-f49b1a000a2a" testName="GeneratorChangeSingleColumnTest" computerName="CUCAMONGA" duration="00:00:00.0052695" startTime="2011-08-17T17:12:31.1713398-07:00" endTime="2011-08-17T17:12:31.1813404-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff054574-b377-471d-991a-e43819f348bd">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_ChangeColumn_ChangeUsers.js
+Generating Migration ChangeColumn_ChangeUsers
+{
+	"up":{"change_column":{
+			"name":"ChangeUsers",
+			"columns":[{
+			"name":"first_name","type":"string"}]
+		}
+	},
+	"down":{"change_column":{
+			"name":"ChangeUsers",
+			"columns":[{
+			"name":"first_name","type":"string"}]}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="42ef4329-a8ef-486b-a5f8-f1e9f9c48e3b" testId="ac0c20c0-6966-79b8-4b6c-7c633eb53e87" testName="GeneratorChangeMultipleColumnTest" computerName="CUCAMONGA" duration="00:00:00.0007933" startTime="2011-08-17T17:12:31.1863407-07:00" endTime="2011-08-17T17:12:31.1913410-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42ef4329-a8ef-486b-a5f8-f1e9f9c48e3b">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_ChangeColumn_ChangeUsers.js
+Generating Migration ChangeColumn_ChangeUsers
+{
+	"up":{"change_column":{
+			"name":"ChangeUsers",
+			"columns":[{
+			"name":"first_name","type":"string"},{
+			"name":"last_name","type":"string"}]
+		}
+	},
+	"down":{"change_column":{
+			"name":"ChangeUsers",
+			"columns":[{
+			"name":"first_name","type":"string"},{
+			"name":"last_name","type":"string"}]}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="61fa1f26-1bc0-440a-9063-5a25b6b81caa" testId="82bd9517-f389-4445-1fce-8aa42a855b86" testName="GeneratorAddIndexTest" computerName="CUCAMONGA" duration="00:00:00.0058861" startTime="2011-08-17T17:12:31.1953412-07:00" endTime="2011-08-17T17:12:31.2063418-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="61fa1f26-1bc0-440a-9063-5a25b6b81caa">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_AddIndex_Users_first_name_last_name.js
+Generating Migration AddIndex_Users_first_name_last_name
+{
+	"up":{
+		"add_index":{
+			"table_name":"Users",
+			"columns":["first_name","last_name"]}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1292c9ec-8c78-41c8-83e3-aecc4490c97e" testId="a32922e2-f1df-7982-29dc-57f3885bc9ec" testName="GeneratorDropIndexTest" computerName="CUCAMONGA" duration="00:00:00.0047024" startTime="2011-08-17T17:12:31.2123422-07:00" endTime="2011-08-17T17:12:31.2223427-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1292c9ec-8c78-41c8-83e3-aecc4490c97e">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_RemoveIndex_Users_first_name_last_name.js
+Generating Migration RemoveIndex_Users_first_name_last_name
+{
+	"up":{
+		"remove_index":{
+			"table_name":"Users",
+			"columns":["first_name","last_name"]}}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="51fd7a27-1be3-41d9-8e48-80500b9ebe9d" testId="2a84bd86-8ca4-1eec-bb5f-cdc52d11f0ed" testName="GeneratorFileTest" computerName="CUCAMONGA" duration="00:00:00.0065833" startTime="2011-08-17T17:12:31.2293431-07:00" endTime="2011-08-17T17:12:31.2443440-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="51fd7a27-1be3-41d9-8e48-80500b9ebe9d">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\..\sql\mysqlfile.sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_SQLFile_mysqlfile.js
+Generating Migration sql\mysqlfile.sql
+{
+	"up":{"file":"..\\sql\\mysqlfile.sql"}}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1ca22a9a-a55d-45ff-b108-7a2f68b31791" testId="e7403101-b8a8-6884-112a-c39c176e3e12" testName="GeneratorSqlTest" computerName="CUCAMONGA" duration="00:00:00.0038595" startTime="2011-08-17T17:12:31.2483442-07:00" endTime="2011-08-17T17:12:31.2573447-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ca22a9a-a55d-45ff-b108-7a2f68b31791">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\migrations\20110818001231_ExecuteSQL.js
+Generating Migration ExecuteSQL
+{
+	"up":"CREATE TABLE Users (ID {pk}, first_name {string} NOT NULL, price_paid {money})",
+	"down":""}</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="858b2fee-7e75-420d-813c-dd315838273a" testId="274b4467-35d6-4a34-11dc-f60e719c1a5c" testName="SqlFormatterAddTableTest" computerName="CUCAMONGA" duration="00:00:00.8072472" startTime="2011-08-17T17:12:31.2623450-07:00" endTime="2011-08-17T17:12:32.0753915-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="858b2fee-7e75-420d-813c-dd315838273a">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\1xxx...sql
+
+
+CREATE TABLE [tname]
+	 (Id int PRIMARY KEY IDENTITY(1,1) NOT NULL 
+	, [first_name] nvarchar(255) NULL 
+	, [last_name] decimal(16,2) NULL 
+	, CreatedOn datetime DEFAULT getutcdate() NOT NULL
+	, UpdatedOn datetime DEFAULT getutcdate() NOT NULL)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ae63b6e2-dcd1-4b19-8220-25b528686471" testId="932f94f6-db59-e4fb-db9c-4892e9feb731" testName="SqlFormatterAddTableTestWithNullableAndDefault" computerName="CUCAMONGA" duration="00:00:00.0008248" startTime="2011-08-17T17:12:32.0803918-07:00" endTime="2011-08-17T17:12:32.0853921-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ae63b6e2-dcd1-4b19-8220-25b528686471">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\11xxx...sql
+
+
+CREATE TABLE [tname]
+	 (Id int PRIMARY KEY IDENTITY(1,1) NOT NULL 
+	, [first_name] nvarchar(255) NOT NULL  DEFAULT ('JASON') 
+	, [last_name] decimal(16,2) NULL 
+	, CreatedOn datetime DEFAULT getutcdate() NOT NULL
+	, UpdatedOn datetime DEFAULT getutcdate() NOT NULL)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="97e0d870-690e-4d5e-aac4-8f9cc9a583ea" testId="9a492a35-95c4-81bf-5741-83962893c6bd" testName="SqlFormatterDropTableTest" computerName="CUCAMONGA" duration="00:00:00.0553521" startTime="2011-08-17T17:12:32.0893923-07:00" endTime="2011-08-17T17:12:32.1493957-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="97e0d870-690e-4d5e-aac4-8f9cc9a583ea">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\2xxx...sql
+
+
+DROP TABLE [tname]</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fefa527e-4860-45ef-9ced-d890ba7c0ab3" testId="53bdf8b3-0cb0-c5cc-f9bd-dc976049c613" testName="SqlFormatterDrop2TableTest" computerName="CUCAMONGA" duration="00:00:00.0583712" startTime="2011-08-17T17:12:32.1553961-07:00" endTime="2011-08-17T17:12:32.2183997-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fefa527e-4860-45ef-9ced-d890ba7c0ab3">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\8xxx..sql..sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\8xxx..sql..sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\8xxx..sql..sqlC:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\8xxx..sql..sql
+
+
+DROP TABLE [tname1]
+
+
+
+
+DROP TABLE [tname2]</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="801e91bd-1dce-499f-9400-fdee91069343" testId="7b132a8e-2b56-7bd7-f605-35a2acab7b8e" testName="SqlFormatterAddColumnTest" computerName="CUCAMONGA" duration="00:00:00.1876108" startTime="2011-08-17T17:12:32.2314004-07:00" endTime="2011-08-17T17:12:32.4234114-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="801e91bd-1dce-499f-9400-fdee91069343">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\3xxx...sql
+
+
+ALTER TABLE [tname] ADD [name] nvarchar(255) NULL</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2dcc7ef0-a87e-4881-abd1-c61450236b7f" testId="817536ec-3ac9-c694-54db-1da1a386b924" testName="SqlFormatterAddColumnReferenceTest" computerName="CUCAMONGA" duration="00:00:00.0884048" startTime="2011-08-17T17:12:32.4284117-07:00" endTime="2011-08-17T17:12:32.5224171-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dcc7ef0-a87e-4881-abd1-c61450236b7f">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\9xxx..sql..sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\9xxx..sql..sql
+
+
+ALTER TABLE [Orders] ADD [UserId] INT NOT NULL  
+
+
+
+
+ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="57be2a59-a27e-4b29-874d-4f995cf44e23" testId="d9c6079b-83c7-f50c-b1b8-59be9fe5c717" testName="SqlFormatterAddTableReferenceTest" computerName="CUCAMONGA" duration="00:00:00.0010369" startTime="2011-08-17T17:12:32.5274174-07:00" endTime="2011-08-17T17:12:32.5334177-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57be2a59-a27e-4b29-874d-4f995cf44e23">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\10xxx..sql..sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\10xxx..sql..sql
+C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\10xxx..sql..sql
+
+
+CREATE TABLE [ApplicationControl]
+	 (Id int PRIMARY KEY IDENTITY(1,1) NOT NULL 
+	, [name] nvarchar(255) NULL 
+	, [ApplicationPageId] INT NOT NULL 
+	, [ApplicationId] INT NOT NULL 
+	, CreatedOn datetime DEFAULT getutcdate() NOT NULL
+	, UpdatedOn datetime DEFAULT getutcdate() NOT NULL) 
+
+
+
+
+ALTER TABLE [ApplicationControl] ADD CONSTRAINT [FK_applicationcontrol_applicationpage_applicationpageid] FOREIGN KEY ([ApplicationPageId]) REFERENCES [ApplicationPage] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+
+ALTER TABLE [ApplicationControl] ADD CONSTRAINT [FK_applicationcontrol_application_applicationid] FOREIGN KEY ([ApplicationId]) REFERENCES [Application] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3db1b61e-7809-451c-bb51-fd4524af7d3b" testId="a8a040ac-527d-a3e5-eb1e-6eb6f9128096" testName="SqlFormatterChangeColumnTest" computerName="CUCAMONGA" duration="00:00:00.2193153" startTime="2011-08-17T17:12:32.5384180-07:00" endTime="2011-08-17T17:12:32.7624308-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3db1b61e-7809-451c-bb51-fd4524af7d3b">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\4xxx...sql
+
+
+ALTER TABLE [tname] ALTER COLUMN [name] nvarchar(255) NULL</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0c119fb5-44c7-443f-be90-de497470bf79" testId="6fa915c5-6ab5-24c3-610a-84f83ee2d7ae" testName="SqlFormatterDropColumnTest" computerName="CUCAMONGA" duration="00:00:00.1027087" startTime="2011-08-17T17:12:32.7674311-07:00" endTime="2011-08-17T17:12:32.8754373-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c119fb5-44c7-443f-be90-de497470bf79">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\5xxx...sql
+
+
+ALTER TABLE [tname] DROP COLUMN [name]</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="077b61c4-d8c6-4086-8c7f-5f8aade15602" testId="c4268f76-efd3-124d-873f-390998bcba88" testName="SqlFormatterAddIndexTest" computerName="CUCAMONGA" duration="00:00:00.2345119" startTime="2011-08-17T17:12:32.8804376-07:00" endTime="2011-08-17T17:12:33.1204513-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="077b61c4-d8c6-4086-8c7f-5f8aade15602">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\6xxx...sql
+
+
+CREATE NONCLUSTERED INDEX [IX_categories_title_slug] ON [categories] ( [title] ASC, [slug] ASC )</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="df9cd26d-70d2-45d2-aa61-7c365b756aa0" testId="df1cc607-527c-2f80-18f8-81c729911b19" testName="SqlFormatterDropIndexTest" computerName="CUCAMONGA" duration="00:00:00.1199402" startTime="2011-08-17T17:12:33.1254516-07:00" endTime="2011-08-17T17:12:33.2504587-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df9cd26d-70d2-45d2-aa61-7c365b756aa0">
+      <Output>
+        <StdOut>C:\Projects\Humpback\TestResults\Administrator_CUCAMONGA 2011-08-17 17_12_25\Out\db\generated\7xxx...sql
+
+
+DROP INDEX [categories].[IX_categories_title_slug]</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2f5b15ee-cba1-454f-b47a-36136e10cbe5" testId="44f823e3-baf8-a2f1-8bcb-877df097c535" testName="TestGeneratePlainSQLString" computerName="CUCAMONGA" duration="00:00:00.0942378" startTime="2011-08-17T17:12:33.2544590-07:00" endTime="2011-08-17T17:12:33.3554647-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f5b15ee-cba1-454f-b47a-36136e10cbe5">
+    </UnitTestResult>
+    <UnitTestResult executionId="0b9092f6-a209-4de8-bb00-b1d22a86fcfe" testId="67302ab4-5dc8-75b9-8b54-6f42f8cae66b" testName="TestGeneratePlainSQLStringArray" computerName="CUCAMONGA" duration="00:00:00.0280485" startTime="2011-08-17T17:12:33.3604650-07:00" endTime="2011-08-17T17:12:33.3934669-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0b9092f6-a209-4de8-bb00-b1d22a86fcfe">
+    </UnitTestResult>
+    <UnitTestResult executionId="cb49c97a-932e-41ff-afba-8b83e2f66de7" testId="f2fd06d6-bc32-5afa-9fd6-c66d5415c515" testName="TestGeneratePlainSQLStringDown" computerName="CUCAMONGA" duration="00:00:00.1197179" startTime="2011-08-17T17:12:33.3984672-07:00" endTime="2011-08-17T17:12:33.5244744-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cb49c97a-932e-41ff-afba-8b83e2f66de7">
+    </UnitTestResult>
+    <UnitTestResult executionId="348270ae-6b57-4563-836f-bcb05abda7f2" testId="e2673458-a0dd-29e1-8ae8-ec51fe236682" testName="TestGeneratePlainSQLStringArrayDown" computerName="CUCAMONGA" duration="00:00:00.0263934" startTime="2011-08-17T17:12:33.5284746-07:00" endTime="2011-08-17T17:12:33.5604765-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="348270ae-6b57-4563-836f-bcb05abda7f2">
+    </UnitTestResult>
+    <UnitTestResult executionId="6cb8e1f7-3f5a-4368-8f74-93d0144e3fe2" testId="08b5b9c9-6f47-d78c-ccbb-c81dcaf801d4" testName="TestForArray" computerName="CUCAMONGA" duration="00:00:00.0272562" startTime="2011-08-17T17:12:33.5644767-07:00" endTime="2011-08-17T17:12:33.5974786-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6cb8e1f7-3f5a-4368-8f74-93d0144e3fe2">
+    </UnitTestResult>
+    <UnitTestResult executionId="09817fde-5ffb-412b-a909-f226b9d9cd51" testId="71dd6206-1db7-63ae-e0fc-471c5670527e" testName="TestForArrayOnString" computerName="CUCAMONGA" duration="00:00:00.0028210" startTime="2011-08-17T17:12:33.6024789-07:00" endTime="2011-08-17T17:12:33.6094793-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="09817fde-5ffb-412b-a909-f226b9d9cd51">
+    </UnitTestResult>
+    <UnitTestResult executionId="65ef7e72-9974-426c-a1e5-dcb658e1afdf" testId="d5cc0cd9-833d-a38d-dcfc-767927d698f4" testName="TestForString" computerName="CUCAMONGA" duration="00:00:00.0100438" startTime="2011-08-17T17:12:33.6134795-07:00" endTime="2011-08-17T17:12:33.6284803-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65ef7e72-9974-426c-a1e5-dcb658e1afdf">
+    </UnitTestResult>
+    <UnitTestResult executionId="b312bb86-bea1-4d78-b32f-8f188c8692f2" testId="8616b539-ff11-f5fa-cddc-12ec76c45a9e" testName="TestForStringOnArray" computerName="CUCAMONGA" duration="00:00:00.0065699" startTime="2011-08-17T17:12:33.6334806-07:00" endTime="2011-08-17T17:12:33.6444813-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b312bb86-bea1-4d78-b32f-8f188c8692f2">
+    </UnitTestResult>
+    <UnitTestResult executionId="acaf3f84-4ec5-4861-b7f7-3a06ad6e9ddb" testId="20d19967-444e-dc24-b335-97edc08b5909" testName="TestForTypeOfArray" computerName="CUCAMONGA" duration="00:00:00.0189035" startTime="2011-08-17T17:12:33.6494815-07:00" endTime="2011-08-17T17:12:33.6734829-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="acaf3f84-4ec5-4861-b7f7-3a06ad6e9ddb">
+      <Output>
+        <StdOut>&lt;&gt;f__AnonymousType1`1[System.String]
+&lt;&gt;f__AnonymousType1`1[System.String][]</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="afcc992b-9b5d-4be4-b526-b5eba2f25935" testId="a48aa486-0eb9-1571-ae7a-ae83f5502512" testName="ConfigurationConstructorTestNullConstructorParam" computerName="CUCAMONGA" duration="00:00:00.0017938" startTime="2011-08-17T17:12:33.6804833-07:00" endTime="2011-08-17T17:12:33.6874837-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="afcc992b-9b5d-4be4-b526-b5eba2f25935">
+    </UnitTestResult>
+    <UnitTestResult executionId="55c2fc92-6a71-4ae9-8f2f-da9e5f0356f4" testId="561a8314-b780-173e-57e0-31e74c4df3cf" testName="ConfigurationConstructorTestDefaultConstructor" computerName="CUCAMONGA" duration="00:00:00.0002884" startTime="2011-08-17T17:12:33.6914840-07:00" endTime="2011-08-17T17:12:33.6974843-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55c2fc92-6a71-4ae9-8f2f-da9e5f0356f4">
+    </UnitTestResult>
+    <UnitTestResult executionId="442309c9-567e-416c-9481-62877b5b9007" testId="3aa6cae7-870d-5dc1-6dfc-f66069c5d485" testName="HelpTestDash" computerName="CUCAMONGA" duration="00:00:00.0003708" startTime="2011-08-17T17:12:33.7024846-07:00" endTime="2011-08-17T17:12:33.7064848-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="442309c9-567e-416c-9481-62877b5b9007">
+    </UnitTestResult>
+    <UnitTestResult executionId="30a4922e-2491-4235-a305-736b365fd24e" testId="0356bc7f-811f-e594-9294-69e99427592b" testName="HelpTest_h" computerName="CUCAMONGA" duration="00:00:00.0003784" startTime="2011-08-17T17:12:33.7114851-07:00" endTime="2011-08-17T17:12:33.7164854-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="30a4922e-2491-4235-a305-736b365fd24e">
+    </UnitTestResult>
+    <UnitTestResult executionId="93a1d0b5-a173-4aaa-b6fa-a8293f264db8" testId="92dbc9fd-8625-52e9-87e0-f4f933c33d3e" testName="HelpTest_H" computerName="CUCAMONGA" duration="00:00:00.0002927" startTime="2011-08-17T17:12:33.7214857-07:00" endTime="2011-08-17T17:12:33.7254859-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93a1d0b5-a173-4aaa-b6fa-a8293f264db8">
+    </UnitTestResult>
+    <UnitTestResult executionId="71d943f6-918c-47ac-8a7c-871e6ce6375e" testId="f7bb9a21-a4c3-3fc0-8813-25cea4ce6edc" testName="HelpTest_HELP" computerName="CUCAMONGA" duration="00:00:00.0003809" startTime="2011-08-17T17:12:33.7304862-07:00" endTime="2011-08-17T17:12:33.7364865-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71d943f6-918c-47ac-8a7c-871e6ce6375e">
+    </UnitTestResult>
+    <UnitTestResult executionId="811054ac-e8e8-4164-a737-7151c1adbb27" testId="156e597f-0b1d-a2d7-359e-abcce95cc492" testName="HelpTest_help" computerName="CUCAMONGA" duration="00:00:00.0003907" startTime="2011-08-17T17:12:33.7404868-07:00" endTime="2011-08-17T17:12:33.7454870-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="811054ac-e8e8-4164-a737-7151c1adbb27">
+    </UnitTestResult>
+    <UnitTestResult executionId="b7ae81bc-b6d7-4028-a4f6-df4cd42670de" testId="0bd60c8b-330c-58f9-5cd5-451e64e5064d" testName="HelpModifierTest_Run" computerName="CUCAMONGA" duration="00:00:00.0003260" startTime="2011-08-17T17:12:33.7504873-07:00" endTime="2011-08-17T17:12:33.7674883-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7ae81bc-b6d7-4028-a4f6-df4cd42670de">
+    </UnitTestResult>
+    <UnitTestResult executionId="59243af6-8c33-49b7-a307-64daf514341c" testId="bffd13bd-a98a-7359-d86a-98f61a84657f" testName="HelpModifierTest_RUN" computerName="CUCAMONGA" duration="00:00:00.0003151" startTime="2011-08-17T17:12:33.7724886-07:00" endTime="2011-08-17T17:12:33.7774889-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="59243af6-8c33-49b7-a307-64daf514341c">
+    </UnitTestResult>
+    <UnitTestResult executionId="9c0809a6-7a25-4426-bbf8-bfc9fc001202" testId="dbcb9613-54a5-05d2-9009-31ab037ddbcd" testName="HelpModifierTest_List" computerName="CUCAMONGA" duration="00:00:00.0004026" startTime="2011-08-17T17:12:33.7834892-07:00" endTime="2011-08-17T17:12:33.7884895-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c0809a6-7a25-4426-bbf8-bfc9fc001202">
+    </UnitTestResult>
+    <UnitTestResult executionId="77f4fd11-5fc9-426e-b23f-9ce886e95cd8" testId="90590812-d0cd-47d6-f358-c315d0722334" testName="HelpModifierTest_Generate" computerName="CUCAMONGA" duration="00:00:00.0003093" startTime="2011-08-17T17:12:33.7924897-07:00" endTime="2011-08-17T17:12:33.7974900-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="77f4fd11-5fc9-426e-b23f-9ce886e95cd8">
+    </UnitTestResult>
+    <UnitTestResult executionId="d2ef4d0e-7e36-4796-a354-689573d45abb" testId="5e541083-8183-1e9e-0c99-d0d43511a838" testName="HelpModifierTest_Sql" computerName="CUCAMONGA" duration="00:00:00.0003881" startTime="2011-08-17T17:12:33.8034904-07:00" endTime="2011-08-17T17:12:33.8084906-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2ef4d0e-7e36-4796-a354-689573d45abb">
+    </UnitTestResult>
+    <UnitTestResult executionId="ad997b19-3779-4769-bbbf-f70e0b4f06b5" testId="289d24b8-7498-9a77-6aaf-02719bbf6dbf" testName="HelpModifierTest_R" computerName="CUCAMONGA" duration="00:00:00.0004525" startTime="2011-08-17T17:12:33.8134909-07:00" endTime="2011-08-17T17:12:33.8174912-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad997b19-3779-4769-bbbf-f70e0b4f06b5">
+    </UnitTestResult>
+    <UnitTestResult executionId="150d1231-272c-4190-adaa-c2db5f0adb27" testId="70f03247-8a89-43a1-08ac-8bf7b89adba6" testName="HelpModifierTest_L" computerName="CUCAMONGA" duration="00:00:00.0003979" startTime="2011-08-17T17:12:33.8224914-07:00" endTime="2011-08-17T17:12:33.8274917-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="150d1231-272c-4190-adaa-c2db5f0adb27">
+    </UnitTestResult>
+    <UnitTestResult executionId="5aa15706-4292-496f-9642-fec013cc09cd" testId="311db638-4b68-3900-bf42-4b797187ac8a" testName="HelpModifierTest_G" computerName="CUCAMONGA" duration="00:00:00.0002934" startTime="2011-08-17T17:12:33.8314920-07:00" endTime="2011-08-17T17:12:33.8364922-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5aa15706-4292-496f-9642-fec013cc09cd">
+    </UnitTestResult>
+    <UnitTestResult executionId="b49dc8d0-faf2-445b-b457-7c7481e29a94" testId="d36c404f-9cbf-9a72-0ca6-674693b7650a" testName="HelpModifierTest_S_and_Ensure_Run_Off" computerName="CUCAMONGA" duration="00:00:00.0005721" startTime="2011-08-17T17:12:33.8414925-07:00" endTime="2011-08-17T17:12:33.8464928-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b49dc8d0-faf2-445b-b457-7c7481e29a94">
+    </UnitTestResult>
+    <UnitTestResult executionId="d0204d38-2b35-4d58-896e-e1b8af23fb5a" testId="977522ec-36ab-7467-e984-16e06673af6f" testName="BasicSqlTest" computerName="CUCAMONGA" duration="00:00:00.0004879" startTime="2011-08-17T17:12:33.8524932-07:00" endTime="2011-08-17T17:12:33.8584935-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d0204d38-2b35-4d58-896e-e1b8af23fb5a">
+    </UnitTestResult>
+    <UnitTestResult executionId="3572e17e-e957-4f4c-a878-a8129d95a9c1" testId="a1158286-c9a0-d3c5-048f-b0851d3cf5b7" testName="BasicSqlTest2" computerName="CUCAMONGA" duration="00:00:00.0003133" startTime="2011-08-17T17:12:33.8634938-07:00" endTime="2011-08-17T17:12:33.8674940-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3572e17e-e957-4f4c-a878-a8129d95a9c1">
+    </UnitTestResult>
+    <UnitTestResult executionId="4cb35911-89cc-4428-b267-106eddcd25a9" testId="9efa9754-2bd6-6a4e-e57a-a525ac22479a" testName="BasicSqlTest3" computerName="CUCAMONGA" duration="00:00:00.0005797" startTime="2011-08-17T17:12:33.8724943-07:00" endTime="2011-08-17T17:12:33.8774946-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4cb35911-89cc-4428-b267-106eddcd25a9">
+    </UnitTestResult>
+    <UnitTestResult executionId="fe1bc757-32f6-4f08-b9e5-f6890bf496ed" testId="bb1a840f-7c75-47b3-fb81-a8b38c6bbd4f" testName="BasicGenerateErrorTest" computerName="CUCAMONGA" duration="00:00:00.0170114" startTime="2011-08-17T17:12:33.8834949-07:00" endTime="2011-08-17T17:12:33.9044961-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe1bc757-32f6-4f08-b9e5-f6890bf496ed">
+    </UnitTestResult>
+    <UnitTestResult executionId="cc2219b2-f301-4135-b095-aeec46e75a99" testId="cc3c90a7-a6c8-747e-feb1-95a067a4287c" testName="BasicGenerateTest" computerName="CUCAMONGA" duration="00:00:00.0003390" startTime="2011-08-17T17:12:33.9094964-07:00" endTime="2011-08-17T17:12:33.9144967-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc2219b2-f301-4135-b095-aeec46e75a99">
+    </UnitTestResult>
+    <UnitTestResult executionId="5979fe7c-e3f9-4d84-a562-27072ba4e556" testId="7eda8c0b-4083-4def-9614-a659eccc9620" testName="GenerateTest" computerName="CUCAMONGA" duration="00:00:00.0007106" startTime="2011-08-17T17:12:33.9194970-07:00" endTime="2011-08-17T17:12:33.9254973-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5979fe7c-e3f9-4d84-a562-27072ba4e556">
+      <Output>
+        <StdOut>first_name:string|last_name:string</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="156ccdcf-9056-480c-b1d8-3b0228720d4c" testId="ada74037-4e7b-b673-a356-32752802c102" testName="GenerateTest_CreateTable" computerName="CUCAMONGA" duration="00:00:00.0004572" startTime="2011-08-17T17:12:33.9304976-07:00" endTime="2011-08-17T17:12:33.9354979-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="156ccdcf-9056-480c-b1d8-3b0228720d4c">
+    </UnitTestResult>
+    <UnitTestResult executionId="464f2c25-9e28-423d-aab5-c08135b4761d" testId="669bad0e-ab50-8768-3d79-24a420607811" testName="GenerateTest_ModifyTable" computerName="CUCAMONGA" duration="00:00:00.0004651" startTime="2011-08-17T17:12:33.9394981-07:00" endTime="2011-08-17T17:12:33.9454985-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="464f2c25-9e28-423d-aab5-c08135b4761d">
+    </UnitTestResult>
+    <UnitTestResult executionId="edb235fb-76f2-4a49-a0a0-9ab2aaa8b4c1" testId="16f64c72-025c-ebb3-6b93-684532a9fa63" testName="BasicListTest" computerName="CUCAMONGA" duration="00:00:00.0005251" startTime="2011-08-17T17:12:33.9504988-07:00" endTime="2011-08-17T17:12:33.9564991-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="edb235fb-76f2-4a49-a0a0-9ab2aaa8b4c1">
+    </UnitTestResult>
+    <UnitTestResult executionId="b75f523b-c584-4955-9c93-03be033dda9b" testId="6085e726-dd8d-693b-9aae-ed39953bc073" testName="BasicRunTest" computerName="CUCAMONGA" duration="00:00:00.0004055" startTime="2011-08-17T17:12:33.9604993-07:00" endTime="2011-08-17T17:12:33.9654996-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b75f523b-c584-4955-9c93-03be033dda9b">
+    </UnitTestResult>
+    <UnitTestResult executionId="648fafd0-58ac-4287-a5e8-abafe1a47662" testId="04f82181-a0a0-268d-8961-6593b0283527" testName="EnvironmentTest" computerName="CUCAMONGA" duration="00:00:00.0004922" startTime="2011-08-17T17:12:33.9704999-07:00" endTime="2011-08-17T17:12:33.9755002-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="648fafd0-58ac-4287-a5e8-abafe1a47662">
+    </UnitTestResult>
+    <UnitTestResult executionId="dbb76a31-4155-42e8-80f5-162c7985e36a" testId="80d6448f-0f06-5c6f-9efd-c6199e7a4680" testName="EnvironmentTestSet" computerName="CUCAMONGA" duration="00:00:00.0005591" startTime="2011-08-17T17:12:33.9795004-07:00" endTime="2011-08-17T17:12:33.9845007-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dbb76a31-4155-42e8-80f5-162c7985e36a">
+    </UnitTestResult>
+    <UnitTestResult executionId="786b2263-da8a-480b-824e-61a15e0877e3" testId="b2badb01-a4d3-5bb4-c5c8-e59600e727e6" testName="EnvironmentTestAdd" computerName="CUCAMONGA" duration="00:00:00.0007771" startTime="2011-08-17T17:12:33.9885009-07:00" endTime="2011-08-17T17:12:33.9945013-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="786b2263-da8a-480b-824e-61a15e0877e3">
+    </UnitTestResult>
+    <UnitTestResult executionId="980a64bb-0edf-48b5-a6b4-02a43614073c" testId="b8b4c87a-5edf-cb32-37de-b42575b67aae" testName="EnvironmentTestRemove" computerName="CUCAMONGA" duration="00:00:00.0007709" startTime="2011-08-17T17:12:33.9995016-07:00" endTime="2011-08-17T17:12:34.0055019-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="980a64bb-0edf-48b5-a6b4-02a43614073c">
+    </UnitTestResult>
+    <UnitTestResult executionId="2b3fd910-d196-436f-9657-9bee52964ed1" testId="1b8a7801-d82d-1746-889b-a337f48ed4dd" testName="EnvironmentTestRename" computerName="CUCAMONGA" duration="00:00:00.0005725" startTime="2011-08-17T17:12:34.0095021-07:00" endTime="2011-08-17T17:12:34.0145024-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b3fd910-d196-436f-9657-9bee52964ed1">
+    </UnitTestResult>
+    <UnitTestResult executionId="9b58e6c3-b183-4db1-b239-c054479a3eba" testId="4ec5d776-a082-2b7a-d6be-4f76f8d00f67" testName="EnvironmentTestDir" computerName="CUCAMONGA" duration="00:00:00.0007612" startTime="2011-08-17T17:12:34.0195027-07:00" endTime="2011-08-17T17:12:34.0255031-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b58e6c3-b183-4db1-b239-c054479a3eba">
+    </UnitTestResult>
+    <UnitTestResult executionId="a6072959-f5ac-48b4-82eb-28508b7b9fe7" testId="a5719ce4-6290-8d0e-bbaa-fb0f4cae04cb" testName="EnvironmentTestConnectionString" computerName="CUCAMONGA" duration="00:00:00.0005949" startTime="2011-08-17T17:12:34.0295033-07:00" endTime="2011-08-17T17:12:34.0355036-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6072959-f5ac-48b4-82eb-28508b7b9fe7">
+    </UnitTestResult>
+    <UnitTestResult executionId="d1661bc6-388c-4143-9f5d-53f71dd03091" testId="e5422223-4a43-76a5-9333-72544862540e" testName="EnvironmentTestFlavor" computerName="CUCAMONGA" duration="00:00:00.0007890" startTime="2011-08-17T17:12:34.0395039-07:00" endTime="2011-08-17T17:12:34.0455042-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1661bc6-388c-4143-9f5d-53f71dd03091">
+    </UnitTestResult>
+  </Results>
+</TestRun>
