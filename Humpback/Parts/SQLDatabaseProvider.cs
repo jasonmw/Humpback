@@ -55,6 +55,21 @@ namespace Humpback.Parts {
                     try {
                         foreach (var s in sql) {
 
+                            if (s.Contains("DROP TABLE")) {
+
+                                if (_configuration.Verbose) {
+                                    Console.WriteLine("DROPPING CONSTRAINTS BEFORE Executing SQL: " + s);
+                                }
+
+                                string table_name = s.Replace("DROP TABLE ", "").Trim();
+                                foreach (var drop_string in DropTableConstraints(table_name, cmd)) {
+                                    cmd.CommandText = drop_string;
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                            }
+
+
                             if (_configuration.Verbose) {
                                 Console.WriteLine("Executing SQL: " + s);
                             }
