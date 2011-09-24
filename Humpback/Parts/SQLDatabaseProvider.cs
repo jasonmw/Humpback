@@ -113,37 +113,65 @@ namespace Humpback.Parts {
             bool has_filesmo = false;
             try {
                 bool fsmo = down.down.filesmo != null;
-                has_filesmo = true;
+                has_filesmo = fsmo;
             } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
                 // intentionally let thru, no smo object
             }
             if (has_filesmo) {
                 ExecuteSmo(_settings.ConnectionString(), sql[0]);
                 return 1;
-            } else {
-                using (var connection = GetOpenConnection()) {
-                    var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                    var cmd = connection.CreateCommand();
-                    cmd.Transaction = transaction;
-                    try {
-                        foreach (var s in sql) {
+            }
+            using (var connection = GetOpenConnection()) {
+                var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                var cmd = connection.CreateCommand();
+                cmd.Transaction = transaction;
+                try {
+                    foreach (var s in sql) {
+                        if (s.Contains("DROP TABLE")) {
 
                             if (_configuration.Verbose) {
-                                Console.WriteLine("Executing SQL: " + s);
+                                Console.WriteLine("DROPPING CONSTRAINTS BEFORE Executing SQL: " + s);
                             }
-                            cmd.CommandText = s;
-                            cmd.ExecuteNonQuery();
+
+                            string table_name = s.Replace("DROP TABLE ", "").Trim();
+                            foreach (var drop_string in DropTableConstraints(table_name, cmd)) {
+                                cmd.CommandText = drop_string;
+                                cmd.ExecuteNonQuery();
+                            }
+
                         }
-                        transaction.Commit();
-                    } catch {
-                        transaction.Rollback();
-                        throw;
-                    } finally {
-                        connection.Close();
+                        if (_configuration.Verbose) {
+                            Console.WriteLine("Executing SQL: " + s);
+                        }
+                        cmd.CommandText = s;
+                        cmd.ExecuteNonQuery();
                     }
+                    transaction.Commit();
+                } catch {
+                    transaction.Rollback();
+                    throw;
+                } finally {
+                    connection.Close();
                 }
-                return sql.Length;
             }
+            return sql.Length;
+        }
+
+        private IEnumerable<string> DropTableConstraints(string table_name, SqlCommand cmd) {
+            string constraint_select =
+                string.Format(
+                    "SELECT a.name FROM sys.objects a INNER JOIN sys.objects b ON a.parent_object_id = b.object_id WHERE b.name = '{0}'",
+                    table_name.Replace("[","").Replace("]",""));
+
+            cmd.CommandText = constraint_select;
+            var rv = new List<string>();
+            using (var reader = cmd.ExecuteReader()) {
+                while (reader.Read()) {
+                    rv.Add(string.Format("ALTER TABLE {0} DROP CONSTRAINT [{1}]", table_name, reader[0]));
+                }
+                reader.Close();
+            }
+            return rv;
         }
 
         protected virtual int ExecuteCommand(string command) {
