@@ -50,6 +50,7 @@
     <Compile Include="ConfigurationOptions\Options.cs" />
     <Compile Include="ConfigurationOptions\Project.cs" />
     <Compile Include="ConfigurationOptions\Settings.cs" />
+    <Compile Include="Parts\SourceEditor.cs" />
     <Compile Include="Parts\SQLCEDatabaseProvider.cs" />
     <Compile Include="Parts\JsonFileMigrationProvider.cs" />
     <Compile Include="Parts\FileWriter.cs" />

@@ -36,7 +36,10 @@ namespace Humpback {
                     _humpback_command = new Generator(_configuration, _settings, _file_writer);
                 } else if (_configuration.List) {
                     _settings.EnsureDirectories();
-                    _humpback_command = new MigrationViewer(_configuration,_migration_provider);
+                    _humpback_command = new MigrationViewer(_configuration, _migration_provider);
+                } else if (_configuration.File) {
+                    _settings.EnsureDirectories();
+                    _humpback_command = new SourceEditor(_configuration, _migration_provider, new MigrationViewer(_configuration, _migration_provider));
                 } else if (_configuration.Migrate) {
                     Console.WriteLine("current project: " + _settings.CurrentProject);
                     _settings.EnsureDirectories();

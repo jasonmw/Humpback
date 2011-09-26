@@ -32,6 +32,11 @@ namespace Humpback.ConfigurationOptions {
                          SetMainToFalse();
                          Sql = true;
                      })
+                .Add("f:|file:|F:|File:|FILE:",
+                     s => {
+                         SetMainToFalse();
+                         File = true;
+                     })
                 .Add("e|E|ENV|env|Env", e => {SetMainToFalse();Env = true;})
                 .Add("all", a => All = true)
                 .Add("single", s => Single = true)
@@ -96,6 +101,7 @@ namespace Humpback.ConfigurationOptions {
             Migrate = false;
             Sql = false;
             Env = false;
+            File = false;
             SetMigrateToLatestVersion();
             GenerateString = "";
         }
@@ -106,6 +112,7 @@ namespace Humpback.ConfigurationOptions {
             Migrate = false;
             Sql = false;
             Env = false;
+            File = false;
         }
 
         private void SetMigrateToLatestVersion() {
@@ -115,6 +122,7 @@ namespace Humpback.ConfigurationOptions {
         public Boolean WriteHelp { get; set; }
         public bool Generate { get; set; }
         public bool List { get; set; }
+        public bool File { get; set; }
         public bool Migrate { get; set; }
         public bool Sql { get; set; }
         public IEnumerable<string> Extra { get; set; }

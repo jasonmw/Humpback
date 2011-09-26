@@ -23,6 +23,8 @@ namespace Humpback.ConfigurationOptions {
                 write_generate_help();
             } else if ("LIST".StartsWith(flag)) {
                 write_list_help();
+            } else if ("FILE".StartsWith(flag)) {
+                write_edit_file_help();
             } else if ("MIGRATE".StartsWith(flag)) {
                 write_migrate_help();
             } else if ("SQL".StartsWith(flag)) {
@@ -97,13 +99,26 @@ List Migrations and Details
 
 2 commands available for listing migrations
 
-
 > hump -list    | List all migrations and their deploy status
 > hump -list 6  | List single migration by number
 
+");
+        }
+
+
+        private static void write_edit_file_help() {
+            Console.WriteLine(@"
+Humpback Migration Information
+==============================
+Edit Migration Text File
+==============================
+
+> hump -file 6  | Edit the specified migration file in the default text editor
 
 ");
         }
+
+
         private static void write_migrate_help() {
             Console.WriteLine(@"
 Humpback Migration Information

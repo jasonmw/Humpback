@@ -40,6 +40,7 @@ Main commands
     env      -e | Configure the migration environment (working directory, connection string)
     generate -g | Generate JSON migration files  
     list     -l | List Migrations and current migration state  
+    file     -f | Edit the file of the specified migration in the default text editor
     migrate  -m | Run Migrations against database  
     sql      -s | Generate SQL files from migration files  
 
@@ -49,7 +50,8 @@ For information about a specific command use the following
     hump -? env
     hump -? generate  
     hump -? migrate  
-    hump -? list  
+    hump -? list   
+    hump -? file  
     hump -? sql  
 
 
