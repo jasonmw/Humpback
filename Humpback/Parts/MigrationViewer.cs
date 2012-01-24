@@ -37,7 +37,7 @@ namespace Humpback.Parts {
                                                            / \`.
                                                           /  _\-'
                                                          /_,'
-"); // yes i know thats not actually a humpback whale, its a sperm whale, but for now thats too bad, theres not a terrible lot in ascii whale photos to choose from.
+"); // yes i know thats not actually a humpback whale, its a sperm whale, but for now thats too bad, theres not a lot of ascii whale photos to choose from.
     // also, if user doesnt' have monospaced font in their shell, it wont render right.   bummer for them!
             Console.WriteLine(migrations.Count + 
 @" Migrations              \o/ means it is currently deployed

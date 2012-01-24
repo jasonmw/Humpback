@@ -132,13 +132,14 @@ namespace Humpback.Parts {
         }
 
 
-        private void CreateFile(string action, dynamic obj) {
+        private string CreateFile(string action, dynamic obj) {
             string serialized = Helpers.Json(obj);
             action = action.Replace(" ", "_");
             action = Regex.Replace(action, @"[^\w\-_]", ""); 
             string file_name = string.Format("{0}_{1}.js",_configuration.NextSerialNumber(),action);
             var path = Path.Combine(_settings.MigrationsFolder(), file_name);
             _file_writer.WriteFile(path, serialized);
+            return path;
         }
 
         public void AddTable() {
@@ -289,7 +290,8 @@ namespace Humpback.Parts {
             dynamic down = "";
             dynamic output_object = new { up,down};
 
-            CreateFile("ExecuteSQL", output_object);
+            string sql_file_path = CreateFile("ExecuteSQL", output_object);
+
             Console.WriteLine("Generating Migration ExecuteSQL");
             Console.WriteLine(Helpers.Json(output_object));
         }
@@ -318,6 +320,7 @@ namespace Humpback.Parts {
             dynamic output_object = new { up };
             _file_writer.WriteFile(sql_file_path, "-- Execute SQLFile Migration " + text_path);
             CreateFile("SQLFile_" + String.Join("_", GenerateColumns().Keys), output_object);
+            SourceEditor.OpenFileInDefaultEditor(sql_file_path); // open sql file to edit right away.
             Console.WriteLine("Generating Migration " + text_path);
             Console.WriteLine(Helpers.Json(output_object));
         }

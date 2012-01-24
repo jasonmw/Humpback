@@ -40,8 +40,7 @@ namespace Humpback.Parts {
                 SaveDeployed();
             } else if (_configuration.NotDeployed) {
                 SaveUnDeployed();
-            }
-            else if (SingleMigrationID() > 0) {
+            } else if (SingleMigrationID() > 0) {
                 SaveSingle(SingleMigrationID());
             } else {
                 SaveAllSql();
