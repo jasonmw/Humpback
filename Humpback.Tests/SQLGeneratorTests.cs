@@ -6,10 +6,9 @@ using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
 using Humpback.Parts;
 using Humpback.Tests.Impl;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Humpback.Tests {
-    [TestClass]
     public class SQLGeneratorTests {
 
 
@@ -21,7 +20,7 @@ namespace Humpback.Tests {
         }
 
 
-        [TestMethod]
+        [Fact]
         public void TestGeneratePlainSQLString() {
             var json = "{\"up\":\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"}";
 
@@ -33,12 +32,12 @@ namespace Humpback.Tests {
 
             dynamic migration_object = Helpers.DeserializeMigration(json);
             _database_provider.ExecuteUpCommand(migration_object);
-            Assert.AreEqual("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
+            Assert.Equal("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
 
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGeneratePlainSQLStringArray() {
             var json = "{\"up\":[\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\",\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"]}";
 
@@ -50,7 +49,7 @@ namespace Humpback.Tests {
 
             dynamic migration_object = Helpers.DeserializeMigration(json);
             _database_provider.ExecuteUpCommand(migration_object);
-            Assert.AreEqual("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
+            Assert.Equal("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
 
 
         }
@@ -59,7 +58,7 @@ namespace Humpback.Tests {
 
 
 
-        [TestMethod]
+        [Fact]
         public void TestGeneratePlainSQLStringDown() {
             var json = "{\"down\":\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"}";
 
@@ -71,12 +70,12 @@ namespace Humpback.Tests {
 
             dynamic migration_object = Helpers.DeserializeMigration(json);
             _database_provider.ExecuteDownCommand(migration_object);
-            Assert.AreEqual("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
+            Assert.Equal("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
 
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGeneratePlainSQLStringArrayDown() {
             var json = "{\"down\":[\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\",\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"]}";
             //json = "{\"down\":[\"DELETE FROM [Control] WHERE ControlName = 'Facebook Status'\",\"DELETE FROM [ControlType] WHERE ControlTypeName = 'Facebook'\"]}";
@@ -88,7 +87,7 @@ namespace Humpback.Tests {
 
             dynamic migration_object = Helpers.DeserializeMigration(json);
             _database_provider.ExecuteDownCommand(migration_object);
-            Assert.AreEqual("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
+            Assert.Equal("DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'", _database_provider.LastCommand);
 
         }
 

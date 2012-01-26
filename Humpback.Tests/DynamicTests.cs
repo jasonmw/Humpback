@@ -3,50 +3,49 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Humpback.Parts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Humpback.Tests {
-    [TestClass]
     public class DynamicTests {
 
 
-        [TestMethod]
+        [Fact]
         public void TestForArray() {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[]{"stuff","morestuff"} };
 
-            Assert.IsNotNull(e.things.Length);
+            Assert.NotNull(e.things.Length);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestForArrayOnString() {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
 
-            Assert.IsNotNull(e.name.Length);
+            Assert.NotNull(e.name.Length);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestForString() {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
 
-            Assert.AreEqual(e.name.GetType(), typeof(string));
+            Assert.Equal(e.name.GetType(), typeof(string));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestForStringOnArray() {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
 
-            Assert.AreNotEqual(e.things.GetType(), typeof(string));
+            Assert.NotEqual(e.things.GetType(), typeof(string));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestForTypeOfArray() {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
@@ -54,8 +53,8 @@ namespace Humpback.Tests {
 
             Console.WriteLine(e.name.GetType());
             Console.WriteLine(e.things.GetType());
-            Assert.IsFalse(e.name.GetType().ToString().EndsWith("[]"));
-            Assert.IsTrue(e.things.GetType().ToString().EndsWith("[]"));
+            Assert.False(e.name.GetType().ToString().EndsWith("[]"));
+            Assert.True(e.things.GetType().ToString().EndsWith("[]"));
         }
 
 

@@ -2,76 +2,20 @@
 using System.IO;
 using Humpback.Parts;
 using Humpback.Tests.Impl;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
+using Xunit;
 
 namespace Humpback.Tests
 {
-    
-    
-    /// <summary>
-    ///This is a test class for SQLServerFormatterTest and is intended
-    ///to contain all SQLServerFormatterTest Unit Tests
-    ///</summary>
-    [TestClass()]
     public class SQLServerFormatterTest {
-
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext {
-            get {
-                return testContextInstance;
-            }
-            set {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
-
-
 
         private static Settings Settings {get {
             return TestHelpers.TestSettings;
 
         }}
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddTableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "1" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -81,15 +25,15 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(1); // create table
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("1"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
-            Assert.IsTrue(file_writer.FileContents.Contains("[last_name] decimal"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("Id"));
-            Assert.IsTrue(file_writer.FileContents.Contains("PRIMARY KEY"));
+            Assert.True(file_writer.FileName.Contains("1"));
+            Assert.True(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
+            Assert.True(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
+            Assert.True(file_writer.FileContents.Contains("[last_name] decimal"));
+            Assert.True(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
+            Assert.True(file_writer.FileContents.Contains("Id"));
+            Assert.True(file_writer.FileContents.Contains("PRIMARY KEY"));
         }
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddTableTestWithNullableAndDefault() {
             Configuration configuration = new Configuration(new[] { "-s", "11" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -99,16 +43,16 @@ namespace Humpback.Tests
             //migrations.SetMigrationNumber(11); // create table
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("11"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
-            Assert.IsTrue(file_writer.FileContents.Contains("[last_name] decimal"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("Id"));
-            Assert.IsTrue(file_writer.FileContents.Contains("PRIMARY KEY"));
-            Assert.IsTrue(file_writer.FileContents.Contains("[first_name] nvarchar(255) NOT NULL  DEFAULT ('JASON')"));
+            Assert.True(file_writer.FileName.Contains("11"));
+            Assert.True(file_writer.FileContents.Contains("CREATE TABLE [tname]"));
+            Assert.True(file_writer.FileContents.Contains("[first_name] nvarchar(255)"));
+            Assert.True(file_writer.FileContents.Contains("[last_name] decimal"));
+            Assert.True(file_writer.FileContents.Contains("CreatedOn datetime DEFAULT getutcdate() NOT NULL"));
+            Assert.True(file_writer.FileContents.Contains("Id"));
+            Assert.True(file_writer.FileContents.Contains("PRIMARY KEY"));
+            Assert.True(file_writer.FileContents.Contains("[first_name] nvarchar(255) NOT NULL  DEFAULT ('JASON')"));
         }
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterDropTableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "2" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -118,11 +62,11 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(2); // drop table
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("2"));
-            Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname]"));
+            Assert.True(file_writer.FileName.Contains("2"));
+            Assert.True(file_writer.FileContents.Contains("DROP TABLE [tname]"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterDrop2TableTest() {
             Configuration configuration = new Configuration(new[] { "-s", "8" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -133,12 +77,12 @@ namespace Humpback.Tests
             target.Execute();
             Console.WriteLine(file_writer.FileName);
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("8"));
-            Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname1]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("DROP TABLE [tname2]"));
+            Assert.True(file_writer.FileName.Contains("8"));
+            Assert.True(file_writer.FileContents.Contains("DROP TABLE [tname1]"));
+            Assert.True(file_writer.FileContents.Contains("DROP TABLE [tname2]"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "3" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -148,13 +92,13 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(3); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("3"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ADD [name]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("nvarchar(255)"));
+            Assert.True(file_writer.FileName.Contains("3"));
+            Assert.True(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
+            Assert.True(file_writer.FileContents.Contains("ADD [name]"));
+            Assert.True(file_writer.FileContents.Contains("nvarchar(255)"));
         }
         
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddColumnReferenceTest() {
             Configuration configuration = new Configuration(new[] { "-s", "9" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -164,14 +108,14 @@ namespace Humpback.Tests
             //migrations.SetMigrationNumber(9); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("9"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FK_orders_user_userid"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION"));
+            Assert.True(file_writer.FileName.Contains("9"));
+            Assert.True(file_writer.FileContents.Contains("FK_orders_user_userid"));
+            Assert.True(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
+            Assert.True(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION"));
         }
         
 
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddTableReferenceTest() {
             Configuration configuration = new Configuration(new[] { "-s", "10" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -181,16 +125,16 @@ namespace Humpback.Tests
             //migrations.SetMigrationNumber(10); // add col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("10"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_applicationpage_applicationpageid"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FK_applicationcontrol_application_applicationid"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationPageId]) REFERENCES [ApplicationPage] ([Id])"));
-            Assert.IsTrue(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationId]) REFERENCES [Application] ([Id])"));
+            Assert.True(file_writer.FileName.Contains("10"));
+            Assert.True(file_writer.FileContents.Contains("FK_applicationcontrol_applicationpage_applicationpageid"));
+            Assert.True(file_writer.FileContents.Contains("FK_applicationcontrol_application_applicationid"));
+            Assert.True(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationPageId]) REFERENCES [ApplicationPage] ([Id])"));
+            Assert.True(file_writer.FileContents.Contains("FOREIGN KEY ([ApplicationId]) REFERENCES [Application] ([Id])"));
         }
 
 
 
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterChangeColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "4" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -200,12 +144,12 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(3); // change col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("4"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER COLUMN [name]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("nvarchar(255)"));
+            Assert.True(file_writer.FileName.Contains("4"));
+            Assert.True(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
+            Assert.True(file_writer.FileContents.Contains("ALTER COLUMN [name]"));
+            Assert.True(file_writer.FileContents.Contains("nvarchar(255)"));
         }
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterDropColumnTest() {
             Configuration configuration = new Configuration(new[] { "-s", "5" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -215,11 +159,11 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(4); // change col
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("5"));
-            Assert.IsTrue(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
-            Assert.IsTrue(file_writer.FileContents.Contains("DROP COLUMN [name]"));
+            Assert.True(file_writer.FileName.Contains("5"));
+            Assert.True(file_writer.FileContents.Contains("ALTER TABLE [tname]"));
+            Assert.True(file_writer.FileContents.Contains("DROP COLUMN [name]"));
         }
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterAddIndexTest() {
             Configuration configuration = new Configuration(new[] { "-s", "6" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -229,10 +173,10 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(5); // add index
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("6"));
-            Assert.IsTrue(file_writer.FileContents.Contains("CREATE NONCLUSTERED INDEX [IX_categories_title_slug] ON [categories] ( [title] ASC, [slug] ASC )"));
+            Assert.True(file_writer.FileName.Contains("6"));
+            Assert.True(file_writer.FileContents.Contains("CREATE NONCLUSTERED INDEX [IX_categories_title_slug] ON [categories] ( [title] ASC, [slug] ASC )"));
         }
-        [TestMethod()]
+        [Fact]
         public void SqlFormatterDropIndexTest() {
             Configuration configuration = new Configuration(new[] { "-s", "7" });
             TestFileWriter file_writer = new TestFileWriter();
@@ -242,8 +186,8 @@ namespace Humpback.Tests
             migrations.SetMigrationNumber(6); // add index
             target.Execute();
             Console.WriteLine(file_writer.FileContents);
-            Assert.IsTrue(file_writer.FileName.Contains("7"));
-            Assert.IsTrue(file_writer.FileContents.Contains("DROP INDEX [categories].[IX_categories_title_slug]"));
+            Assert.True(file_writer.FileName.Contains("7"));
+            Assert.True(file_writer.FileContents.Contains("DROP INDEX [categories].[IX_categories_title_slug]"));
         }
     }
 
