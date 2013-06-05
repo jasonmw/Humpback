@@ -44,7 +44,7 @@ namespace Humpback.Parts {
 
 
         public string sql_create_schema_info_table {
-            get { return "CREATE TABLE SchemaInfo (Version INT)"; }
+            get { return "CREATE TABLE SchemaInfo (Version INT NOT NULL PRIMARY KEY)"; }
         }
 
         public string sql_initialize_schema_info {
