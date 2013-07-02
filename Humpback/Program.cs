@@ -56,6 +56,9 @@ namespace Humpback {
 
             } catch (Exception e)  {
                 Console.WriteLine(e.Message);
+                if(e.InnerException != null) {
+                    Console.WriteLine(e.InnerException.Message);
+                }
                 if(_configuration != null && _configuration.Verbose) {
                     Console.WriteLine(e.ToString());
                 }

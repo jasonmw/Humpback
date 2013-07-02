@@ -33,6 +33,7 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("Id"));
             Assert.True(file_writer.FileContents.Contains("PRIMARY KEY"));
         }
+        
         [Fact]
         public void SqlFormatterAddTableTestWithNullableAndDefault() {
             Configuration configuration = new Configuration(new[] { "-s", "11" });

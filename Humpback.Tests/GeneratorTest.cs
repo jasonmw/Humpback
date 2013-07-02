@@ -29,7 +29,6 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileName.Contains("Users"));
             Assert.True(file_writer.FileContents.Contains("create_table"));
             Assert.True(file_writer.FileContents.Contains("drop_table"));
-            Assert.True(file_writer.FileContents.Contains("column_name_here"));
         }
 
         [Fact]
@@ -60,7 +59,24 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("drop_table"));
             Assert.True(file_writer.FileContents.Contains("first_name"));
             Assert.True(file_writer.FileContents.Contains("last_name"));
-            Assert.True(file_writer.FileContents.Contains("timestamps"));
+            Assert.True(file_writer.FileContents.Contains("full_audit"));
+        }
+        [Fact]
+        public void GeneratorAddTableMultipleColumnWithNullable() {
+            Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string:false", "last_name:string:true:'welty'" });
+            TestFileWriter file_writer = new TestFileWriter();
+            IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
+            target.Execute();
+            Assert.True(file_writer.FileName.Contains("Users"));
+            Assert.True(file_writer.FileContents.Contains("create_table"));
+            Assert.True(file_writer.FileContents.Contains("up"));
+            Assert.True(file_writer.FileContents.Contains("down"));
+            Assert.True(file_writer.FileContents.Contains("drop_table"));
+            Assert.True(file_writer.FileContents.Contains("first_name"));
+            Assert.True(file_writer.FileContents.Contains("last_name"));
+            Assert.True(file_writer.FileContents.Contains("\"nullable\":false"));
+            Assert.True(file_writer.FileContents.Contains("\"default\":\"'welty'\""));
+            Assert.True(file_writer.FileContents.Contains("full_audit"));
         }
 
         [Fact]

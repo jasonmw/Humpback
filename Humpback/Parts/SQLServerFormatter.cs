@@ -74,6 +74,11 @@ namespace Humpback.Parts {
                 return "\n\t, CreatedOn datetime DEFAULT getutcdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getutcdate() NOT NULL";
             }
         }
+        public string sql_fs_FullAudit {
+            get {
+                return "\n\t, CreatedOn datetime DEFAULT getutcdate() NOT NULL\n\t, UpdatedOn datetime DEFAULT getutcdate() NOT NULL, CreatedBy nvarchar(1000) NULL, UpdatedBy nvarchar(1000) NULL";
+            }
+        }
         public string sql_fs_primary_key {
             get {
                 return "Id int PRIMARY KEY IDENTITY(1,1) NOT NULL \n\t";
@@ -148,9 +153,12 @@ namespace Humpback.Parts {
             var counter = 0;
             foreach (dynamic col in columns) {
                 //name
-
+                bool nullable_specified = false;
                 string column_name = col.name;
                 string column_type = col.type;
+                if(col.nullable != null) {
+                    nullable_specified = true;
+                }
                 bool nullable = col.nullable ?? true;
                 string default_value = col.@default ?? "";
                 string extra_col_def = col.extra ?? "";
@@ -162,7 +170,9 @@ namespace Humpback.Parts {
                     string fk_name = string.Format(sql_fs_foreign_key_name, table_name.ToLower(), col.name.ToLower(), id_col_name.ToLower()); // FK_Orders_User_UserId
                     string fk = string.Format(sql_fs_foreign_key, fk_name, table_name, id_col_name, col.name);
                     _commands_to_add.Add(fk);
-                    nullable = false;
+                    if (!nullable_specified) {
+                        nullable = false;
+                    }
                 }
 
 
@@ -282,7 +292,9 @@ namespace Humpback.Parts {
                 var columns = BuildColumnList(op.create_table.name, op.create_table.columns);
 
                 //add some timestamps?
-                if (op.create_table.timestamps != null) {
+                if (op.create_table.full_audit != null) {
+                    columns += sql_fs_FullAudit;
+                } else if (op.create_table.timestamps != null) {
                     columns += sql_fs_Timestamps;
                 }
 

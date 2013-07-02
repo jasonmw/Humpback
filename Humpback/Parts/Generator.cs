@@ -110,13 +110,28 @@ namespace Humpback.Parts {
         }
 
         private void ChangeColumn() {
-
-            var column_dictionary = GenerateColumns();
+            var nullables = new Dictionary<string, bool>();
+            var defaults = new Dictionary<string, string>();
+            var column_dictionary = GenerateColumns(nullables,defaults);
 
             IList<dynamic> columns = new List<dynamic>();
 
             foreach (var column in column_dictionary) {
-                columns.Add(new { name = column.Key, @type = column.Value });
+                if (nullables.ContainsKey(column.Key) && defaults.ContainsKey(column.Key)) {
+
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key], @default = defaults[column.Key] });
+                } 
+                
+                else if(nullables.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key] });
+                } 
+                else if (defaults.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, @default = defaults[column.Key] });
+                }
+                else {
+                    columns.Add(new {name = column.Key, @type = column.Value});
+                }
+                
             }
             if (!columns.Any()) {
                 columns.Add(new { name = "column_name_here", @type = "string" });
@@ -144,19 +159,29 @@ namespace Humpback.Parts {
 
         public void AddTable() {
 
-            var column_dictionary = GenerateColumns();
+
+            var nullables = new Dictionary<string, bool>();
+            var defaults = new Dictionary<string, string>();
+            var column_dictionary = GenerateColumns(nullables, defaults);
 
             IList<dynamic> columns = new List<dynamic>();
 
-            foreach(var column in column_dictionary) {
-                columns.Add(new {name=column.Key,@type=column.Value});
-            }
-            if (!columns.Any()) {
-                columns.Add(new { name = "column_name_here", @type = "string" });
+            foreach (var column in column_dictionary) {
+                if (nullables.ContainsKey(column.Key) && defaults.ContainsKey(column.Key)) {
+
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key], @default = defaults[column.Key] });
+                } else if (nullables.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key] });
+                } else if (defaults.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, @default = defaults[column.Key] });
+                } else {
+                    columns.Add(new { name = column.Key, @type = column.Value });
+                }
+
             }
 
             var name = _configuration.GenerateString;
-            dynamic up = new {create_table=new{name,timestamps=true,columns}};
+            dynamic up = new {create_table=new{name,full_audit=true,columns}};
             dynamic down = new {drop_table=name};
             dynamic output_object = new {up, down};
             CreateFile("AddTable_" + name, output_object);
@@ -202,10 +227,25 @@ namespace Humpback.Parts {
                 column_name = _configuration.GenerateString.Substring(3, ix - 3);
             }
 
-            var column_dictionary = GenerateColumns();
+
+            var nullables = new Dictionary<string, bool>();
+            var defaults = new Dictionary<string, string>();
+            var column_dictionary = GenerateColumns(nullables, defaults);
+
             IList<dynamic> columns = new List<dynamic>();
+
             foreach (var column in column_dictionary) {
-                columns.Add(new { name = column.Key, @type = column.Value });
+                if (nullables.ContainsKey(column.Key) && defaults.ContainsKey(column.Key)) {
+
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key], @default = defaults[column.Key] });
+                } else if (nullables.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, nullable = nullables[column.Key] });
+                } else if (defaults.ContainsKey(column.Key)) {
+                    columns.Add(new { name = column.Key, @type = column.Value, @default = defaults[column.Key] });
+                } else {
+                    columns.Add(new { name = column.Key, @type = column.Value });
+                }
+
             }
             if(!columns.Any()) {
                 if (generate_string_upper.StartsWith("ADD") && generate_string_upper.Contains("TO")) {
@@ -359,13 +399,28 @@ namespace Humpback.Parts {
         /// sometimes used just for the names, and not the value (type)
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> GenerateColumns() {
+        private Dictionary<string, string> GenerateColumns(Dictionary<string,bool> nullable_values = null, Dictionary<string,string> default_values = null) {
             var rv = new Dictionary<string, string>(); // rv is return value.  don't hate for the acronym
+            nullable_values = nullable_values ?? new Dictionary<string, bool>();
+            default_values = default_values ?? new Dictionary<string, string>();
+
             var extra_array = _configuration.Extra.Except(new[] { _configuration.GenerateString });
             foreach (var item in extra_array) {
                 if (item.Contains(":")) {
                     var parts = item.Trim().Split(":".ToCharArray());
                     rv.Add(parts[0].TrimEnd(), parts[1].TrimStart());
+                    if(parts.Length > 2 && !string.IsNullOrWhiteSpace(parts[2])) {
+                        bool nullable = false;
+                        if(bool.TryParse(parts[2].Trim(),out nullable)) {
+                            
+                        } else {
+                            nullable = true;
+                        }
+                        nullable_values.Add(parts[0].TrimEnd(),nullable);
+                    }
+                    if(parts.Length > 3 && !string.IsNullOrWhiteSpace(parts[3])) {
+                        default_values.Add(parts[0].TrimEnd(),parts[3].Trim());
+                    }
                 } else {
                     // default to string if they dont' specify type
                     rv.Add(item.Trim(), "string");
