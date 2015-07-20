@@ -292,7 +292,7 @@ namespace Humpback.Parts {
                 var columns = BuildColumnList(op.create_table.name, op.create_table.columns);
 
                 //add some timestamps?
-                if (op.create_table.full_audit != null) {
+                if (op.create_table.full_audit ?? false) {
                     columns += sql_fs_FullAudit;
                 } else if (op.create_table.timestamps != null) {
                     columns += sql_fs_Timestamps;
