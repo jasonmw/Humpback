@@ -67,6 +67,12 @@ namespace Humpback.Parts
         {
             Console.WriteLine("Opening {0} in the default editor.", fileName);
             var text_editor = (string)Registry.GetValue(@"HKEY_CLASSES_ROOT\txtfile\shell\open\command\", "", "notepad.exe");
+            if (string.IsNullOrEmpty(text_editor) || !File.Exists(text_editor))
+            {
+                string windowsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                text_editor = Path.Combine(windowsDirectory, "notepad.exe");
+            }
+
             text_editor = text_editor.Replace("\"%1\"", "").Trim();
             System.Diagnostics.Process.Start(text_editor, fileName);
         }
