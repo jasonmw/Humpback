@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Humpback.Parts;
 using Xunit;
 
-namespace Humpback.Tests {
-    public class DynamicTests {
+namespace Humpback.Tests
+{
+    public class DynamicTests
+    {
 
 
         [Fact]
-        public void TestForArray() {
+        public void TestForArray()
+        {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
-            dynamic e = new { name = "jason", things = new[]{"stuff","morestuff"} };
+            dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
 
             Assert.NotNull(e.things.Length);
         }
 
         [Fact]
-        public void TestForArrayOnString() {
+        public void TestForArrayOnString()
+        {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
@@ -28,7 +28,8 @@ namespace Humpback.Tests {
         }
 
         [Fact]
-        public void TestForString() {
+        public void TestForString()
+        {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
@@ -37,7 +38,8 @@ namespace Humpback.Tests {
         }
 
         [Fact]
-        public void TestForStringOnArray() {
+        public void TestForStringOnArray()
+        {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = "jason", things = new[] { "stuff", "morestuff" } };
@@ -46,7 +48,8 @@ namespace Humpback.Tests {
         }
 
         [Fact]
-        public void TestForTypeOfArray() {
+        public void TestForTypeOfArray()
+        {
 
             //dynamic d = new { name = "jason", things = new{val="stuff"} }; // throws error testing for Length property
             dynamic e = new { name = new { name2 = "jason" }, things = new[] { new { name2 = "jason" }, new { name2 = "jason" } } };
