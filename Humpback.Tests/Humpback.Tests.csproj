@@ -72,6 +72,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedVersionInfo.cs">
+      <Link>Properties\SharedVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="GeneratorTest.cs" />
@@ -89,10 +92,6 @@
     <ProjectReference Include="..\Humpback.Interfaces\Humpback.Interfaces.csproj">
       <Project>{B830E3E4-3942-48BB-97A8-3E9BB0E9F1E1}</Project>
       <Name>Humpback.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Humpback\Humpback.csproj">
-      <Project>{2EA42E6C-D69E-46DD-AA57-5BDC47B1AFF3}</Project>
-      <Name>Humpback</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
