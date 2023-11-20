@@ -16,3 +16,4 @@ _ReSharper.*
 *.rptproj.user
 *.db
 /.vs
+/packages
