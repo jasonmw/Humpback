@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humpback.Tests", "Humpback.Tests\Humpback.Tests.csproj", "{6E00DC4B-EF35-41F3-9553-CE3F867F6AE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90DAD459-602D-4E95-9231-65E6F75BFBEC}"
+	ProjectSection(SolutionItems) = preProject
+		SharedVersionInfo.cs = SharedVersionInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
