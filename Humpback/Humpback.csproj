@@ -59,7 +59,7 @@
     <Compile Include="Parts\MigrationViewer.cs" />
     <Compile Include="Parts\SettingsActions.cs" />
     <Compile Include="Parts\SourceEditor.cs" />
-    <Compile Include="Parts\SQLCEDatabaseProvider.cs" />
+    <Compile Include="Parts\HumbackDatabaseProvider.cs" />
     <Compile Include="Parts\SQLDatabaseProvider.cs" />
     <Compile Include="Parts\SQLServerFormatter.cs" />
     <Compile Include="Program.cs" />
