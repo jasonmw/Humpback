@@ -15,3 +15,4 @@ _ReSharper.*
 *.resharper.user
 *.rptproj.user
 *.db
+/.vs
