@@ -17,3 +17,4 @@ _ReSharper.*
 *.db
 /.vs
 /packages
+/Humpback.Tests/.vs
