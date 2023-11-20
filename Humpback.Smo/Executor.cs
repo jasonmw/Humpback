@@ -11,7 +11,8 @@ namespace Humpback.Smo {
 
         public static int Execute(string connection_string, string sql) {
             using (var conn = new SqlConnection(connection_string)) {
-                var server = new Server(new ServerConnection(conn));
+                var serverConnection = new ServerConnection(connection_string);
+                var server = new Server(serverConnection);
                 conn.Open();
                 return server.ConnectionContext.ExecuteNonQuery(sql);
             }
