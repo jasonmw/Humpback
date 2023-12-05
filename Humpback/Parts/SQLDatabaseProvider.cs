@@ -51,7 +51,7 @@ namespace Humpback.Parts
             }
             if (has_filesmo)
             {
-                ExecuteSmo(_settings.ConnectionString(), sql[0]);
+                Smo.Executor.Execute(_settings.ConnectionString(), sql[0]);
                 return 1;
             }
             else
@@ -108,45 +108,6 @@ namespace Humpback.Parts
             }
         }
 
-        // due to dependency, kinda pulling this out on an as needed basis
-        // this way if someone doenst' have smo, and doesnt try to call, never has an issue.
-        private int ExecuteSmo(string connection_string, string sql)
-        {
-            // Smo.Executor.Execute(_settings.ConnectionString(), sql[0]);
-            if (smo_assembly == null)
-            {
-                load_smo_assembly();
-            }
-            var Executor = smo_assembly.GetType("Humpback.Smo.Executor");
-            var Execute = Executor.GetMethod("Execute");
-            return (int)Execute.Invoke(null, new[] { connection_string, sql });
-        }
-
-        private void load_smo_assembly()
-        {
-            var _assembly = Assembly.GetExecutingAssembly();
-            using (var resource_stream = _assembly.GetManifestResourceStream("Humpback.Artifacts.Humpback.Smo.dll"))
-            {
-                smo_assembly = Assembly.Load(ReadFully(resource_stream));
-            }
-        }
-
-        // Thank you Jon Skeet!  http://stackoverflow.com/questions/221925/creating-a-byte-array-from-a-stream/221941#221941
-        public static byte[] ReadFully(Stream input)
-        {
-            var buffer = new byte[16 * 1024];
-            using (var ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
-        private Assembly smo_assembly;
-
         public virtual int ExecuteDownCommand(dynamic down)
         {
             if (down.down == null)
@@ -166,7 +127,7 @@ namespace Humpback.Parts
             }
             if (has_filesmo)
             {
-                ExecuteSmo(_settings.ConnectionString(), sql[0]);
+                Smo.Executor.Execute(_settings.ConnectionString(), sql[0]);
                 return 1;
             }
             using (var connection = GetOpenConnection())
