@@ -2,7 +2,9 @@
 using Humpback.Interfaces;
 using Humpback.Parts;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace Humpback
 {
@@ -92,19 +94,50 @@ namespace Humpback
             }
             if (Debugger.IsAttached && Environment.UserInteractive)
             {
-                string line = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(line))
+                string[] inputs = ParseUserString(Console.ReadLine());
+                if (inputs.Length > 0)
                 {
-                    return 0;
-                }
-
-                string[] input = line.Split();
-                if (input.Length > 0)
-                {
-                    return Main(input);
+                    Main(inputs);
                 }
             }
+
             return 0;
+        }
+
+        private static string[] ParseUserString(string userString)
+        {
+            if (string.IsNullOrWhiteSpace(userString))
+            {
+                return new string[0];
+            }
+
+            int start = 0;
+            bool quote = false;
+            List<string> inputs = new List<string>();
+            for (int i = 0; i < userString.Length; i++)
+            {
+                if (userString[i] == '"' || (!quote && userString[i] == ' '))
+                {
+                    if (i - start > 0)
+                    {
+                        inputs.Add(userString.Substring(start, i - start));
+                    }
+
+                    start = i + 1;
+                }
+
+                if (userString[i] == '"')
+                {
+                    quote = !quote;
+                }
+            }
+
+            if (userString.Length - start > 0)
+            {
+                inputs.Add(userString.Substring(start, userString.Length - start));
+            }
+
+            return inputs.ToArray();
         }
 
     }
