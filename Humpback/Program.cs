@@ -90,9 +90,19 @@ namespace Humpback
                 }
                 return -1;
             }
-            if (Debugger.IsAttached)
+            if (Debugger.IsAttached && Environment.UserInteractive)
             {
-                Console.ReadLine();
+                string line = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    return 0;
+                }
+
+                string[] input = line.Split();
+                if (input.Length > 0)
+                {
+                    return Main(input);
+                }
             }
             return 0;
         }
