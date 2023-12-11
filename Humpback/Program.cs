@@ -73,14 +73,13 @@ namespace Humpback
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                if (e.InnerException != null)
+                var inner = e.InnerException;
+                while(inner != null)
                 {
-                    Console.WriteLine(e.InnerException.Message);
-                    if (e.InnerException.InnerException != null)
-                    {
-                        Console.WriteLine(e.InnerException.InnerException.Message);
-                    }
+                    Console.WriteLine(inner.Message);
+                    inner = inner.InnerException;
                 }
+
                 if (_configuration != null && _configuration.Verbose)
                 {
                     Console.WriteLine(e.ToString());
