@@ -252,7 +252,6 @@ namespace Humpback.Parts
             }
         }
 
-
         private void EnsureSchemaInfo()
         {
             try
@@ -265,7 +264,5 @@ namespace Humpback.Parts
                 ExecuteCommand(_sql_formatter.sql_initialize_schema_info);
             }
         }
-
-
     }
 }

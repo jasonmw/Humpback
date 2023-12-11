@@ -1,6 +1,5 @@
 ﻿using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
-using System.Data.SqlClient;
 
 namespace Humpback.Smo
 {
@@ -9,13 +8,9 @@ namespace Humpback.Smo
 
         public static int Execute(string connection_string, string sql)
         {
-            using (var conn = new SqlConnection(connection_string))
-            {
-                var serverConnection = new ServerConnection(connection_string);
-                var server = new Server(serverConnection);
-                conn.Open();
-                return server.ConnectionContext.ExecuteNonQuery(sql);
-            }
+            var connection = new Microsoft.Data.SqlClient.SqlConnection(connection_string);
+            Server server = new Server(new ServerConnection(connection));
+            return server.ConnectionContext.ExecuteNonQuery(sql);
         }
     }
 }
