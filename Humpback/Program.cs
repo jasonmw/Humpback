@@ -4,7 +4,6 @@ using Humpback.Parts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Humpback
 {
@@ -74,7 +73,7 @@ namespace Humpback
             {
                 Console.WriteLine(e.Message);
                 var inner = e.InnerException;
-                while(inner != null)
+                while (inner != null)
                 {
                     Console.WriteLine(inner.Message);
                     inner = inner.InnerException;

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Reflection;
 using Configuration = Humpback.ConfigurationOptions.Configuration;
 using Settings = Humpback.ConfigurationOptions.Settings;
 
