@@ -7,7 +7,7 @@ The database migrations are similar to rails, they are [stored as json](https://
 
 Your interface is the command line.
 
-##Available via NuGet as a package manager console tool
+## Available via NuGet as a package manager console tool
 From Visual Studio package manager console
 
 ```
