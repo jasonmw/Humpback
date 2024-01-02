@@ -99,6 +99,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedVersionInfo.cs">
+      <Link>Properties\SharedVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="GeneratorTest.cs" />

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedVersionInfo.cs">
+      <Link>Properties\SharedVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IFileWriter.cs" />
     <Compile Include="IMigrationProvider.cs" />

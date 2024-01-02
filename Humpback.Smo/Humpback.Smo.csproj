@@ -269,6 +269,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedVersionInfo.cs">
+      <Link>Properties\SharedVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Executor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
