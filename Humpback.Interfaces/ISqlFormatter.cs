@@ -1,5 +1,7 @@
-﻿namespace Humpback.Interfaces {
-    public interface ISqlFormatter {
+﻿namespace Humpback.Interfaces
+{
+    public interface ISqlFormatter
+    {
         string[] GenerateSQLUp(dynamic operation);
         string[] GenerateSQLDown(dynamic operation);
         string sql_file_name(string p);

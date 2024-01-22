@@ -1,18 +1,18 @@
-﻿using Humpback.Parts;
+﻿using Humpback.ConfigurationOptions;
+using Humpback.Parts;
 using Humpback.Tests.Impl;
-using System;
-using Humpback.ConfigurationOptions;
-using Humpback;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Humpback.Tests
 {
-    
-    public class GeneratorTest {
 
-        private static Settings Settings {
-            get {
+    public class GeneratorTest
+    {
+
+        private static Settings Settings
+        {
+            get
+            {
                 return TestHelpers.TestSettings;
 
             }
@@ -21,9 +21,10 @@ namespace Humpback.Tests
         ///A test for Generator
         ///</summary>
         [Fact]
-        public void GeneratorAddTableNoColumnsSpecified() {
-            Configuration configuration = new Configuration(new[] { "-g","Users" });
-            TestFileWriter file_writer = new TestFileWriter(); 
+        public void GeneratorAddTableNoColumnsSpecified()
+        {
+            Configuration configuration = new Configuration(new[] { "-g", "Users" });
+            TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
             target.Execute();
             Assert.True(file_writer.FileName.Contains("Users"));
@@ -32,7 +33,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorAddTable1Column() {
+        public void GeneratorAddTable1Column()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -47,7 +49,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorAddTableMultipleColumn() {
+        public void GeneratorAddTableMultipleColumn()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string", "last_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -62,7 +65,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("full_audit"));
         }
         [Fact]
-        public void GeneratorAddTableMultipleColumnWithNullable() {
+        public void GeneratorAddTableMultipleColumnWithNullable()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "Users", "first_name:string:false", "last_name:string:true:'welty'" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -80,7 +84,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorDropTable() {
+        public void GeneratorDropTable()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "DropUsers" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -93,7 +98,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorRemoveColumn() {
+        public void GeneratorRemoveColumn()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "Removefirst_nameFromUsers" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -108,7 +114,8 @@ namespace Humpback.Tests
         ///A test for AddColumn
         ///</summary>
         [Fact]
-        public void GeneratorAddSingleColumnTest() {
+        public void GeneratorAddSingleColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "addfirst_nametoUsers" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -121,7 +128,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorAddSingleColumnTest_Escaped_To() {
+        public void GeneratorAddSingleColumnTest_Escaped_To()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "addcustomer_name_to_Users" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -134,7 +142,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorAddSingleColumnTestDuplicateTo() {
+        public void GeneratorAddSingleColumnTestDuplicateTo()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "addcustomernametoUsers" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -143,7 +152,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void GeneratorAddMultipleColumnTest() {
+        public void GeneratorAddMultipleColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "addfirst_nametoUsers", "first_name:string", "last_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -158,7 +168,8 @@ namespace Humpback.Tests
 
 
         [Fact]
-        public void GeneratorAddReferenceColumnTest() {
+        public void GeneratorAddReferenceColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "AddUserToOrders", "User:reference" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -176,7 +187,8 @@ namespace Humpback.Tests
         ///A test for AddColumn
         ///</summary>
         [Fact]
-        public void GeneratorChangeSingleColumnTest() {
+        public void GeneratorChangeSingleColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "ChangeUsers", "first_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -189,7 +201,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("down"));
         }
         [Fact]
-        public void GeneratorChangeMultipleColumnTest() {
+        public void GeneratorChangeMultipleColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "ChangeUsers", "first_name:string", "last_name:string" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -206,7 +219,8 @@ namespace Humpback.Tests
         ///A test for AddIndex
         ///</summary>
         [Fact]
-        public void GeneratorAddIndexTest() {
+        public void GeneratorAddIndexTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "addindextoUsers", "first_name", "last_name" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -219,7 +233,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("last_name"));
         }
         [Fact]
-        public void GeneratorDropIndexTest() {
+        public void GeneratorDropIndexTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "removeindexfromUsers", "first_name", "last_name" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -236,7 +251,8 @@ namespace Humpback.Tests
         ///A test for File
         ///</summary>
         [Fact]
-        public void GeneratorFileTest() {
+        public void GeneratorFileTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "File", "mysqlfile" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);
@@ -245,7 +261,7 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("file"));
             Assert.True(file_writer.FileContents.Contains("mysqlfile"));
             Assert.True(file_writer.FileContents.Contains("up"));
-            
+
         }
 
 
@@ -253,7 +269,8 @@ namespace Humpback.Tests
         ///A test for Raw SQL
         ///</summary>
         [Fact]
-        public void GeneratorSqlTest() {
+        public void GeneratorSqlTest()
+        {
             Configuration configuration = new Configuration(new[] { "-g", "SQL", "CREATE TABLE Users (ID {pk}, first_name {string} NOT NULL, price_paid {money})" });
             TestFileWriter file_writer = new TestFileWriter();
             IHumpbackCommand target = new Generator(configuration, Settings, file_writer);

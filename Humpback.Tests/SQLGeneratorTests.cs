@@ -1,19 +1,19 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Humpback.ConfigurationOptions;
+﻿using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
 using Humpback.Parts;
 using Humpback.Tests.Impl;
 using Xunit;
 
-namespace Humpback.Tests {
-    public class SQLGeneratorTests {
+namespace Humpback.Tests
+{
+    public class SQLGeneratorTests
+    {
 
 
-        private static Settings Settings {
-            get {
+        private static Settings Settings
+        {
+            get
+            {
                 return TestHelpers.TestSettings;
 
             }
@@ -21,7 +21,8 @@ namespace Humpback.Tests {
 
 
         [Fact]
-        public void TestGeneratePlainSQLString() {
+        public void TestGeneratePlainSQLString()
+        {
             var json = "{\"up\":\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"}";
 
 
@@ -38,7 +39,8 @@ namespace Humpback.Tests {
         }
 
         [Fact]
-        public void TestGeneratePlainSQLStringArray() {
+        public void TestGeneratePlainSQLStringArray()
+        {
             var json = "{\"up\":[\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\",\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"]}";
 
 
@@ -59,7 +61,8 @@ namespace Humpback.Tests {
 
 
         [Fact]
-        public void TestGeneratePlainSQLStringDown() {
+        public void TestGeneratePlainSQLStringDown()
+        {
             var json = "{\"down\":\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"}";
 
 
@@ -76,9 +79,9 @@ namespace Humpback.Tests {
         }
 
         [Fact]
-        public void TestGeneratePlainSQLStringArrayDown() {
+        public void TestGeneratePlainSQLStringArrayDown()
+        {
             var json = "{\"down\":[\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\",\"DELETE FROM [Control] WHERE ControlName LIKE '%Date Label'\"]}";
-            //json = "{\"down\":[\"DELETE FROM [Control] WHERE ControlName = 'Facebook Status'\",\"DELETE FROM [ControlType] WHERE ControlTypeName = 'Facebook'\"]}";
 
             Configuration configuration = new Configuration(new[] { "-s", "1" });
             TestFileWriter file_writer = new TestFileWriter();
