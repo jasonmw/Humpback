@@ -199,6 +199,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedVersionInfo.cs">
+      <Link>Properties\SharedVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="ConfigurationOptions\Configuration.cs" />
     <Compile Include="ConfigurationOptions\Help.cs" />
     <Compile Include="ConfigurationOptions\Options.cs" />
