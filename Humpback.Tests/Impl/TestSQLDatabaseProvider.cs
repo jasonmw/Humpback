@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Humpback.ConfigurationOptions;
+﻿using Humpback.ConfigurationOptions;
 using Humpback.Interfaces;
 using Humpback.Parts;
 
-namespace Humpback.Tests.Impl {
-    public class TestSQLDatabaseProvider : SQLDatabaseProvider {
-        public TestSQLDatabaseProvider(Configuration configuration, Settings settings, ISqlFormatter sql_formatter) : base(configuration, settings, sql_formatter) {
+namespace Humpback.Tests.Impl
+{
+    public class TestSQLDatabaseProvider : SQLDatabaseProvider
+    {
+        public TestSQLDatabaseProvider(Configuration configuration, Settings settings, ISqlFormatter sql_formatter) : base(configuration, settings, sql_formatter)
+        {
         }
 
-        protected override int ExecuteCommand(string command) {
+        protected override int ExecuteCommand(string command)
+        {
             LastCommand = command;
             return 0;
         }
@@ -19,45 +19,61 @@ namespace Humpback.Tests.Impl {
         public string LastCommand { get; private set; }
 
 
-        public new virtual int ExecuteUpCommand(dynamic up) {
+        public new virtual int ExecuteUpCommand(dynamic up)
+        {
 
             var sql = _sql_formatter.GenerateSQLUp(up);
             // test for file
             bool has_filesmo = false;
-            try {
+            try
+            {
                 bool fsmo = up.up.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
                 // intentionally let thru, no smo object
             }
-            if (has_filesmo) {
+            if (has_filesmo)
+            {
                 LastCommand = sql[0];
-            } else {
-                
-                        foreach (var s in sql) {
+            }
+            else
+            {
 
-                            LastCommand += s;
-                        }
+                foreach (var s in sql)
+                {
+
+                    LastCommand += s;
+                }
             }
             return 1;
         }
 
-        public new virtual int ExecuteDownCommand(dynamic down) {
+        public new virtual int ExecuteDownCommand(dynamic down)
+        {
 
             var sql = _sql_formatter.GenerateSQLDown(down);
             // test for file
             bool has_filesmo = false;
-            try {
+            try
+            {
                 bool fsmo = down.down.filesmo != null;
                 has_filesmo = true;
-            } catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {
+            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
                 // intentionally let thru, no smo object
             }
-            if (has_filesmo) {
+            if (has_filesmo)
+            {
                 LastCommand = sql[0];
-            } else {
+            }
+            else
+            {
 
-                foreach (var s in sql) {
+                foreach (var s in sql)
+                {
 
                     LastCommand += s;
                 }

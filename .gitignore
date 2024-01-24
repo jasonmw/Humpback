@@ -15,3 +15,10 @@ _ReSharper.*
 *.resharper.user
 *.rptproj.user
 *.db
+/.vs
+/packages
+/Humpback.Tests/.vs
+/Humpback.Smo/.vs
+/Humpback/.vs
+/MigrationBackup
+/Humpback.Interfaces/.vs
