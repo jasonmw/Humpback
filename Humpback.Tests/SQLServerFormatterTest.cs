@@ -1,22 +1,27 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using Humpback.ConfigurationOptions;
+using Humpback.Interfaces;
 using Humpback.Parts;
 using Humpback.Tests.Impl;
 using System;
-using Humpback.ConfigurationOptions;
-using Humpback.Interfaces;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Humpback.Tests
 {
-    public class SQLServerFormatterTest {
+    public class SQLServerFormatterTest
+    {
 
-        private static Settings Settings {get {
-            return TestHelpers.TestSettings;
+        private static Settings Settings
+        {
+            get
+            {
+                return TestHelpers.TestSettings;
 
-        }}
+            }
+        }
         [Fact]
-        public void SqlFormatterAddTableTest() {
+        public void SqlFormatterAddTableTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "1" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -33,9 +38,10 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("Id"));
             Assert.True(file_writer.FileContents.Contains("PRIMARY KEY"));
         }
-        
+
         [Fact]
-        public void SqlFormatterAddTableTestWithNullableAndDefault() {
+        public void SqlFormatterAddTableTestWithNullableAndDefault()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "11" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -54,7 +60,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("[first_name] nvarchar(255) NOT NULL  DEFAULT ('JASON')"));
         }
         [Fact]
-        public void SqlFormatterDropTableTest() {
+        public void SqlFormatterDropTableTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "2" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -68,7 +75,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void SqlFormatterDrop2TableTest() {
+        public void SqlFormatterDrop2TableTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "8" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -84,7 +92,8 @@ namespace Humpback.Tests
         }
 
         [Fact]
-        public void SqlFormatterAddColumnTest() {
+        public void SqlFormatterAddColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "3" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -98,9 +107,10 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("ADD [name]"));
             Assert.True(file_writer.FileContents.Contains("nvarchar(255)"));
         }
-        
+
         [Fact]
-        public void SqlFormatterAddColumnReferenceTest() {
+        public void SqlFormatterAddColumnReferenceTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "9" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -114,10 +124,11 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD [UserId] INT NOT NULL"));
             Assert.True(file_writer.FileContents.Contains("ALTER TABLE [Orders] ADD CONSTRAINT [FK_orders_user_userid] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION"));
         }
-        
+
 
         [Fact]
-        public void SqlFormatterAddTableReferenceTest() {
+        public void SqlFormatterAddTableReferenceTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "10" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -136,7 +147,8 @@ namespace Humpback.Tests
 
 
         [Fact]
-        public void SqlFormatterChangeColumnTest() {
+        public void SqlFormatterChangeColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "4" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -151,7 +163,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("nvarchar(255)"));
         }
         [Fact]
-        public void SqlFormatterDropColumnTest() {
+        public void SqlFormatterDropColumnTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "5" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -165,7 +178,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("DROP COLUMN [name]"));
         }
         [Fact]
-        public void SqlFormatterAddIndexTest() {
+        public void SqlFormatterAddIndexTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "6" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -178,7 +192,8 @@ namespace Humpback.Tests
             Assert.True(file_writer.FileContents.Contains("CREATE NONCLUSTERED INDEX [IX_categories_title_slug] ON [categories] ( [title] ASC, [slug] ASC )"));
         }
         [Fact]
-        public void SqlFormatterDropIndexTest() {
+        public void SqlFormatterDropIndexTest()
+        {
             Configuration configuration = new Configuration(new[] { "-s", "7" });
             TestFileWriter file_writer = new TestFileWriter();
             ISqlFormatter formatter = new SQLServerFormatter(configuration, Settings);
@@ -192,41 +207,50 @@ namespace Humpback.Tests
         }
     }
 
-    public class TestMigrationProvider:IMigrationProvider {
-        public SortedDictionary<int, string> GetMigrations() {
+    public class TestMigrationProvider : IMigrationProvider
+    {
+        public SortedDictionary<int, string> GetMigrations()
+        {
             var rv = new SortedDictionary<int, string>();
-            foreach (var key in functions_dictionary.Keys) {
+            foreach (var key in functions_dictionary.Keys)
+            {
                 rv.Add(key, key + "xxx.sql");
             }
             return rv;
         }
 
-        public SortedDictionary<int, string> GetMigrationsContents() {
+        public SortedDictionary<int, string> GetMigrationsContents()
+        {
             var rv = new SortedDictionary<int, string>();
-            foreach(var key in functions_dictionary.Keys) {
+            foreach (var key in functions_dictionary.Keys)
+            {
                 rv.Add(key, functions_dictionary[key]().Value);
             }
             return rv;
         }
 
-        public KeyValuePair<string, string> GetMigrationWithContents(int migration_number) {
-            if (functions_dictionary.ContainsKey(migration_number)) {
+        public KeyValuePair<string, string> GetMigrationWithContents(int migration_number)
+        {
+            if (functions_dictionary.ContainsKey(migration_number))
+            {
                 return functions_dictionary[migration_number]();
             }
             return functions_dictionary[1]();
         }
 
         private int migration_number = 0;
-        public int DatabaseMigrationNumber() {
+        public int DatabaseMigrationNumber()
+        {
             return migration_number;
         }
 
-        public void SetMigrationNumber(int number) {
+        public void SetMigrationNumber(int number)
+        {
             migration_number = number;
         }
 
-        private readonly Dictionary<int,Func<KeyValuePair<string, string>>> functions_dictionary =
-            new Dictionary<int,Func<KeyValuePair<string, string>>> {
+        private readonly Dictionary<int, Func<KeyValuePair<string, string>>> functions_dictionary =
+            new Dictionary<int, Func<KeyValuePair<string, string>>> {
                 {1, CreateTable},
                 {2, DropTable},
                 {3, AddColumns},
@@ -242,41 +266,52 @@ namespace Humpback.Tests
 
 
 
-        private static KeyValuePair<string,string> CreateTable() {
+        private static KeyValuePair<string, string> CreateTable()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'create_table':{'name':'tname','timestamps':true,'columns':[{'name':'first_name','type':'string'},{'name':'last_name','type':'money'}]}},'down':{'drop_table':'tname'}}");
         }
-        private static KeyValuePair<string, string> DropTable() {
+        private static KeyValuePair<string, string> DropTable()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'drop_table':'tname'}}");
         }
-        private static KeyValuePair<string, string> Drop2Tables() {
+        private static KeyValuePair<string, string> Drop2Tables()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':[{'drop_table':'tname1'},{'drop_table':'tname2'}]}");
         }
-        private static KeyValuePair<string, string> AddColumns() {
+        private static KeyValuePair<string, string> AddColumns()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'add_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}},'down':{'remove_column':{'table':'tname','column':'name'}}}");
         }
-        private static KeyValuePair<string, string> RemoveColumn() {
+        private static KeyValuePair<string, string> RemoveColumn()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'remove_column':{'table':'tname','column':'name'}}}");
         }
-        private static KeyValuePair<string, string> ChangeColumns() {
+        private static KeyValuePair<string, string> ChangeColumns()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'change_column':{'table':'tname','columns':[{'name':'name','type':'string'}]}}}");
         }
-        private static KeyValuePair<string, string> AddIndex() {
+        private static KeyValuePair<string, string> AddIndex()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{add_index:{table_name:'categories',columns:['title','slug']}}}");
         }
-        private static KeyValuePair<string, string> RemoveIndex() {
+        private static KeyValuePair<string, string> RemoveIndex()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{remove_index:{table_name:'categories',columns:['title','slug']}}}");
         }
-        private static KeyValuePair<string, string> AddColumnReference() {
+        private static KeyValuePair<string, string> AddColumnReference()
+        {
             return new KeyValuePair<string, string>("7xxx.sql",
                                                     @"{'up': {'add_column': {'table': 'Orders','columns': [{'name': 'User','type': 'reference'}]}},'down': {'remove_column': {'table': 'Orders','column': 'UserId'}}}");
         }
-        private static KeyValuePair<string, string> AddTableTwoReference() {
+        private static KeyValuePair<string, string> AddTableTwoReference()
+        {
             return new KeyValuePair<string, string>("7xxx.sql",
                                                     @"{'up': {'create_table': {'name': 'ApplicationControl','timestamps': true,'columns': [{'name': 'name','type': 'string'},{'name': 'ApplicationPage','type': 'reference'},{'name': 'Application','type': 'reference'}]}},'down': {'drop_table': 'ApplicationControl'}}");
         }
-        private static KeyValuePair<string, string> CreateTableWithNullAndDefault() {
+        private static KeyValuePair<string, string> CreateTableWithNullAndDefault()
+        {
             return new KeyValuePair<string, string>("7xxx.sql", @"{'up':{'create_table':{'name':'tname','timestamps':true,'columns':[{'name':'first_name','type':'string', 'nullable':false, default:""'JASON'""},{'name':'last_name','type':'money'}]}},'down':{'drop_table':'tname'}}");
         }
-        
+
     }
 }

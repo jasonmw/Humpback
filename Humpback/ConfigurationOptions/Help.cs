@@ -1,41 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Humpback.ConfigurationOptions {
-    public class Help : IHumpbackCommand {
+namespace Humpback.ConfigurationOptions
+{
+    public class Help : IHumpbackCommand
+    {
 
         private Configuration _configuration;
 
-        public Help(Configuration configuration) {
+        public Help(Configuration configuration)
+        {
             _configuration = configuration;
         }
 
 
 
-        public void Execute() {
-            string flag = (_configuration.Extra!=null && _configuration.Extra.Any()) ? _configuration.Extra.First() : "";
+        public void Execute()
+        {
+            string flag = (_configuration.Extra != null && _configuration.Extra.Any()) ? _configuration.Extra.First() : "";
             flag = flag.ToUpperInvariant();
-            if (string.IsNullOrWhiteSpace(flag)) {
+            if (string.IsNullOrWhiteSpace(flag))
+            {
                 write_general_help();
-            } else if ("GENERATE".StartsWith(flag)) {
+            }
+            else if ("GENERATE".StartsWith(flag))
+            {
                 write_generate_help();
-            } else if ("LIST".StartsWith(flag)) {
+            }
+            else if ("LIST".StartsWith(flag))
+            {
                 write_list_help();
-            } else if ("FILE".StartsWith(flag)) {
+            }
+            else if ("FILE".StartsWith(flag))
+            {
                 write_edit_file_help();
-            } else if ("MIGRATE".StartsWith(flag)) {
+            }
+            else if ("MIGRATE".StartsWith(flag))
+            {
                 write_migrate_help();
-            } else if ("SQL".StartsWith(flag)) {
+            }
+            else if ("SQL".StartsWith(flag))
+            {
                 write_sql_help();
-            } else if ("ENVIRONMENT".StartsWith(flag)) {
+            }
+            else if ("ENVIRONMENT".StartsWith(flag))
+            {
                 write_environment_help();
-            } else {
+            }
+            else
+            {
                 write_general_help();
             }
         }
-        private static void write_generate_help() {
+        private static void write_generate_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -90,7 +108,8 @@ sql ( sql SqlString )
 
 ");
         }
-        private static void write_list_help() {
+        private static void write_list_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -106,7 +125,8 @@ List Migrations and Details
         }
 
 
-        private static void write_edit_file_help() {
+        private static void write_edit_file_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -119,7 +139,8 @@ Edit Migration Text File
         }
 
 
-        private static void write_migrate_help() {
+        private static void write_migrate_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -138,7 +159,8 @@ Available actions:
 
 ");
         }
-        private static void write_sql_help() {
+        private static void write_sql_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -160,7 +182,8 @@ Available actions:
 ");
         }
 
-        private static void write_environment_help() {
+        private static void write_environment_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================
@@ -188,7 +211,8 @@ Available actions:
         }
 
 
-        private static void write_general_help() {
+        private static void write_general_help()
+        {
             Console.WriteLine(@"
 Humpback Migration Information
 ==============================

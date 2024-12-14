@@ -1,43 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Configuration;
 
-namespace Humpback.ConfigurationOptions {
-    public class Configuration {
+namespace Humpback.ConfigurationOptions
+{
+    public class Configuration
+    {
 
-        private void Parse(IEnumerable<string> options) {
+        private void Parse(IEnumerable<string> options)
+        {
             var oset = new OptionSet()
                 .Add("?|help|h|HELP|H|Help", h => WriteHelp = true)
                 .Add("g=|gen=|G=|GEN=|Gen=|Generate=|generate=|GENERATE=",
-                     s => {
+                     s =>
+                     {
                          SetMainToFalse();
                          Generate = true;
                          GenerateString = s.Trim();
                      })
                 .Add("l:|list:|L:|LIST:|List:",
-                     s => {
+                     s =>
+                     {
                          SetMainToFalse();
                          List = true;
                      })
                 .Add("m:|migrate:|M:|MIGRATE:|Migrate:",
-                     s => {
+                     s =>
+                     {
                          SetMainToFalse();
                          Migrate = true;
                      })
                 .Add("s:|sql:|S:|SQL:|Sql:",
-                     s => {
+                     s =>
+                     {
                          SetMainToFalse();
                          Sql = true;
                      })
                 .Add("f:|file:|F:|File:|FILE:",
-                     s => {
+                     s =>
+                     {
                          SetMainToFalse();
                          File = true;
                      })
-                .Add("e|E|ENV|env|Env", e => {SetMainToFalse();Env = true;})
+                .Add("e|E|ENV|env|Env", e => { SetMainToFalse(); Env = true; })
                 .Add("all", a => All = true)
                 .Add("single", s => Single = true)
                 .Add("dp", dp => Deployed = true)
@@ -48,7 +53,7 @@ namespace Humpback.ConfigurationOptions {
                 .Add("empty", e => Empty = true)
                 .Add("reset", r => Reset = true)
                 .Add("v", v => Verbose = true)
-                .Add("dir=", s => settings_dir=s)
+                .Add("dir=", s => settings_dir = s)
                 .Add("cs=", s => settings_cs = s)
                 .Add("flavor=", s => settings_flavor = s)
                 .Add("rename=", s => settings_rename = s)
@@ -57,7 +62,7 @@ namespace Humpback.ConfigurationOptions {
                 .Add("init", s => env_init = true)
                 .Add("remove=", s => remove_project_name = s)
                 ;
-            
+
             Extra = oset.Parse(options);
         }
 
@@ -73,13 +78,16 @@ namespace Humpback.ConfigurationOptions {
 
 
 
-        public Configuration() {
+        public Configuration()
+        {
             ResetOptions();
         }
 
         public Configuration(IEnumerable<string> options)
-            : this() {
-            if (options == null || options.Count() == 0) {
+            : this()
+        {
+            if (options == null || options.Count() == 0)
+            {
                 return;
             }
             Parse(options);
@@ -87,14 +95,16 @@ namespace Humpback.ConfigurationOptions {
 
 
 
-        public string NextSerialNumber() {
+        public string NextSerialNumber()
+        {
             return DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss");
         }
 
 
-        
 
-        private void ResetOptions() {
+
+        private void ResetOptions()
+        {
             WriteHelp = true;
             Generate = false;
             List = false;
@@ -105,7 +115,8 @@ namespace Humpback.ConfigurationOptions {
             SetMigrateToLatestVersion();
             GenerateString = "";
         }
-        private void SetMainToFalse() {
+        private void SetMainToFalse()
+        {
             WriteHelp = false;
             Generate = false;
             List = false;
@@ -115,7 +126,8 @@ namespace Humpback.ConfigurationOptions {
             File = false;
         }
 
-        private void SetMigrateToLatestVersion() {
+        private void SetMigrateToLatestVersion()
+        {
             MigrateToVersion = 0;
         }
 
@@ -155,18 +167,21 @@ namespace Humpback.ConfigurationOptions {
 
 
 
-        public bool Verbose {
+        public bool Verbose
+        {
             get;
             set;
         }
 
     }
 
-    public enum GenerateActionType {
+    public enum GenerateActionType
+    {
         Empty, AddTable, RemoveTable, AddColumn, ChangeColumn, RemoveColumn, AddIndex, RemoveIndex, Sql, File,
         FileSmo
     }
-    public enum RunActionType {
+    public enum RunActionType
+    {
         Up, Down
     }
 }

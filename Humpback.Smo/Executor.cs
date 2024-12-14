@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using Microsoft.SqlServer.Management.Common;
+﻿using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Humpback.Smo {
-    public static class Executor {
-
-        public static int Execute(string connection_string, string sql) {
-            using (var conn = new SqlConnection(connection_string)) {
-                var server = new Server(new ServerConnection(conn));
-                conn.Open();
-                return server.ConnectionContext.ExecuteNonQuery(sql);
-            }
+namespace Humpback.Smo
+{
+    public static class Executor
+    {
+        /// <summary>
+        /// Execute TSQL strings using Microsoft.SqlServer.Management.Smo.
+        /// </summary>
+        /// <param name="connection_string">Config connection string.</param>
+        /// <param name="sql">Compiled TSQL script.</param>
+        /// <returns>number of records affected.</returns>
+        public static int Execute(string connection_string, string sql)
+        {
+            var connection = new Microsoft.Data.SqlClient.SqlConnection(connection_string);
+            Server server = new Server(new ServerConnection(connection));
+            return server.ConnectionContext.ExecuteNonQuery(sql);
         }
     }
 }

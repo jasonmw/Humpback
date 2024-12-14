@@ -1,5 +1,7 @@
-﻿namespace Humpback.Interfaces {
-    public interface IDatabaseProvider {
+﻿namespace Humpback.Interfaces
+{
+    public interface IDatabaseProvider
+    {
 
         int GetMigrationVersion();
         void UpdateMigrationVersion(int number);

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Humpback.Tools;
+using System;
 using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
-using Humpback.Tools;
 
-namespace Humpback.Parts {
-    public static class Helpers {
+namespace Humpback.Parts
+{
+    public static class Helpers
+    {
 
         private static string[] keywords_tab_level_1 = new[] {
             "up","down"
@@ -19,7 +19,8 @@ namespace Humpback.Parts {
         };
 
         // Here be formatting dragons
-        public static string Json(dynamic input) {
+        public static string Json(dynamic input)
+        {
             string json = new JavaScriptSerializer().Serialize(input);
             json = keywords_tab_level_1.Aggregate(json, (current, s) => current.Replace("\"" + s + "\":", Environment.NewLine + "\t\"" + s + "\":"));
             json = keywords_tab_level_2.Aggregate(json, (current, s) => current.Replace("\"" + s + "\":", Environment.NewLine + "\t\t\"" + s + "\":"));
@@ -31,7 +32,8 @@ namespace Humpback.Parts {
         }
 
 
-        public static dynamic DeserializeMigration(string this_migration_contents) {
+        public static dynamic DeserializeMigration(string this_migration_contents)
+        {
             var serializer = new JavaScriptSerializer();
             serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
 
